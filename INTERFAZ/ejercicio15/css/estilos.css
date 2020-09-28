@@ -166,7 +166,7 @@ img {
 }
 
 #cabecera h1 {
-    background: url(../css/logo.gif) no-repeat -5px -10px;
+    background-image: url(../css/logo.gif) no-repeat -5px -10px;
 }
 
 #cabecera h1 span {

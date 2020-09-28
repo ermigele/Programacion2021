@@ -1,0 +1,9 @@
+body {
+    background: url(gradient_bg.jpg);
+    background-repeat: repeat-x;
+}
+
+h1 {
+    color: white;
+    text-align: center;
+}
