@@ -10,7 +10,7 @@
     </style>
 
     <script>
-        window.onload = function() {
+        window.onload = function () {
             document.getElementById("nombre").onkeypress = soloLetras;
             document.getElementById("formulario_1").onsubmit = validar;
         }
@@ -26,46 +26,77 @@
         function validar() {
             var nombre = document.getElementById("nombre");
             if (nombre.value.length < 2) {
-                document.getElementById("info_nombre").innerHTML = "No sabes leer o que?";
+                document.getElementById("info_nombre").innerHTML = "Introduce mas de una letra";
                 nombre.focus();
                 return false;
             }
+            debugger;
+            validarDNI();
+       
+                var sexo = document.getElementById("sexo");
+            if (sexo.value == "") {
+                document.getElementById("info_sexo").innerHTML = "Selecciona un sexo";
+                sexo.focus();
+                return false;
+            }
         }
+
+        function validarDNI() {
+            debugger;
+            var dni = document.getElementById("dni");
+            var numero = dni.substr(0, dni.length - 1);
+            var letra = dni.substr(dni.length - 1, 1);
+            var letras = 'TRWAGMYFPDXBNJZSQVHLCKET';
+            var formatoDNI = /^\d{8}[a-zA-Z]$/;
+
+            if (formatoDNI.test(dni) == true) {
+                numero = numero % 23;
+                letra = 'TRWAGMYFPDXBNJZSQVHLCKET';
+                letra = letra.substring(numero, numero + 1);
+                if (letras != letra.toUpperCase()) {
+                    document.getElementById("info_dni").innerHTML = "Letra del DNI no se corresponde";
+                    return false;
+                }
+            } else {
+                document.getElementById("info_dni").innerHTML = "Formato incorrecto";
+                return false;
+            }
+        }
+
     </script>
 </head>
-º
 
 <body>
 
     <h1>Ejercicio Validación de Formularios</h1>
     <form id="formulario_1">
         <p>
-            <h3>Formulario de Registro:</h3>
-            <label for="nombre">Nombre: </label>
-            <input type="text" name="nombre" id="nombre" maxlength="25" size="15" />
-            <span id="info_nombre"></span>
-            <div>(Mínimo 2 letras)</div>
-            <br><br>
+        <h3>Formulario de Registro:</h3>
+        <label for="nombre">Nombre: </label>
+        <input type="text" name="nombre" id="nombre" maxlength="25" size="15" />
+        <span id="info_nombre"></span>
+        <div>(Mínimo 2 letras)</div>
+        <br><br>
 
-            <label for="dni">NIF: </label>
-            <input type="text" name="dni" id="dni" maxlength="9" size="9" />
-            <span id="info_dni"></span>
-            <br><br><br>
+        <label for="dni">NIF: </label>
+        <input type="text" name="dni" id="dni" maxlength="9" size="9" />
+        <span id="info_dni"></span>
+        <br><br><br>
 
-            <label>Sexo: </label>
-            <select id="sexo">
-				<option value="">Selecciona una opción</option>
-				<option value="F">Femenino</option>
-				<option value="M">Masculino</option>
-				<option value="Y">Ya quisiera yo</option>
-			</select>
-            <span id="info_sexo"></span>
+        <label>Sexo: </label>
+        <select id="sexo">
+            <option value="">Selecciona una opción</option>
+            <option value="F">Femenino</option>
+            <option value="M">Masculino</option>
+            <option value="Y">Ya quisiera yo</option>
+        </select>
+        <span id="info_sexo"></span>
 
-            <br><br><br>
-            <label for="sugerencia">Alguna sugerencia: </label>
-            <textarea id="sugerencia" name="sugerencia"></textarea>
-            <span id="info_sugerencia"></span>
-            <br><br>
+        <br><br><br>
+        <label for="sugerencia">Alguna sugerencia: </label>
+        <textarea id="sugerencia" name="sugerencia"></textarea>
+        <span id="info_sugerencia"></span>
+        <br><br>
         </p>
         <p><b>Todos los campos son obligatorios.</b></p>
         <br>
