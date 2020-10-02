@@ -10,59 +10,71 @@
     </style>
 
     <script>
-        window.onload = function () {
+        window.onload = function() {
             document.getElementById("nombre").onkeypress = soloLetras;
+            document.getElementById("dni").onkeyup = aMayusculas;
             document.getElementById("formulario_1").onsubmit = validar;
         }
 
         function soloLetras(e) {
-            //console.log("LLega soloLetras", e);
             var condicion = ((e.keyCode >= 97 && e.keyCode <= 122) || (e.keyCode >= 65 && e.keyCode <= 90) || e.keyCode == 241 || e.keyCode == 209 || e.keyCode == 32);
             condicion = condicion || ("áéíóúÁÉÍÓÚ".indexOf(e.key) != -1);
-            //  console.log("condicion =", condicion);
             return condicion;
         }
 
+        function aMayusculas() {
+            this.value = this.value.toUpperCase();
+        }
+
         function validar() {
+            var correcto = true;
             var nombre = document.getElementById("nombre");
             if (nombre.value.length < 2) {
                 document.getElementById("info_nombre").innerHTML = "Introduce mas de una letra";
-                nombre.focus();
-                return false;
+                //nombre.focus();
+                correcto = false;
             }
-            debugger;
-            validarDNI();
-       
-                var sexo = document.getElementById("sexo");
-            if (sexo.value == "") {
-                document.getElementById("info_sexo").innerHTML = "Selecciona un sexo";
-                sexo.focus();
-                return false;
-            }
-        }
 
-        function validarDNI() {
-            debugger;
-            var dni = document.getElementById("dni");
-            var numero = dni.substr(0, dni.length - 1);
-            var letra = dni.substr(dni.length - 1, 1);
-            var letras = 'TRWAGMYFPDXBNJZSQVHLCKET';
-            var formatoDNI = /^\d{8}[a-zA-Z]$/;
-
-            if (formatoDNI.test(dni) == true) {
-                numero = numero % 23;
-                letra = 'TRWAGMYFPDXBNJZSQVHLCKET';
-                letra = letra.substring(numero, numero + 1);
-                if (letras != letra.toUpperCase()) {
-                    document.getElementById("info_dni").innerHTML = "Letra del DNI no se corresponde";
-                    return false;
-                }
+            var dni = document.getElementById("dni").value;
+            if (dni == "") {
+                correcto = false;
+                document.getElementById("info_dni").innerHTML = "Rellene el DNI";
+                //   dni.focus();
             } else {
-                document.getElementById("info_dni").innerHTML = "Formato incorrecto";
-                return false;
-            }
-        }
+                var numero = dni.substr(0, dni.length - 1);
+                var letra = dni.substr(dni.length - 1, 1);
+                var letras = 'TRWAGMYFPDXBNJZSQVHLCKET';
+                var formatoDNI = /^\d{8}[a-zA-Z]$/;
 
+                if (formatoDNI.test(dni) == true) {
+                    numero = numero % 23;
+                    letras = letras.substring(numero, numero + 1);
+                    if (letras != letra.toUpperCase()) {
+                        document.getElementById("info_dni").innerHTML = "Letra del DNI no se corresponde";
+                        //   dni.focus();
+                        correcto = false;
+                    }
+                } else {
+                    document.getElementById("info_dni").innerHTML = "Formato incorrecto";
+                    //   dni.focus();
+                    correcto = false;
+                }
+            }
+
+            var sexo = document.getElementById("sexo").value;
+            if (sexo == "") {
+                document.getElementById("info_sexo").innerHTML = "Selecciona un sexo";
+                //   sexo.focus();
+                correcto = false;
+            }
+            var textA = document.getElementById("sugerencia");
+            if (textA.length < 1) {
+                document.getElementById("info_sugerencia").innerHTML = "Indicanos alguna sugerencia";
+                //     textA.focus();
+                correcto = false;
+            }
+            return correcto;
+        }
     </script>
 </head>
 
@@ -71,32 +83,32 @@
     <h1>Ejercicio Validación de Formularios</h1>
     <form id="formulario_1">
         <p>
-        <h3>Formulario de Registro:</h3>
-        <label for="nombre">Nombre: </label>
-        <input type="text" name="nombre" id="nombre" maxlength="25" size="15" />
-        <span id="info_nombre"></span>
-        <div>(Mínimo 2 letras)</div>
-        <br><br>
+            <h3>Formulario de Registro:</h3>
+            <label for="nombre">Nombre: </label>
+            <input type="text" name="nombre" id="nombre" maxlength="25" size="15" />
+            <span id="info_nombre"></span>
+            <div>(Mínimo 2 letras)</div>
+            <br><br>
 
-        <label for="dni">NIF: </label>
-        <input type="text" name="dni" id="dni" maxlength="9" size="9" />
-        <span id="info_dni"></span>
-        <br><br><br>
+            <label for="dni">NIF: </label>
+            <input type="text" name="dni" id="dni" maxlength="9" size="9" />
+            <span id="info_dni"></span>
+            <br><br><br>
 
-        <label>Sexo: </label>
-        <select id="sexo">
+            <label>Sexo: </label>
+            <select id="sexo">
             <option value="">Selecciona una opción</option>
             <option value="F">Femenino</option>
             <option value="M">Masculino</option>
             <option value="Y">Ya quisiera yo</option>
         </select>
-        <span id="info_sexo"></span>
+            <span id="info_sexo"></span>
 
-        <br><br><br>
-        <label for="sugerencia">Alguna sugerencia: </label>
-        <textarea id="sugerencia" name="sugerencia"></textarea>
-        <span id="info_sugerencia"></span>
-        <br><br>
+            <br><br><br>
+            <label for="sugerencia">Alguna sugerencia: </label>
+            <textarea id="sugerencia" name="sugerencia"></textarea>
+            <span id="info_sugerencia"></span>
+            <br><br>
         </p>
         <p><b>Todos los campos son obligatorios.</b></p>
         <br>
