@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+  <head>   
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Solución</title>
+		<style>
+			#factorial, #datos, #genParrafos{
+				width: 400px;
+				margin-top: 2em;
+				margin-left: 2em;
+				border: 2px solid blue;
+				padding: .5em;
+			}
+			h3{
+				text-align: center;
+				color: maroon;
+			}
+			span{
+				color: red;
+			}
+			button{
+				margin-top: 1em;
+				margin-right: 2em;
+			}
+			textarea{
+				width: 90%;
+				height: 7em;
+			}
+			p{
+				border: 1px solid pink;
+			}
+		</style>
+		
+    <script type="text/javascript">
+      
+      window.onload = function(){
+				document.getElementById("btFactorial").onclick = function(){
+					function f(n){
+						if (n <= 1)
+							return 1;
+						return n * f(n-1);
+					}
+					var n = document.getElementById("numero");
+					if (n.value.length == 0) {
+						alert("Debes introducir un número");
+						n.focus();
+						return;
+					}
+					document.getElementById("resFactorial").innerHTML = f(n.value);
+				}
+				
+				document.getElementById("btEstaciones").onclick = calcularEstacion;
+				document.getElementById("btParrafos").onclick = generarParrafos;
+				
+				document.getElementById("numero").onkeypress = PermiteSoloNumeros;
+				document.getElementById("fDia").onkeypress = PermiteSoloNumeros;
+				document.getElementById("nParrafos").onkeypress = PermiteSoloNumeros;
+				
+				document.getElementById("nombre").onkeypress = PermiteSoloLetrasEspacios;
+			}
+			
+			//  Permitir SOLO números, sin decimales:
+			function PermiteSoloNumeros(e) {
+				var c = e.charCode || window.event.keyCode;
+				return ((c >= 48)  && (c <= 57));
+				console.log(PermiteSoloNumeros);
+			}
+			
+			//  Permitir SOLO letras con espacios:
+			function PermiteSoloLetrasEspacios(e) {
+				var c = e.charCode || window.event.keyCode;
+				return (((c >= 65)  && (c <= 90)) || ((c >= 97) && (c <= 122)) || (c == 32));
+			}
+			
+			
+			
+			function calcularEstacion(){
+				var sal = document.getElementById("nombre").value;
+				var dia = document.getElementById("fDia").value;
+				var mes = document.getElementById("fMes").value;
+				
+				if (sal.length == 0) {
+					alert("Debes de introducir un nombre");
+					document.getElementById("nombre").focus();
+					return;
+				}
+				
+				if (dia.length == 0) {
+					alert("Debes de introducir un día");
+					document.getElementById("fDia").focus();
+					return;
+				}
+				
+				
+				if (dia.length == 1)
+					var fe = mes + "0" + dia;
+				else
+					var fe = mes+dia;
+				console.log("fe = ", fe);
+				sal += ", has nacido en ";
+				
+				if ((fe >= 321) && (fe <= 620))
+					sal += "Primavera"
+				
+				if ((fe >= 621) && (fe <= 920))
+					sal += "Verano"
+					
+				if ((fe >= 921) && (fe <= 1220))
+					sal += "Otoño"
+					
+				if ((fe >= 1221) || ((fe >= 1) && (fe <= 320)))
+					sal += "Invierno"
+				
+				//  Muestro resultado:
+				document.getElementById("resEstacion").innerHTML = sal;
+			}
+			
+			
+			
+			function generarParrafos(){
+				var np = document.getElementById("nParrafos");
+				var cont = document.getElementById("contParrafo");
+				
+				if (np.value.length == 0) {
+					alert("Debes introducir una cantidad de párrafos");
+					np.focus();
+					return;
+				}
+				
+				if (cont.value.length == 0) {
+					alert("Debes introducir un contenido para los párrafos");
+					cont.focus();
+					return;
+				}
+				
+				
+				var listaParrafos = document.getElementById("listaParrafos");
+				//  Limpiamos lo que pudiera haber antes:
+				listaParrafos.innerHTML = "";
+				var parrafo, texto;
+				for(var i=0; i<np.value; i++) {
+					parrafo = document.createElement("p");
+					texto = document.createTextNode(cont.value);
+					parrafo.appendChild(texto);
+					listaParrafos.appendChild(parrafo);
+				}
+			}
+			
+      
+    </script>
+  </head>
+  
+  <body>
+
+    <div id="factorial">
+			<h3>Cálculo del factorial de un número</h3>
+			<label>Introduce número: </label>
+			<input type="text" id="numero">
+		
+			<button id="btFactorial">Calcular Factorial</button>
+			<label>Resultado: </label><span id="resFactorial"></span>
+		</div>
+		
+		
+		<div id="datos">
+			<h3>Datos personales</h3>
+			<label>Nombre: </label>
+			<input type="text" id="nombre">
+			<br><br>
+			<label>Fecha de nacimiento</label>
+			<br><br>
+			<label>Día: </label>
+			<input type="text" id="fDia" size="2">
+			<br><br>
+			<label>Mes: </label>
+			<select id="fMes">
+				<option value="1">Enero</option>
+				<option value="2">Febrero</option>
+				<option value="3">Marzo</option>
+				<option value="4">Abril</option>
+				<option value="5">Mayo</option>
+				<option value="6">Junio</option>
+				<option value="7">Julio</option>
+				<option value="8">Agosto</option>
+				<option value="9">Septiembre</option>
+				<option value="10">Octubre</option>
+				<option value="11">Noviembre</option>
+				<option value="12">Diciembre</option>
+			</select>
+			<br><br>
+		
+			<button id="btEstaciones">Calcular Estación</button>
+			<br><br>
+			<label>Resultado: </label><span id="resEstacion"></span>
+		</div>
+		
+		
+		<div id="genParrafos">
+			<h3>Generación de párrafos</h3>
+			<label>Número párrafos: </label>
+			<input type="text" id="nParrafos">
+			<br><br>
+			<label>Contenido párrafos: </label>
+			<br>
+			<textarea id="contParrafo"></textarea>
+			<br>
+			<button id="btParrafos">Generar párrafos</button>
+			<br><br>
+			<label>Resultado: </label>
+			<br>
+			<div id="listaParrafos">
+			</div>
+			
+		</div>
+    
+  </body>
+  
+</html>
