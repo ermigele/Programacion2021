@@ -6,36 +6,42 @@
     <title>Ejercicio Tablas. CREAR TABLAS V2</title>
 
     <script type="text/javascript">
-        window.onload = function() {
-
+        window.onload = function () {
             document.getElementById("btGenTabla").onclick = generarTabla;
+        }
 
-            function generarTabla() {
-                var filas = document.getElementById("nfilas").value;
-                var colum = document.getElementById("ncolumnas").value;
-                var table = document.createElement("table");
+        function generarTabla() {
+            var fila = document.getElementById("nfilas").value;
+            var colum = document.getElementById("ncolumnas").value;
 
-                for (var i = 0; i < filas; i++) {
-                    //  if (i == 0) {
-                    //    var thead = document.createElement("thead");
-                    //  table.appendChild(thead);
-                    //}
-                    var tr = document.createElement("tr");
-                    table.appendChild(tr);
-                    //     thead.appendChild(tr);
+            var table = document.createElement("table");
+            var thead = document.createElement("thead");
+            var tbody = document.createElement("tbody");
+            var tr, td, texto;
 
-                    for (var j = 0; j < colum; j++) {
-                        //       if (j == 0) {
-                        //           var tbody = document.createElement("tbody");
-                        //           table.appendChild(tbody);
-                        //        }
-                        var td = document.createElement("td");
-                        tr.appendChild(td);
-                        //         tbody.appendChild(td);
-                    }
-                }
-                document.getElementById("tabla").appendChild(table);
+            table.appendChild(thead);
+
+            for (var c = 0; c < colum; c++) {
+                td = document.createElement("td");
+                texto = document.createTextNode("Columna " + c);
+                td.appendChild(texto);
+                thead.appendChild(td);
             }
+
+            for (var f = 1; f < fila; f++) {
+                tr = document.createElement("tr");
+
+                for (var c = 0; c < colum; c++) {
+                    td = document.createElement("td");
+                    texto = document.createTextNode("Fila " + f);
+                    td.appendChild(texto);
+                    tr.appendChild(td);
+                }
+                tbody.appendChild(tr);
+            }
+            table.appendChild(tbody);
+            table.setAttribute("border", "1");
+            document.getElementById("tabla").appendChild(table);
         }
     </script>
 
@@ -44,11 +50,12 @@
 <body>
     <br>
     <h2>Ejercicio Tablas. CREAR TABLAS V2</h2>
-    <h3>Introducir el código javascript necesario, para que al pulsar sobre el botón, se cree una tabla con un número fijo de filas y columnas. </h3>
+    <h3>Introducir el código javascript necesario, para que al pulsar sobre el botón, se cree una tabla con un número
+        fijo de filas y columnas. </h3>
 
     <h3>Ahora generamos la tabla con formato: "thead" y "tbody"</h3>
 
-    <br/>
+    <br />
     <form>
         <p>
             <label for="nfilas">Introduce el número de filas:</label>
@@ -59,8 +66,8 @@
         </p>
         <p>
             <button type="button" id="btGenTabla">
-					Generar Tabla
-				</button>
+                Generar Tabla
+            </button>
         </p>
     </form>
     <br>
