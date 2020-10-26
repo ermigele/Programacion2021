@@ -12,15 +12,22 @@
 
         pAJAX("GET", "https://swapi.dev/api/people/?format=json", mostrarInformacion);
 
-        function llenarFila(texto, tipoText) {
-            etiqueta = document.createElement("td");
-            texto = document.createTextNode(texto);
-            etiqueta.appendChild(texto);
-            return etiqueta;
+        function llenarFila(texto, esURL = false) {
+            var td = document.createElement("td");
+            if (esURL) {
+                var url = document.createElement("a");
+                url.text = texto;
+                url.setAttribute("href", texto);
+                td.appendChild(url);
+            } else {
+                texto = document.createTextNode(texto);
+                td.appendChild(texto);
+            }
+            return td;
         }
 
         function mostrarInformacion(datos) {
-            var tr, td, texto;
+            var tr, texto;
             for (f in datos.results) {
                 tr = document.createElement("tr");
 
@@ -28,7 +35,7 @@
                 tr.appendChild(llenarFila(datos.results[f].height));
                 tr.appendChild(llenarFila(datos.results[f].birth_year));
                 tr.appendChild(llenarFila(datos.results[f].gender));
-                tr.appendChild(llenarFila(datos.results[f].homeworld));
+                tr.appendChild(llenarFila(datos.results[f].homeworld, true));
 
                 document.getElementById("cuerpazo").appendChild(tr);
             }
@@ -42,19 +49,19 @@
             width: 70%;
             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         }
-        
+
         th {
             color: white;
             border: 1px solid black;
             padding: 10px;
             background-color: green;
         }
-        
+
         td {
             border: 1px solid black;
             padding: 5px;
         }
-        
+
         table tbody tr:nth-child(2n) {
             background-color: greenyellow;
         }
