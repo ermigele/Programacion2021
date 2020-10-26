@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Listado personajes STAR WARS</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <script src="utilAyax.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        window.onload = () => {
+            mostrarInformacion;
+        }
+
+        pAJAX("GET", "https://swapi.dev/api/people/?format=json", mostrarInformacion);
+
+        function llenarFila(texto, tipoText) {
+            etiqueta = document.createElement("td");
+            texto = document.createTextNode(texto);
+            etiqueta.appendChild(texto);
+            return etiqueta;
+        }
+
+        function mostrarInformacion(datos) {
+            var tr, td, texto;
+            for (f in datos.results) {
+                tr = document.createElement("tr");
+
+                tr.appendChild(llenarFila(datos.results[f].name));
+                tr.appendChild(llenarFila(datos.results[f].height));
+                tr.appendChild(llenarFila(datos.results[f].birth_year));
+                tr.appendChild(llenarFila(datos.results[f].gender));
+                tr.appendChild(llenarFila(datos.results[f].homeworld));
+
+                document.getElementById("cuerpazo").appendChild(tr);
+            }
+        }
+    </script>
+
+    <style>
+        table {
+            border-collapse: collapse;
+            padding: 5px;
+            width: 70%;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        
+        th {
+            color: white;
+            border: 1px solid black;
+            padding: 10px;
+            background-color: green;
+        }
+        
+        td {
+            border: 1px solid black;
+            padding: 5px;
+        }
+        
+        table tbody tr:nth-child(2n) {
+            background-color: greenyellow;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Listado de personajes</h2>
+
+    <table border="1.5">
+        <thead>
+            <th>Nombre</th>
+            <th>Estatura</th>
+            <th>Nacimiento</th>
+            <th>Genero</th>
+            <th>Homeworld</th>
+        </thead>
+        <tbody id="cuerpazo">
+
+        </tbody>
+    </table>
+
+</body>
+
+</html>

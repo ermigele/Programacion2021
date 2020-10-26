@@ -1,0 +1,144 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="UTF-8"/>
+		<title>Ejercicio 11 Versión 2. Formato a una Tabla. Selección Avanzada</title>
+		<style type="text/css">
+		
+		.tabla {
+			border: 1px solid;
+			
+			
+		}
+		.tabla tr, .tabla td {
+			border: 1px solid;  
+		}
+		
+		/*  1. Alinear el texto de las celdas, cabeceras y título. Definir los bordes de la tabla,celdas y cabeceras (color gris oscuro #333):  */
+		.tabla {
+			border-collapse: collapse;  
+			border: 1px solid #333;
+		}
+		/*  Alineo el texto a centrado, en TODAS las celdas de la tabla:  */
+		.tabla tr, .tabla td {
+			border: 1px solid #333;
+			text-align: center;
+		}
+		/*  Alineo el texto a la izquierda de la primera columna (el primer elemento td de las filas (tr)) menos la cabecera:  */
+		.tabla tbody tr td:first-child {
+			text-align: left;
+		}
+		/*  Pongo en negrita la primera fila y la primera columna, tal y como está en el ejemplo:  */
+		.tabla thead, .tabla tbody tr td:first-child {
+			font-weight: bold;
+		}
+		
+		
+		/*  2. Formatear las cabeceras de fila y columna con la imagen de fondo correspondiente en cada caso 
+					(fondo_gris.gif, euro.png, dolar.png, yen.png,libra.png). 
+					Modificar el tipo de letra de la tabla y utilizar Arial. El color azul claro es #E6F3FF:  */
+		
+		/*  Establecemos el tipo de letra a la fila cabecera y a la primera columna:  */
+		.tabla thead, .tabla tbody tr td:first-child {
+			font: Arial, Helvetica, sans-serif;
+		}
+		/*  Ponemos la imagen de fondo a la fila cabecera:  */
+		.tabla thead {
+			background-image: url(images/fondo_gris.gif);
+		}
+		
+		
+		/*  Aplicamos las imágenes de fondo según corresponda al tipo de moneda:  */
+		
+		/*
+		 * 
+		 * 			En este caso no ha hecho falta añadir NINGÚN ID O CLASE al html de la tabla.
+		 * 
+		 * ****  ESTO ES LO QUE ES DIFERENTE: "".tabla tbody tr:nth-child(1)" :"
+		 */
+		
+		.tabla tbody tr:first-child td:first-child {
+			padding-left: 1em;
+			background: url(images/euro.png) no-repeat left;
+			background-color: #E6F3FF;
+            
+		}
+		
+		.tabla tbody tr:nth-child(2) td:first-child {
+			padding-left: 1em;
+			background: url(images/dolar.png) no-repeat left;
+			background-color: #E6F3FF;
+		}
+		
+		.tabla tbody tr:nth-child(3) td:first-child {
+			padding-left: 1em;
+			background: url(images/libra.png) no-repeat left;
+			background-color: #E6F3FF;
+		}
+		.tabla tbody tr:nth-child(4) td:first-child {
+			padding-left: 1em;
+			background: url(images/yen.png) no-repeat left;
+			background-color: #E6F3FF;
+		}
+		
+		
+		/*  3. Mostrar un color alterno (las impares) en las filas de datos (color amarillo claro #FFFFCC):  */
+		.tabla tbody tr:nth-child(odd) {
+			background-color: #FFFFCC;
+		}
+		
+		
+		/*  Funcionalidad añadida según la últma sugerencia del punto 10.2 - Capítulo 10 (página 151) del pdf:  */
+		.tabla tbody tr:hover {
+			background: #FFFF66;
+            background: pink;
+		}
+		/*  Nota: esto último NO FUNCIONA en Internet Explorer  */
+			
+		</style>	
+	</head>
+	<body>
+
+		<table class="tabla" summary="Cambio moneda">
+			<thead>
+				<tr>
+					<td>Cambio</td>
+					<td>Compra</td>
+					<td>Venta</td>
+					<td>Máximo</td>
+					<td>Mínimo</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Euro/Dolar</td>
+					<td>1.2524</td>
+					<td>1.2527</td>
+					<td>1.2539</td>
+					<td>1.2488</td>
+				</tr>
+				<tr>
+					<td>Dolar/Yen</td>
+					<td>119.01</td>
+					<td>119.05</td>
+					<td>119.82</td>
+					<td>119.82</td>
+				</tr>
+				<tr>
+					<td>Libra/Dolar</td>
+					<td>1.8606</td>
+					<td>1.8611</td>
+					<td>1.8651</td>
+					<td>1.8522</td>
+				</tr>
+					<tr>
+						<td>Yen/Euro</td>
+						<td>149.09</td>
+						<td>149.13</td>
+						<td>149.79</td>
+						<td>148.96</td>
+					</tr>
+			</tbody>
+		</table>
+
+	</body>
+</html>
