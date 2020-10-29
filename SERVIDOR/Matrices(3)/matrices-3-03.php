@@ -1,6 +1,6 @@
 <?php
 /**
- * matrices-2-02.php
+ * matrices-3-03.php
  *
  * @author Escriba aquí su nombre
  *
@@ -11,17 +11,17 @@
 <head>
   <meta charset="utf-8">
   <title>
-    Elimina valores repetidos.
-    Matrices (2)
+    Ordenar dados.
+    Matrices (3). Sin formularios.
     Escriba aquí su nombre
   </title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
-  <h1>Elimina valores repetidos</h1>
+  <h1>Ordenar dados</h1>
 
-  <p>Actualice la página para mostrar un nuevo grupo de valores.</p>
+  <p>Actualice la página para mostrar una nueva tirada.</p>
 
 <?php
 
