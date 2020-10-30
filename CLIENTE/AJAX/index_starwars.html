@@ -7,10 +7,21 @@
     <script src="utilAyax.js" type="text/javascript"></script>
     <script type="text/javascript">
         window.onload = () => {
-            mostrarInformacion;
+            pAJAX("GET", "https://swapi.dev/api/people/?format=json", mostrarInformacion);
+            document.getElementById("previus").onclick = cambPagina;
+            document.getElementById("next").onclick = cambPagina;
+
         }
 
-        pAJAX("GET", "https://swapi.dev/api/people/?format=json", mostrarInformacion);
+        var pagina = 1;
+
+        function cambPagina() {
+            pagina = (this.id == "previus" && pagina > 1) ? pagina - 1 : pagina + 1;
+            document.getElementById("espera").style.display = "block";
+            setTimeout(() => {
+                pAJAX("GET", "https://swapi.dev/api/people/?page=" + pagina + "&format=json", mostrarInformacion);
+            }, 3000);
+        }
 
         function llenarFila(texto, esURL = false) {
             var td = document.createElement("td");
@@ -27,7 +38,12 @@
         }
 
         function mostrarInformacion(datos) {
-            var tr, texto;
+            var tr, texto, paginaAnt, paginaSig;
+
+            paginaAnt = (datos.previous == null) ? document.getElementById("previus").style.display = 'none' : document.getElementById("previus").style.display = 'inline'
+            paginaSig = (datos.next == null) ? document.getElementById("next").style.display = 'none' : document.getElementById("next").style.display = 'inline'
+            document.getElementById("cuerpazo").innerHTML = " ";
+
             for (f in datos.results) {
                 tr = document.createElement("tr");
 
@@ -47,6 +63,7 @@
                     pAJAX("GET", this.href + "?format=json", mostrarPlaneta);
                 }
             });
+            document.getElementById("espera").style.display = "none";
         }
 
 
@@ -79,7 +96,7 @@
             color: white;
             border: 1px solid black;
             padding: 10px;
-            background-color: green;
+            background-color: black;
         }
         
         td {
@@ -88,7 +105,22 @@
         }
         
         table tbody tr:nth-child(2n) {
-            background-color: greenyellow;
+            background-color: gray;
+        }
+        
+        #previus {
+            display: none;
+        }
+        
+        #espera {
+            display: none;
+            position: fixed;
+            top: 20%;
+            left: 30%;
+            width: 220px;
+            height: 220px;
+            background: url('cargandoSW2.gif') center no-repeat;
+            background-size: 200px 200px;
         }
     </style>
 </head>
@@ -108,8 +140,12 @@
 
         </tbody>
     </table>
+    <br>
+    <input type="button" id="previus" value="Anterior">
+    <input type="button" id="next" value="Siguiente">
 
     <div id="datosPlaneta"></div>
+    <div id="espera"></div>
 
 </body>
 

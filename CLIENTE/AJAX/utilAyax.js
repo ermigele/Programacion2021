@@ -3,7 +3,7 @@ const pAJAX = (metodo, url, fCallback) => {
 
     peti.onreadystatechange = () => {
             if ((peti.readyState == 4) && (peti.status == 200)) {
-                console.log(peti.responseText);
+                //  console.log(peti.responseText);
                 fCallback(JSON.parse(peti.responseText));
             }
         }

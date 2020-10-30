@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Listado personajes STAR WARS</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <script src="utilAyax.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    </script>
+
+    <style>
+        h1 {
+            color: cadetblue;
+        }
+        
+        table {
+            border-collapse: collapse;
+            padding: 5px;
+            width: 70%;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        
+        th {
+            color: white;
+            border: 1px solid black;
+            padding: 10px;
+            background-color: green;
+        }
+        
+        td {
+            border: 1px solid black;
+            padding: 5px;
+        }
+        
+        table tbody tr:nth-child(2n) {
+            background-color: greenyellow;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Listado de personajes</h1>
+
+    <table border="1.5">
+        <thead>
+            <th>Imagen</th>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apodo</th>
+            <th>Nacimiento</th>
+            <th>Genero</th>
+            <th>Estado</th>
+            <th>Aparición</th>
+            <th>Ocupación</th>
+            <th>Categoria</th>
+        </thead>
+        <tbody id="cuerpazo">
+
+        </tbody>
+    </table>
+    <input type="button" value="Anterior">
+    <input type="button" value="Siguiente">
+
+    <div id="detalles"></div>
+
+</body>
+
+</html>
