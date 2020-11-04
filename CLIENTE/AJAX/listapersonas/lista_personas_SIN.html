@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Ejercicio Listado Personas. AJAX</title>
+    <style type="text/css">
+
+    </style>
+
+    <script type="text/javascript">
+        window.onload = () => {
+            pedirPersonas();
+        }
+
+        var peti;
+        const pedirPersonas = () => {
+            peti = new XMLHttpRequest();
+
+            console.log("peti: ", peti);
+
+            peti.onreadystatechange = pintaPersonas;
+
+            peti.open("POST", "servidor.php", true);
+
+            //Establezco una cabecera para petición POST:ç
+            peti.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            var p = {
+                servicio: "listar"
+            };
+
+            peti.send(JSON.stringify(p));
+
+        }
+
+        const pintaPersonas = () => {
+            console.log("this = ", this);
+            if ((peti.readyState == 4) && (peti.status == 200)) {
+                console.log("this.responseText = ", peti.responseText);
+            }
+        }
+    </script>
+
+</head>
+
+<body>
+    <h1>Registro de Usuarios</h1>
+
+    <form>
+        <label for="dni">DNI:</label>
+        <input type="text" id="dni" name="dni" value="27473339T" />
+        <span id="infoDNI"> </span>
+        <br/>
+        <label for="nombre">NOMBRE:</label>
+        <input type="text" id="nombre" name="nombre" value="Marco Elio" />
+        <br/>
+        <label for="apellidos">APELLIDOS:</label>
+        <input type="text" id="apellidos" name="apellidos" value="García Gomariz" />
+        <br/>
+
+        <br/>
+
+        <table id="tabla_personas" border="1">
+            <tr>
+                <th>ID</th>
+                <th>DNI</th>
+                <th>NOMBRE</th>
+                <th>APELLIDOS</th>
+            </tr>
+
+            <tbody id="filas_tabla">
+
+            </tbody>
+        </table>
+
+        <br/>
+        <br/>
+        <input type="button" value="AÑADIR" id="btAnade" />
+        <br><br>
+        <input type="button" value="BORRAR" id="btBorrar" />
+        <input type="text" id="id" name="id" value="" size="5" placeholder="ID a borrar" />
+    </form>
+
+</body>
+
+</html>
