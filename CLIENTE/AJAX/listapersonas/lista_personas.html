@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Ejercicio Listado Personas. AJAX</title>
+    <style type="text/css">
+        h3 {
+            color: red;
+        }
+        
+        body {
+            background-color: rgb(138, 223, 226);
+        }
+        
+        #tabla_personas {
+            background-color: rgb(236, 77, 77);
+        }
+        
+        #nuevoUsuario {
+            background-color: rgb(199, 238, 107);
+            border: 2px solid rgb(100, 139, 224);
+            border-radius: 15px;
+            padding: 1em;
+            color: rgb(139, 74, 199);
+        }
+        
+        #editarUsuario {
+            visibility: hidden;
+            position: absolute;
+            top: 20%;
+            left: 20%;
+            z-index: 11;
+            background-color: rgb(223, 135, 84);
+            border: 2px solid rgb(8, 107, 146);
+            border-radius: 15px;
+            padding: 1em;
+            color: rgb(126, 39, 207);
+        }
+        
+        fieldset {
+            width: 20%;
+        }
+        
+        #eliminar {
+            background-color: pink;
+            font-weight: bold;
+        }
+    </style>
+    <script src="utilPost.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        window.onload = () => {
+            petiPOST("servidor.php", LISTAR, mostrarTabla);
+            document.getElementById("btAnade").onclick = nuevaPersona;
+            document.getElementById("btCancelar").onclick = cancelarForm;
+            document.getElementById("btConfirmar").onclick = mofidicarPersona;
+        }
+        const LISTAR = {
+            servicio: "listar"
+        }
+        const URL = "servidor.php";
+        var oRes = null;
+
+        function nuevaPersona(e) {
+            debugger;
+            var p = {
+                servicio: "insertar",
+                dni: document.getElementById("dni").value,
+                nombre: document.getElementById("nombre").value,
+                apellidos: document.getElementById("apellidos").value
+            }
+            petiPOST(URL, p, mostrarTabla);
+        }
+
+        function borrarPersona() {
+            this.parentNode.parentNode.className = "eliminar";
+            setTimeout(() => {
+                if (confirm("¿Estas seguro que lo deseas eliminar?")) {
+                    var p = {
+                        servicio: "borrar",
+                        id: this.dataset.idPersona
+                    }
+                    petiPOST(URL, p, mostrarTabla);
+                }
+                this.parentNode.parentNode.className = "";
+            }, 100);
+        }
+
+
+        function editarPersona() {
+            var buscarP = {
+                servicio: "selPersonaID",
+                id: this.dataset.idPersona
+            };
+            document.getElementById("editarUsuario").setAttribute("style", "visibility:visible");
+            petiPOST(URL, buscarP, llenarForm);
+        }
+
+        function cancelarForm() {
+            document.getElementById("editarUsuario").setAttribute("style", "visibilty:visible");
+        }
+
+        function mofidicarPersona() {
+            var p = {
+                servicio: "modificar",
+                id: document.getElementById("idMod").value,
+                dni: document.getElementById("dniMod").value,
+                nombre: document.getElementById("nombreMod").value,
+                apellidos: document.getElementById("apellidosMod").value
+            };
+            petiPOST(URL, p, mostrarTabla);
+            document.getElementById("editarUsuario").setAttribute("style", "visibility:hidden");
+
+
+        }
+
+        function llenarForm(datos) {
+            document.getElementById("idMod").value = datos.ID;
+            document.getElementById("dniMod").value = datos.DNI;
+            document.getElementById("nombreMod").value = datos.NOMBRE;
+            document.getElementById("apellidosMod").value = datos.APELLIDOS;
+        }
+
+        function mostrarTabla(datos) {
+            oRes = datos;
+            document.getElementById("filas_tabla").innerHTML = " ";
+
+            oRes.forEach(function(o) {
+                var tr = document.createElement("tr");
+                tr.appendChild(llenarFila(o.ID));
+                tr.appendChild(llenarFila(o.DNI));
+                tr.appendChild(llenarFila(o.NOMBRE));
+                tr.appendChild(llenarFila(o.APELLIDOS));
+                tr.appendChild(llenarFila(o.ID, "BORRAR"));
+                tr.appendChild(llenarFila(o.ID, "EDITAR"));
+                document.getElementById("filas_tabla").appendChild(tr);
+            });
+        }
+
+        function llenarFila(datos, tipo = "") {
+            var td = document.createElement("td");
+            var boton = document.createElement("button");
+            switch (tipo) {
+                case "BORRAR":
+                    boton.innerHTML = "Borrar"
+                    boton.dataset.idPersona = datos;
+                    boton.onclick = borrarPersona;
+                    td.appendChild(boton);
+                    break;
+                case "EDITAR":
+                    boton.innerHTML = "Editar"
+                    boton.dataset.idPersona = datos;
+                    boton.onclick = editarPersona;
+                    td.appendChild(boton);
+                    break;
+                default:
+                    datos = document.createTextNode(datos);
+                    td.appendChild(datos);
+            }
+            return td;
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Registro de Usuarios</h1>
+
+    <form id="nuevoUsuario">
+        <fieldset>
+            <legend>Nuevo usuario </legend>
+            <label for="dni">DNI:</label>
+            <input type="text" id="dni" name="dni" value="20538956W" />
+            <span id="infoDNI"> </span>
+            <br />
+            <label for="nombre">NOMBRE:</label>
+            <input type="text" id="nombre" name="nombre" value="Manuel" />
+            <br />
+            <label for="apellidos">APELLIDOS:</label>
+            <input type="text" id="apellidos" name="apellidos" value="Martin" />
+            <br />
+            <input type="button" value="Añadir" id="btAnade" />
+        </fieldset>
+    </form>
+
+    <br />
+
+    <table id="tabla_personas" border="1">
+        <tr>
+            <th>ID</th>
+            <th>DNI</th>
+            <th>NOMBRE</th>
+            <th>APELLIDOS</th>
+            <th>Eliminar</th>
+            <th>Modificar</th>
+        </tr>
+        <tbody id="filas_tabla">
+
+        </tbody>
+    </table>
+
+    <form id="editarUsuario">
+        <fieldset>
+            <legend>Editar usuario </legend>
+            <input type="hidden" id="idMod">
+            <label for="dni">DNI:</label>
+            <input type="text" id="dniMod" name="dniMod" />
+            <span id="infoDNI"> </span>
+            <br />
+            <label for="nombre">NOMBRE:</label>
+            <input type="text" id="nombreMod" name="nombreMod" />
+            <br />
+            <label for="apellidos">APELLIDOS:</label>
+            <input type="text" id="apellidosMod" name="apellidosMod" />
+            <br />
+            <input type="button" value="Confirmar" id="btConfirmar" />
+            <input type="button" value="Cancelar" id="btCancelar" />
+        </fieldset>
+    </form>
+
+</body>
+
+</html>
