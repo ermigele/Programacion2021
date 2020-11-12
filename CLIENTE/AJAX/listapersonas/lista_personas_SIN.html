@@ -8,7 +8,7 @@
         h3 {
             color: red;
         }
-        
+
         #formUsuario {
             visibility: hidden;
             position: absolute;
@@ -21,11 +21,11 @@
             padding: 1em;
             color: red;
         }
-        
+
         fieldset {
             width: 20%;
         }
-        
+
         #eliminar {
             background-color: pink;
             font-weight: bold;
@@ -47,7 +47,7 @@
         var oRes = null;
 
         function nuevaPersona(e) {
-            document.getElementById("formUsuario").setAttribute("style", "visibility: visible;")
+            document.getElementById("formUsuario").setAttribute("style", "visibility: visible");
         }
 
         function borrarPersona() {
@@ -108,7 +108,7 @@
             oRes = datos;
             document.getElementById("filas_tabla").innerHTML = " ";
 
-            oRes.forEach(function(o) {
+            oRes.forEach(function (o) {
                 var tr = document.createElement("tr");
                 tr.appendChild(llenarFila(o.ID));
                 tr.appendChild(llenarFila(o.DNI));
@@ -148,13 +148,12 @@
 <body>
     <h1>Registro de Usuarios</h1>
 
-    <br/>
+    <br />
     <input type="button" id="btAnade" value="Nueva persona" />
-    <br/>
+    <br />
 
     <form id="formUsuario">
         <fieldset>
-            <legend>Nuevo usuario </legend>
             <input type="hidden" dataset-idPersonas="-1" id="id">
             <label for="dni">DNI:</label>
             <input type="text" id="dni" name="dni" />
