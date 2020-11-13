@@ -7,10 +7,9 @@
     <script src="../utilAyax.js" type="text/javascript"></script>
     <script type="text/javascript">
         window.onload = () => {
-            pAJAX("GET", "https://swapi.dev/api/people/?format=json", mostrarInformacion);
+            fetch("https://swapi.dev/api/people/?format=json").then(algo => algo.json()).then(datos => mostrarInformacion(datos));
             document.getElementById("previus").onclick = cambPagina;
             document.getElementById("next").onclick = cambPagina;
-
         }
 
         var pagina = 1;
@@ -19,8 +18,8 @@
             pagina = (this.id == "previus" && pagina > 1) ? pagina - 1 : pagina + 1;
             document.getElementById("espera").style.display = "block";
             setTimeout(() => {
-                pAJAX("GET", "https://swapi.dev/api/people/?page=" + pagina + "&format=json", mostrarInformacion);
-            }, 3000);
+                fetch("https://swapi.dev/api/people/?page=" + pagina).then(algo => algo.json()).then(datos => mostrarInformacion(datos));
+            }, 2000);
         }
 
         function llenarFila(texto, esURL = false) {
@@ -60,7 +59,7 @@
             enlaces.forEach(function(a) {
                 a.onclick = function(evento) {
                     evento.preventDefault();
-                    pAJAX("GET", this.href + "?format=json", mostrarPlaneta);
+                    fetch(this.href).then(algo => algo.json()).then(datos => mostrarPlaneta(datos));
                 }
             });
             document.getElementById("espera").style.display = "none";
