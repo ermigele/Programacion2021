@@ -1,124 +1,155 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
 
-        <title>Ejercicio 15 - Informaci?n sobre eventos</title>
+<head>
 
-        <style type="text/css">
-            body {font-family: arial, helvetica;}
-            #info {width:160px; border:thin solid silver; padding:.5em; position: absolute; top:1px; left:2px;}
-            #info h1 {margin: 0;}
-        </style>
+    <title>Ejercicio 15 - Informaci?n sobre eventos</title>
 
-        <script type="text/javascript">
-            //  Definimos la variable GLOBAL, donde se guarda el botón del ratón que se ha pulsado:
-            var boton_raton = 0;
-            
-            window.onload = function() {
-                document.onmousemove = obtenerPosicion;
-                document.onkeypress = obtenerTecla;
-                document.onclick = cambiarColor;
-                document.getElementById("info").onmousedown = inicio_mover;
-                document.getElementById("info").onmouseup = fin_mover;
+    <style type="text/css">
+        body {
+            font-family: arial, helvetica;
+        }
+        
+        #info {
+            width: 160px;
+            border: thin solid silver;
+            padding: .5em;
+            position: absolute;
+            top: 1px;
+            left: 2px;
+        }
+        
+        #info h1 {
+            margin: 0;
+        }
+    </style>
 
-                document.onmouseup=fin_mover;
+    <script type="text/javascript">
+        var strReverse = str.split('').reverse().join(''); // 'lkjhgfdsa'
+
+        // Retorna un nÃºmero aleatorio entre 0 (incluido) y 1 (excluido)
+        function getRandom() {
+            return Math.random();
+        }
+        // Retorna un nÃºmero aleatorio entre min (incluido) y max (excluido)
+        function getRandomArbitrary(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+        // Retorna un entero aleatorio entre min (incluido) y max (excluido)
+        // Â¡Usando Math.round() te darÃ¡ una distribuciÃ³n no-uniforme!
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min)) + min;
+        }
+
+
+        //  Definimos la variable GLOBAL, donde se guarda el botï¿½n del ratï¿½n que se ha pulsado:
+        var boton_raton = 0;
+
+        window.onload = function() {
+            document.onmousemove = obtenerPosicion;
+            document.onkeypress = obtenerTecla;
+            document.onclick = cambiarColor;
+            document.getElementById("info").onmousedown = inicio_mover;
+            document.getElementById("info").onmouseup = fin_mover;
+
+            document.onmouseup = fin_mover;
+        }
+
+
+
+        function inicio_mover() {
+            boton_raton = 1;
+            //  Devolvemos false aquï¿½ y en fin_mover para que NO seleccione el texto. Para este caso.
+            return false;
+        }
+
+        function fin_mover() {
+            boton_raton = 0;
+            return false;
+        }
+
+        function cambiarColor() {
+            document.getElementById("info").style.backgroundColor = "#FFFFCC";
+        }
+
+        function obtenerTecla(elEvento) {
+            var evento = elEvento || window.event;
+            var mensaje = new Array();
+            //  Mostramos el Tï¿½tulo:
+            mensaje[0] = "Teclado";
+            //  Mostramos el carï¿½cter que se ha pulsado:
+            mensaje[1] = "Carï¿½cter [" + String.fromCharCode(evento.charCode) + "]";
+            //  Mostramos el cï¿½digo ASCII de la letra que se ha pulsado:
+            mensaje[2] = "Cï¿½digo [" + evento.charCode + "]";
+
+            //  Cambiamos el Color (azulito):
+            document.getElementById("info").style.backgroundColor = "#CCE6FF";
+
+            //  Mostramos la Informaciï¿½n:
+            muestraInformacion(mensaje);
+        }
+
+        function obtenerPosicion(elEvento) {
+            //  Cogemos las coordenadas del Navegador:
+            var evento = elEvento || window.event;
+            var mensaje = new Array();
+            //  Mostramos el Tï¿½tulo:
+            mensaje[0] = "Ratï¿½n";
+            //  Cogemos las coordenadas del Navegador
+            mensaje[1] = "Navegador [" + evento.clientX + ", " + evento.clientY + "]";
+            //  Cogemos las coordenadas de la Pantala:
+            mensaje[2] = "Pantalla [" + evento.screenX + ", " + evento.screenY + "]";
+
+            //  Cogemos las coordenadas de la Pï¿½gina:
+            // Detectar si el navegador es Internet Explorer
+            var ie = navigator.userAgent.toLowerCase().indexOf('msie') != -1;
+
+            if (ie)
+                mensaje[3] = "Pï¿½gina [" + (evento.clientX + document.body.scrollLeft) + ", " +
+                (evento.clientY + document.body.scrollTop) + "]";
+            else
+                mensaje[3] = "Pï¿½gina [" + evento.pageX + ", " + evento.pageY + "]";
+
+            info = document.getElementById("info");
+            //  Quitamos cualquier color:
+            info.style.backgroundColor = "";
+
+            //  Lo movemos:
+            //  Atributo: evento.button (POR CONFIRMAR):
+            //  button = 1 => Botï¿½n izquierdo del ratï¿½n (para IE).
+            //  button = 0 => Botï¿½n izquierdo del ratï¿½n (para FireFox).
+            //  button = 2 => Botï¿½n derecho del ratï¿½n.
+            //  button = 4 => Rueda central del ratï¿½n.
+
+            if (boton_raton == 1) {
+                mensaje[4] = "MOVIENDO";
+                info.style.left = evento.clientX + "px";
+                info.style.top = evento.clientY + "px";
+                info.style.backgroundColor = "pink";
             }
 
-         
-         
-            function inicio_mover() {
-                boton_raton = 1; 
-                //  Devolvemos false aquí y en fin_mover para que NO seleccione el texto. Para este caso.
-                return false;
+            //  Mostramos la Informaciï¿½n:
+            muestraInformacion(mensaje);
+        }
+
+        function muestraInformacion(mensaje) {
+            document.getElementById("info").innerHTML = '<h1>' + mensaje[0] + '</h1>';
+            for (var i = 1; i < mensaje.length; i++) {
+                document.getElementById("info").innerHTML += '<p>' + mensaje[i] + '</p>';
             }
-			
-            function fin_mover() {
-                boton_raton = 0; 
-                return false;
-            }
+        }
+    </script>
 
-            function cambiarColor() {
-                document.getElementById("info").style.backgroundColor = "#FFFFCC";
-            }
-            
-            function obtenerTecla(elEvento) {
-                var evento = elEvento || window.event;
-                var mensaje = new Array(); 
-                //  Mostramos el Título:
-                mensaje[0] = "Teclado";
-                //  Mostramos el carácter que se ha pulsado:
-                mensaje[1] = "Carácter [" + String.fromCharCode(evento.charCode) + "]";
-                //  Mostramos el código ASCII de la letra que se ha pulsado:
-                mensaje[2] = "Código [" + evento.charCode + "]";
-                
-                //  Cambiamos el Color (azulito):
-                document.getElementById("info").style.backgroundColor = "#CCE6FF";
-                
-                //  Mostramos la Información:
-                muestraInformacion(mensaje);
-            }
-            
-            function obtenerPosicion(elEvento) {
-                //  Cogemos las coordenadas del Navegador:
-                var evento = elEvento || window.event;
-                var mensaje = new Array(); 
-                //  Mostramos el Título:
-                mensaje[0] = "Ratón";
-                //  Cogemos las coordenadas del Navegador
-                mensaje[1] = "Navegador [" + evento.clientX + ", " + evento.clientY + "]";
-                //  Cogemos las coordenadas de la Pantala:
-                mensaje[2] = "Pantalla [" + evento.screenX + ", " + evento.screenY + "]";
-                
-                //  Cogemos las coordenadas de la Página:
-                // Detectar si el navegador es Internet Explorer
-                var ie = navigator.userAgent.toLowerCase().indexOf('msie')!=-1;
- 
-                if(ie) 
-                    mensaje[3] = "Página [" + (evento.clientX + document.body.scrollLeft) + ", " + 
-                    (evento.clientY + document.body.scrollTop) + "]";
-                else
-                    mensaje[3] = "Página [" + evento.pageX + ", " + evento.pageY + "]";  
-                
-                info = document.getElementById("info");
-                //  Quitamos cualquier color:
-                info.style.backgroundColor = "";
-                
-                //  Lo movemos:
-                //  Atributo: evento.button (POR CONFIRMAR):
-                //  button = 1 => Botón izquierdo del ratón (para IE).
-                //  button = 0 => Botón izquierdo del ratón (para FireFox).
-                //  button = 2 => Botón derecho del ratón.
-                //  button = 4 => Rueda central del ratón.
+</head>
 
-                if (boton_raton == 1) {
-                    mensaje[4] = "MOVIENDO";
-                    info.style.left = evento.clientX + "px";
-                    info.style.top = evento.clientY + "px";
-                    info.style.backgroundColor = "pink";
-                }
+<body>
 
-                //  Mostramos la Información:
-                muestraInformacion(mensaje);
-            }
+    <div id="info"></div>
 
-            function muestraInformacion(mensaje) {
-                document.getElementById("info").innerHTML = '<h1>'+mensaje[0]+'</h1>';
-                for(var i=1; i<mensaje.length; i++) {
-                    document.getElementById("info").innerHTML += '<p>'+mensaje[i]+'</p>';
-                }
-            }
-            
-        </script>
+    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
-    </head>
+</body>
 
-    <body>
-
-        <div id="info"></div>
-
-        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-
-    </body>
 </html>
