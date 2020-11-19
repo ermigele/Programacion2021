@@ -1,8 +1,6 @@
 <?php
-session_start();
-$_SESSION["encuesta"] = [];
-$preguntas = $_GET["pre"];
-$respuestas = $_GET["res"];
+$preguntas = $_GET["preguntas"];
+$respuestas = $_GET["respuestas"];
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -17,11 +15,13 @@ $respuestas = $_GET["res"];
     <p>Escribe el enunciado de cada una de las preguntas</p>
     <form action="sesiones-2-02C.php">
         <?php
-        for ($i = 1; $i < $preguntas; $i++) {
+        for ($i = 1; $i <= $preguntas; $i++) {
             print("Pregunta " . $i . ":");
-            print("<input type=\"text\"> <br /><br />");
+            print("<input type=\"text\" name=\"pregunta$i\"> <br /> <br />");
         }
+        print("<input type=\"hidden\" name=\"respuestas\" value=\"$respuestas\">");
         ?>
+
         <input type="submit" value="Generar">
     </form>
 
