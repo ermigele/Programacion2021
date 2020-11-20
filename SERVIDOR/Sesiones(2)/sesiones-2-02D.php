@@ -2,6 +2,8 @@
 session_start();
 if (isset($_SESSION["encuesta"])) {
     $_SESSION["encuesta"] = [$_REQUEST];
+}else{
+    $_SESSION["encuesta"] = [$_REQUEST];
 }
 print_r($_SESSION["encuesta"]);
 ?>
