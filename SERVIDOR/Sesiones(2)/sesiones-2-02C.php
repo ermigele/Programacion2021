@@ -1,7 +1,6 @@
 <?php
 $totalPreguntas = count($_REQUEST) - 1;
 $totalRespuestas = $_REQUEST["respuestas"];
-print_r($_REQUEST);
 ?>
 <!DOCTYPE html>
 <html lang="es">

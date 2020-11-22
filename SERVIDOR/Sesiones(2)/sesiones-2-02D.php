@@ -2,10 +2,9 @@
 session_start();
 if (isset($_SESSION["encuesta"])) {
     $_SESSION["encuesta"] = [$_REQUEST];
-}else{
+} else {
     $_SESSION["encuesta"] = [$_REQUEST];
 }
-print_r($_SESSION["encuesta"]);
 ?>
 
 <!DOCTYPE html>
@@ -19,10 +18,11 @@ print_r($_SESSION["encuesta"]);
 <body>
     <h1>Encuesta(Resultado)</h1>
     <?php
-    print("Se ha contestado ". count( $_SESSION["encuesta"]). " pregunta(s) de un total de ". count( $_SESSION["encuesta"])."");
-
     print("<ul>");
-    print("<li>A la pregunta .............. se ha contestado ...</li>");
+    foreach ($_SESSION["encuesta"] as $clave => $array) {
+        foreach ($array as $clave2 => $valor)
+            print("<li>A la pregunta " . $clave2 . " se ha contestado " . $valor . " </li>");
+    }
     print("</ul>")
     ?>
 </body>
