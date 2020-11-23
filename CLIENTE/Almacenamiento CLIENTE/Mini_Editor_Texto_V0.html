@@ -30,6 +30,25 @@
             document.getElementById("subrayado").addEventListener("mousedown", cambiarSubrayado, false);
             document.getElementById("cursiva").addEventListener("mousedown", cambiarCursiva, false);
             document.getElementById("color").addEventListener("mousedown", cambiarColor, false);
+            listaWebStorage();
+            document.getElementById("listaGuardados").onclick = textoGuardado;
+        }
+
+        function listaWebStorage() {
+            var cont = localStorage.length;
+            var select = document.getElementById("listaGuardados");
+            var nombre, option;
+
+            for (i = 0; i < localStorage.length; i++) {
+                nombre = localStorage.key(i);
+                option = new Option(nombre, nombre);
+                select.appendChild(option);
+            }
+        }
+
+        function textoGuardado(e) {
+            var nombre = this.value;
+            texto.innerHTML = localStorage.getItem(nombre);
         }
 
         function guardar() {
@@ -70,6 +89,7 @@
     <h3>Procesador de Textos</h3>
     <label> Nombre del texto </label><input type="text" name="nombre" id="nombre" />
     <label>Color </label><input type="color" name="color" id="colores" />
+    <select id="listaGuardados" multiple></select>
     <p>
         <span id="guardar">Guardar</span>
         <span id="negrita">Negrita</span>

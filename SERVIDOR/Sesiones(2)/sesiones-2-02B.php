@@ -1,6 +1,10 @@
 <?php
 $preguntas = $_GET["preguntas"];
 $respuestas = $_GET["respuestas"];
+
+if ($preguntas > 10 || $preguntas < 1 && $respuestas > 10 || $respuestas < 2)
+    header("Location: sesiones-2-02A.html");
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -21,7 +25,6 @@ $respuestas = $_GET["respuestas"];
         }
         print("<input type=\"hidden\" name=\"respuestas\" value=\"$respuestas\">");
         ?>
-
         <input type="submit" value="Generar">
     </form>
 

@@ -1,9 +1,9 @@
 <?php
 session_start();
-if (isset($_SESSION["encuesta"])) {
+if (!isset($_SESSION["encuesta"])) {
     $_SESSION["encuesta"] = [$_REQUEST];
 } else {
-    $_SESSION["encuesta"] = [$_REQUEST];
+    array_push($_SESSION["encuesta"], $_REQUEST);
 }
 ?>
 

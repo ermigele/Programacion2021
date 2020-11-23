@@ -11,5 +11,5 @@ if ($opc == "Jugar") {
     }
 } else {
     $_SESSION["tragaperras"][0] += 1;
-    header("Location: sesiones-2-03A.php");
+    header("Location: sesiones-2-03A.php?opc=" . $opc);
 }

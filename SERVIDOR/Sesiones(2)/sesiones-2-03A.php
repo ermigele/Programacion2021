@@ -22,26 +22,25 @@ $frutas = [];
     <table border=1,5>
         <tr>
             <?php
-            $premio = false;
+            $cont = 1;
             $frutas = [];
             for ($i = 0; $i <= 2; $i++) {
                 $frutaAleatoria = rand(127817, 127827);
                 print("<td> <p style=\"font-size: 600%; margin: 0\"> &#$frutaAleatoria </p> </td>");
 
                 if (isset($_REQUEST['opc']) && $_REQUEST['opc'] == 'Jugar') {
-                    if (in_array($frutaAleatoria, $frutas))
-                        $premio = true;
-                    else
-                        $premio = false;
+                    if (in_array($frutaAleatoria, $frutas)) {
+                        $cont += 1;
+                    }
                 }
                 $frutas[] = $frutaAleatoria;
             }
 
-            if ($premio) {
+            if ($cont > 2) {
                 $_SESSION["tragaperras"][0] += 10;
                 $_SESSION["tragaperras"][1] += 1;
-                //header("Location: sesiones-2-03A.php");
             }
+            $cont = 0;
             ?>
             <td>
                 <br /> <br />
