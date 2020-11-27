@@ -16,7 +16,6 @@ $conexion->connect('localhost', 'root', '', 'ejemplo');
 
 <body>
     <?php
-    $validado = true;
 
     if (isset($_GET['editar'])) {
         $id = $_GET['editar'];
@@ -27,9 +26,8 @@ $conexion->connect('localhost', 'root', '', 'ejemplo');
         $email = $row['email'];
         $codigocurso = $row['codigo_curso'];
         print_r($row);
-    }
-
-    if (isset($_GET['nombre']) || isset($_GET['apellidos']) || isset($_GET['email']) || isset($_GET['codigo_curso'])) {
+    } else if (isset($_GET['nombre']) || isset($_GET['apellidos']) || isset($_GET['email']) || isset($_GET['codigo_curso'])) {
+        $validado = true;
         if ($_GET['nombre'] == "") {
             print("Error el nombre del alumno no puede estar vacio <br />");
             $validado = false;
@@ -44,40 +42,51 @@ $conexion->connect('localhost', 'root', '', 'ejemplo');
         }
 
         if ($validado) {
+            $id = $_GET['id'];
+            $nombre = $_GET['nombre'];
+            $apellidos = $_GET['apellidos'];
+            $email = $_GET['email'];
+            $codigocurso = $_GET['codigo_curso'];
+
             $consulta = $conexion->stmt_init();
-            if ($id == null) {
+            if ($id < 0) {
                 $consulta->prepare("insert into alumnos (nombre, apellidos, email, codigo_curso) values (?,?,?,?)");
-                $nombre = $_GET['nombre'];
-                $apellidos = $_GET['apellidos'];
-                $email = $_GET['email'];
-                $codigocurso = $_GET['codigo_curso'];
+                $consulta->bind_param('sssi', $nombre, $apellidos, $email, $codigocurso);
             } else {
-               // $consulta->prepare("UPDATE alumnos SET nombre values (?,?,?,?)");
+                $consulta->prepare("UPDATE alumnos SET nombre = ?, apellidos = ?, email = ?, codigo_curso = ? WHERE codigo = ?");
+                $consulta->bind_param('sssii', $nombre, $apellidos, $email, $codigocurso, $id);
             }
-            $consulta->bind_param('sssi', $nombre, $apellidos, $email, $codigocurso);
             $consulta->execute();
             $consulta->close();
 
             header("Location: listado.php");
+        } else {
+            $id = $_GET['nombre'];
+            $nombre = $_GET['nombre'];
+            $apellidos = $_GET['apellidos'];
+            $email = $_GET['email'];
+            $codigocurso = $_GET['codigo_curso'];
         }
     } else {
-    ?>
-        <h1>Añadir alumno </h1>
-
-        <form action="">
-            <label>Nombre </label> <input type="text" name="nombre" <?php print("value=" . $nombre); ?> /> <br /> <br />
-            <label>Apellidos </label> <input type="text" name="apellidos" <?php print("value=" . $apellidos); ?> /> <br /> <br />
-            <label>Email </label> <input type="text" name="email" placeholder="nombre@gmail.com" <?php print("value=" . $email); ?> /> <br /> <br />
-            <label>Curso </label> <input type="text" name="codigo_curso" <?php print("value=" . $codigocurso); ?> /> <br /> <br />
-
-            <input type="submit" value="Guardar" />
-        </form>
-
-    <?php
-
-
+        $id = -1;
+        $nombre = "";
+        $apellidos = "";
+        $email = "";
+        $codigocurso = "";
     }
     ?>
+    <h1>Añadir alumno </h1>
+
+    <form action="">
+        <label>Nombre </label> <input type="text" name="nombre" value="<?php print($nombre); ?>" /> <br /> <br />
+        <label>Apellidos </label> <input type="text" name="apellidos" value="<?php print($apellidos); ?>" /> <br /> <br />
+        <label>Email </label> <input type="text" name="email" placeholder="nombre@gmail.com" value="<?php print($email); ?>" /> <br /> <br />
+        <label>Curso </label> <input type="text" name="codigo_curso" value="<?php print($codigocurso); ?>" /> <br /> <br />
+        <input type="hidden" name="id" value="<?php print($id) ?>" />
+
+        <input type="submit" value="Guardar" />
+    </form>
+
 
 </body>
 
