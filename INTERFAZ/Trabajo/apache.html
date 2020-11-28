@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Servidor Apache</title>
+    <style type="text/css">
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0px;
+            background-color: violet;
+           /* background-image: url(imagenes/portada.jpg);  */
+        }
+
+        header {
+            width: 100%;
+            height: 100px;
+            padding-top: 0px;
+            text-align: center;
+            font-size: large;
+            background-color: cadetblue;
+
+        }
+
+        .menu ul li {
+            margin-left: 20%;
+            overflow: hidden;
+            display: inline;
+        }
+
+        .columna {
+            float: left;
+            width: 50%;
+        }
+
+        /* Clear floats after the columns */
+        .fila:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .columna #submenu {
+            margin-left: 0%;
+            margin-right: 45%;
+            background-color: white;
+        }
+
+        li {
+
+            list-style: none;
+        }
+
+        .columna .contenido {
+            overflow: auto;
+            background-color: cornflowerblue;
+            margin-left: 0%;
+            margin-right: 0%;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 100%;
+            width: 100%;
+            height: 100px;
+            background-color: red;
+        }
+    </style>
+</head>
+
+
+<body>
+    <header class="portada">
+        <h1>Servidor Apache</h1>
+    </header>
+
+    <nav class="menu">
+        <ul>
+            <li><a href="index.html"><img src="iconos/apache.ico" width="80" /> </a></li>
+            <li><a href="lighttpd.html"><img src="imagenes/portada_lighttpd.png" width="80" /></a></li>
+            <li><a href="cherokee.html"><img src="imagenes/cherokee.png" width="100" /></a></li>
+        </ul>
+    </nav>
+
+    <div class="fila">
+
+        <div class="columna">
+            <div id="submenu">
+                <img src="imagenes/portada_apache.jpg" width="100" />
+                <ul>
+                    <li><a href="index.html">Requisitos</a></li>
+                    <li><a href="#">Descargar</a></li>
+                    <li><a href="#">Descomprimir</a></li>
+                    <li><a href="#">Instalación</a></li>
+                    <li><a href="#">Ajustar el firewall</a></li>
+                    <li><a href="#">Comprobar su servidor web</a></li>
+                    <li><a href="#">Administrar el proceso de Apache</a></li>
+                </ul>
+                <img src="imagenes/apache_pluma.png" width="100" />
+            </div>
+        </div>
+
+        <div class="columna">
+            <div class="contenido">
+                <h2 id="introducionApache">Introducción El servidor HTTP Apache </h2>
+                <p> es el servidor web más usado en el mundo. Provee muchas características poderosas, incluyendo
+                    módulos de
+                    carga dinámica, soporte robusto a medios, así como amplia integración a otros programas comúnmente
+                    utilizados. En esta guía, explicaremos
+                    cómo instalar un servidor web Apache en tu servidor Ubuntu 18.04.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <strong>Miguel Ángel Martín Martín</strong>
+    </footer>
+</body>
+
+</html>
