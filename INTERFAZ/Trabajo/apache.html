@@ -21,11 +21,15 @@
         .menu {
             background-color: chocolate;
             overflow: hidden;
-            border: 1px solid;
+            width: 100%;
+        }
+
+        .indice {
+            background-color: chocolate;
         }
 
         .menu ul li {
-            margin-left: 20%;
+            margin-left: 35%;
             display: inline;
         }
 
@@ -33,20 +37,41 @@
             list-style: none;
         }
 
+        /*  .row {
         .column {
             flex: 50%;
             background-color: white;
         }
 
-        /* Clear floats after the columns */
-        .row:after {
-            content: "";
-            display: table;
-            clear: both;
+            display: flex;
+            width: 100%;
         }
+
+        .column_left {
+            display: flex;
+            flex-direction: column;
+            width: 40%;
+        }
+
+        .column_right {
+            display: flex;
+            flex-direction: column;
+            width: 80%;
+            flex: 1;
+        } */
 
         .row {
             display: flex;
+            flex-direction: row;
+        }
+
+        .column-left {
+            width: 20%;
+            height: 5vh;
+        }
+
+        .column-right {
+            width: 80%;
         }
 
         .contenido {
@@ -73,14 +98,13 @@
         <label>Servidor Apache</label>
     </header>
 
-    <div class="main_menu">
-        <div class="indice">
-
+    <div class="row indice">
+        <div class="column-left">
+            <a href="index.html">Indice </a>
         </div>
 
-        <div class="menu">
+        <div class="column-right menu">
             <ul>
-                <li id="indice"><a href="index.html">Indice </a></li>
                 <li><a href="lighttpd.html"><img src="imagenes/portada_lighttpd.png" width="50" /></a></li>
                 <li><a href="cherokee.html"><img src="imagenes/cherokee.png" width="80" /></a></li>
             </ul>
@@ -88,23 +112,21 @@
     </div>
 
     <div class="row">
-        <div class="column">
-            <div id="submenu">
-                <img src="imagenes/portada_apache.jpg" width="100" />
-                <ul>
-                    <li><a href="#introducionApache">Requisitos</a></li>
-                    <li><a href="#">Descargar</a></li>
-                    <li><a href="#">Descomprimir</a></li>
-                    <li><a href="#">Instalación</a></li>
-                    <li><a href="#">Ajustar el firewall</a></li>
-                    <li><a href="#">Comprobar su servidor web</a></li>
-                    <li><a href="#">Administrar el proceso de Apache</a></li>
-                </ul>
-                <img src="imagenes/apache_pluma.png" width="100" />
-            </div>
+        <div class="column-left">
+            <img src="imagenes/portada_apache.jpg" width="100" />
+            <ul>
+                <li><a href="#introducionApache">Requisitos</a></li>
+                <li><a href="#">Descargar</a></li>
+                <li><a href="#">Descomprimir</a></li>
+                <li><a href="#">Instalación</a></li>
+                <li><a href="#">Ajustar el firewall</a></li>
+                <li><a href="#">Comprobar su servidor web</a></li>
+                <li><a href="#">Administrar el proceso de Apache</a></li>
+            </ul>
+            <img src="imagenes/apache_pluma.png" width="100" />
         </div>
 
-        <div class="contenido">
+        <div class="column-right contenido">
             <div class="texto">
                 <h2 id="introducionApache">Introducción El servidor HTTP Apache </h2>
                 <p> es el servidor web más usado en el mundo. Provee muchas características poderosas, incluyendo
