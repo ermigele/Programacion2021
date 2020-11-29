@@ -8,21 +8,78 @@
             margin: 0px;
         }
 
-        .portada {
-            width: 100%;
-            height: 250px;
-            background-image: url("portada.PNG");
+        header {
+            color: #8c8c8c;
+            text-align: justify;
+            font-size: 2em;
+            height: 3em;
+            text-align: center;
+            background-color: darkslategrey;
+            flex: 0 0 auto;
         }
 
         .apache :hover {
             background-image: url(portadaApache.jpg);
         }
+
+        li {
+            list-style: none;
+            display: inline;
+            margin-left: 20%;
+        }
+
+        footer {
+            font-size: 13px;
+            color: #8c8c8c;
+            text-align: justify;
+            line-height: 20px;
+            text-align: center;
+            background-color: darkslategrey;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 2.5rem;
+        }
+
+        #show_apache {
+            display: none
+        }
+
+        #apache:hover+#show_apache {
+            display: block
+        }
+
+        #apache:hover+#hide {
+            display: none
+        }
     </style>
 </head>
 
 <body>
-    <header class="portada">
-    </header>
+    <header><label>Manual de servidores web</label></header> <br />
+
+    <div>
+        <ul>
+            <li>
+                <a href="apache.html"><img src="imagenes/portada_apache.jpg" width="120"></a>
+            </li>
+            <li><a href="lighttpd.html"><img src="imagenes/portada_lighttpd.png" width="120"></a></li>
+            <li><a href="cherokee.html"><img src="imagenes/portada_cherokee.png" width="120"></a></li>
+        </ul>
+    </div>
+
+    <div>
+        <div id="show_apache">
+            <h1>APACHE</h1>
+        </div>
+        <div>
+
+        </div>
+        <div>
+
+        </div>
+    </div>
+
 
     <footer>
         <strong>Miguel Ángel Martín Martín</strong>
