@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Listado alumnado</title>
+    <style type="text/css">
+        h3 {
+            color: red;
+        }
+
+        #formUsuario {
+            visibility: hidden;
+            position: absolute;
+            top: 20%;
+            left: 20%;
+            z-index: 11;
+            background-color: pink;
+            border: 2px solid maroon;
+            border-radius: 15px;
+            padding: 1em;
+            color: red;
+        }
+
+        fieldset {
+            width: 20%;
+        }
+
+        #eliminar {
+            background-color: pink;
+            font-weight: bold;
+        }
+    </style>
+
+    <script type="text/javascript">
+        window.onload = () => {
+            pedirSexo();
+            pedirEstadoCivil();
+            pedirDatos();
+            document.getElementById("btAnade").onclick = nuevoAlumno;
+            document.getElementById("btCancelar").onclick = cancelarForm;
+            document.getElementById("btConfirmar").onclick = confirmarPersona;
+        }
+        const URL = "servicios_alumnado/servicios.php";
+        var listaAlumnos = null;
+        var listaSexo = null;
+        var listaEstadoCivil = null;
+
+        function rellenarArraySexo(datos) {
+            listaSexo = {};
+            datos.forEach(dato => listaSexo[dato.CODIGO] = dato.NOMBRE);
+        }
+
+        function rellenarArrayEstadiCivil(datos) {
+            listaEstadoCivil = {};
+            datos.forEach(dato => listaEstadoCivil[dato.ID] = dato.NOMBRE);
+        }
+
+        function nuevoAlumno(e) {
+            document.getElementById("formUsuario").setAttribute("style", "visibility: visible");
+        }
+
+        function borrarPersona() {
+            debugger;
+            this.parentNode.parentNode.className = "eliminar";
+            setTimeout(() => {
+                if (confirm("¿Estas seguro que lo deseas eliminar?")) {
+                    let a = {
+                        accion: 2,
+                        id: this.dataset.idPersona
+                    }
+                    let parametros = {
+                        method: 'POST',
+                        body: JSON.stringify(a)
+                    }
+                    fetch(URL, parametros).then(peti => peti.json()).then(datos => mostrarTabla(datos))
+                        .catch(e => console.error('error al pedir los datos. ', e));
+                }
+                this.parentNode.parentNode.className = "";
+            }, 100);
+        }
+
+        function editarPersona() {
+            let buscarP = {
+                accion: 4,
+                id: this.dataset.idPersona
+            }
+            let parametros = {
+                method: 'POST',
+                body: JSON.stringify(buscarP)
+            }
+            fetch(URL, parametros).then(peti => peti.json()).then(datos >= mostrarTabla(datos))
+                .catch(e => console.error('error al pedir los datos. ', e));
+            document.getElementById("formUsuario").setAttribute("style", "visibility:visible");
+        }
+
+        function cancelarForm() {
+            document.getElementById("formUsuario").setAttribute("style", "visibility:hidden");
+        }
+
+        function confirmarPersona() {
+            if (this.dataset.id = "-1") {
+                let a = {
+                    accion: 0,
+                    nombre: document.getElementById("nombre").value,
+                    apellidos: document.getElementById("apellidos").value,
+                    sexo: document.getElementById("sexo").value,
+                    fecha_nacimiento: document.getElementById("fecNac").value,
+                    estado_civil: document.getElementById("estado_civil").value
+                }
+                let parametros = {
+                    method: 'POST',
+                    body: JSON.stringify(a)
+                }
+            } else {
+                let a = {
+                    accion: 1,
+                    id: document.getElementById("idMod").value,
+                    nombre: document.getElementById("nombreMod").value,
+                    apellidos: document.getElementById("apellidosMod").value
+                };
+                let parametros = {
+                    method: 'POST',
+                    body: JSON.stringify(a)
+                }
+            }
+            fetch(URL, parametros).then(peti => peti.json()).then(datos >= mostrarTabla(datos))
+                .catch(e => console.error('error al pedir los datos. ', e));
+            document.getElementById("formUsuario").setAttribute("style", "visibility:hidden");
+        }
+
+        function llenarForm(datos) {
+            document.getElementById("id").value = datos.ID;
+            document.getElementById("dni").value = datos.DNI;
+            document.getElementById("nombre").value = datos.NOMBRE
+            document.getElementById("apellidos").value = datos.APELLIDOS;
+        }
+
+        function mostrarTabla(datos) {
+            listaAlumnos = datos;
+            document.getElementById("filasAlumnos").innerHTML = " ";
+            listaAlumnos.forEach(function (a) {
+                var tr = document.createElement("tr");
+                tr.appendChild(llenarFila(a.ID));
+                tr.appendChild(llenarFila(a.NOMBRE));
+                tr.appendChild(llenarFila(a.APELLIDOS));
+                tr.appendChild(llenarFila(listaSexo[a.SEXO]));
+                tr.appendChild(llenarFila(a.FECHA_NACIMIENTO));
+                tr.appendChild(llenarFila(listaEstadoCivil[a.ESTADO_CIVIL]));
+                tr.appendChild(llenarFila(a.ID, "BORRAR"));
+                tr.appendChild(llenarFila(a.ID, "EDITAR"));
+                document.getElementById("filasAlumnos").appendChild(tr);
+            });
+        }
+
+        function llenarFila(datos, tipo = "") {
+            var td = document.createElement("td");
+            var boton = document.createElement("button");
+            switch (tipo) {
+                case "BORRAR":
+                    boton.innerHTML = "Borrar";
+                    boton.dataset.idPersona = datos;
+                    boton.onclick = borrarPersona;
+                    td.appendChild(boton);
+                    break;
+                case "EDITAR":
+                    boton.innerHTML = "Editar";
+                    boton.dataset.idPersona = datos;
+                    boton.onclick = editarPersona;
+                    td.appendChild(boton);
+                    break;
+                default:
+                    datos = document.createTextNode(datos);
+                    td.appendChild(datos);
+            }
+            return td;
+        }
+
+        function cancelarForm() {
+            document.getElementById("formUsuario").setAttribute("style", "visibility:hidden");
+        }
+        function pedirDatos() {
+            let a = {
+                accion: 3
+            }
+            let parametros = {
+                method: 'POST',
+                body: JSON.stringify(a)
+            }
+            fetch(URL, parametros).then(peti => peti.json()).then(datos => mostrarTabla(datos))
+                .catch(e => console.error('error al pedir los datos. ', e));
+        }
+
+        function pedirSexo() {
+            let a = {
+                accion: 5
+            }
+            let parametros = {
+                method: 'POST',
+                body: JSON.stringify(a)
+            }
+            fetch(URL, parametros).then(peti => peti.json()).then(datos => rellenarArraySexo(datos))
+                .catch(e => console.error('error al pedir los datos. ', e));
+        }
+
+        function pedirEstadoCivil() {
+            let a = {
+                accion: 9
+            }
+            let parametros = {
+                method: 'POST',
+                body: JSON.stringify(a)
+            }
+            fetch(URL, parametros).then(peti => peti.json()).then(datos => rellenarArrayEstadiCivil(datos))
+                .catch(e => console.error('error al pedir los datos. ', e));
+        }
+
+    </script>
+</head>
+
+<body>
+    <h1>Listado de alumnos</h1>
+
+    <input type="button" id="btAnade" value="Nuevo alumno" />
+    <br /> <br />
+
+    <form id="formUsuario">
+        <fieldset>
+            <input type="hidden" dataset-idPersonas="-1" id="id">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" />
+            <br /> <br />
+            <label for="apellidos">Apellidos:</label>
+            <input type="text" id="apellidos" name="apellidos" />
+            <br /> <br />
+            <label for="sexo">Sexo:</label>
+            <select type="text" id="sexo" name="sexo">
+            </select>
+            <br /> <br />
+            <label for="fecNac">Fecha de nacimiento:</label>
+            <input type="text" id="fecNac" name="fecNac" />
+            <br /> <br />
+            <label for="estadoCivil">Estado civil:</label>
+            <select id="estadoCivil" name="estadoCivil">
+            </select>
+            <br /> <br />
+            <input type="button" value="Confirmar" id="btConfirmar" />
+            <input type="button" value="Cancelar" id="btCancelar" />
+        </fieldset>
+    </form>
+
+    <table id="tablaAlumnos" border="1.5">
+        <tr>
+            <th>ID</th>
+            <th>NOMBRE</th>
+            <th>APELLIDOS</th>
+            <th>SEXO</th>
+            <th>FECHA NACIMIENTO</th>
+            <th>ESTADO CIVIL</th>
+            <th>Eliminar</th>
+            <th>Modificar</th>
+        </tr>
+        <tbody id="filasAlumnos">
+    </table>
+</body>
+
+</html>
