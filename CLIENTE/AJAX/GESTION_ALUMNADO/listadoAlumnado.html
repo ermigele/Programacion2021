@@ -7,7 +7,7 @@
         h3 {
             color: red;
         }
-
+        
         #formUsuario {
             visibility: hidden;
             position: absolute;
@@ -20,11 +20,11 @@
             padding: 1em;
             color: red;
         }
-
+        
         fieldset {
-            width: 20%;
+            width: 93%;
         }
-
+        
         #eliminar {
             background-color: pink;
             font-weight: bold;
@@ -46,17 +46,30 @@
         var listaEstadoCivil = null;
 
         function rellenarArraySexo(datos) {
-            listaSexo = {};
+            listaSexo = new Array;
             datos.forEach(dato => listaSexo[dato.CODIGO] = dato.NOMBRE);
         }
 
         function rellenarArrayEstadiCivil(datos) {
-            listaEstadoCivil = {};
+            listaEstadoCivil = new Array;
             datos.forEach(dato => listaEstadoCivil[dato.ID] = dato.NOMBRE);
         }
 
         function nuevoAlumno(e) {
             document.getElementById("formUsuario").setAttribute("style", "visibility: visible");
+            var selectSex = document.getElementById("sexo");
+            var selectEstadoCivil = document.getElementById("estadoCivil");
+            var op;
+
+            for (a in listaSexo) {
+                op = new Option(listaSexo[a], a);
+                selectSex.appendChild(op);
+            }
+
+            listaEstadoCivil.forEach(function(a) {
+                op = new Option(a, a);
+                selectEstadoCivil.appendChild(op);
+            });
         }
 
         function borrarPersona() {
@@ -88,7 +101,7 @@
                 method: 'POST',
                 body: JSON.stringify(buscarP)
             }
-            fetch(URL, parametros).then(peti => peti.json()).then(datos >= mostrarTabla(datos))
+            fetch(URL, parametros).then(peti => peti.json()).then(datos => mostrarTabla(datos))
                 .catch(e => console.error('error al pedir los datos. ', e));
             document.getElementById("formUsuario").setAttribute("style", "visibility:visible");
         }
@@ -98,32 +111,33 @@
         }
 
         function confirmarPersona() {
+            debugger;
             if (this.dataset.id = "-1") {
-                let a = {
+                var a = {
                     accion: 0,
                     nombre: document.getElementById("nombre").value,
                     apellidos: document.getElementById("apellidos").value,
                     sexo: document.getElementById("sexo").value,
                     fecha_nacimiento: document.getElementById("fecNac").value,
-                    estado_civil: document.getElementById("estado_civil").value
+                    estado_civil: document.getElementById("estadoCivil").value
                 }
-                let parametros = {
+                var parametros = {
                     method: 'POST',
                     body: JSON.stringify(a)
                 }
             } else {
-                let a = {
+                var a = {
                     accion: 1,
                     id: document.getElementById("idMod").value,
                     nombre: document.getElementById("nombreMod").value,
                     apellidos: document.getElementById("apellidosMod").value
-                };
-                let parametros = {
+                }
+                var parametros = {
                     method: 'POST',
                     body: JSON.stringify(a)
                 }
             }
-            fetch(URL, parametros).then(peti => peti.json()).then(datos >= mostrarTabla(datos))
+            fetch(URL, parametros).then(peti => peti.json()).then(datos => mostrarTabla(datos))
                 .catch(e => console.error('error al pedir los datos. ', e));
             document.getElementById("formUsuario").setAttribute("style", "visibility:hidden");
         }
@@ -138,13 +152,16 @@
         function mostrarTabla(datos) {
             listaAlumnos = datos;
             document.getElementById("filasAlumnos").innerHTML = " ";
-            listaAlumnos.forEach(function (a) {
+            listaAlumnos.forEach(function(a) {
+                let fecha = new Date(a.FECHA_NACIMIENTO);
+                fecha = fecha.getDate() + " / " + (fecha.getMonth() + 1) + " / " + fecha.getFullYear();
+
                 var tr = document.createElement("tr");
                 tr.appendChild(llenarFila(a.ID));
                 tr.appendChild(llenarFila(a.NOMBRE));
                 tr.appendChild(llenarFila(a.APELLIDOS));
                 tr.appendChild(llenarFila(listaSexo[a.SEXO]));
-                tr.appendChild(llenarFila(a.FECHA_NACIMIENTO));
+                tr.appendChild(llenarFila(fecha));
                 tr.appendChild(llenarFila(listaEstadoCivil[a.ESTADO_CIVIL]));
                 tr.appendChild(llenarFila(a.ID, "BORRAR"));
                 tr.appendChild(llenarFila(a.ID, "EDITAR"));
@@ -178,6 +195,7 @@
         function cancelarForm() {
             document.getElementById("formUsuario").setAttribute("style", "visibility:hidden");
         }
+
         function pedirDatos() {
             let a = {
                 accion: 3
@@ -213,7 +231,6 @@
             fetch(URL, parametros).then(peti => peti.json()).then(datos => rellenarArrayEstadiCivil(datos))
                 .catch(e => console.error('error al pedir los datos. ', e));
         }
-
     </script>
 </head>
 
@@ -237,7 +254,7 @@
             </select>
             <br /> <br />
             <label for="fecNac">Fecha de nacimiento:</label>
-            <input type="text" id="fecNac" name="fecNac" />
+            <input type="date" id="fecNac" name="fecNac" min="2002-01-01" max="2020-12-31" />
             <br /> <br />
             <label for="estadoCivil">Estado civil:</label>
             <select id="estadoCivil" name="estadoCivil">

@@ -8,7 +8,7 @@
         h3 {
             color: red;
         }
-
+        
         #formUsuario {
             visibility: hidden;
             position: absolute;
@@ -21,11 +21,11 @@
             padding: 1em;
             color: red;
         }
-
+        
         fieldset {
             width: 20%;
         }
-
+        
         #eliminar {
             background-color: pink;
             font-weight: bold;
@@ -108,7 +108,7 @@
             oRes = datos;
             document.getElementById("filas_tabla").innerHTML = " ";
 
-            oRes.forEach(function (o) {
+            oRes.forEach(function(o) {
                 var tr = document.createElement("tr");
                 tr.appendChild(llenarFila(o.ID));
                 tr.appendChild(llenarFila(o.DNI));

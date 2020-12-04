@@ -7,7 +7,7 @@
         html {
             height: 100%;
         }
-
+        
         body {
             font-family: 'Roboto', sans-serif;
             margin: 0px;
@@ -15,7 +15,7 @@
             flex-direction: column;
             height: 100%;
         }
-
+        
         header {
             color: #8c8c8c;
             text-align: justify;
@@ -25,68 +25,68 @@
             background-color: darkslategrey;
             flex: 0 0 auto;
         }
-
+        
         .menu {
             background-color: rgb(190, 121, 71);
             overflow: hidden;
             width: 100%;
         }
-
+        
         .menu ul li {
             margin-left: 35%;
             display: inline;
         }
-
+        
         .indice {
             border-bottom: 5em;
             background-color: rgb(190, 121, 71);
         }
-
+        
         .indice ul {
             font-size: 16px;
             border-radius: 2px;
         }
-
+        
         .column-left ul li {
             text-decoration: none;
             margin-bottom: 20px;
         }
-
+        
         ul li {
             list-style: none;
         }
-
+        
         .row {
             display: flex;
             flex-direction: row;
             height: 4em;
         }
-
+        
         .column-left {
             width: 20%;
             height: 5vh;
         }
-
+        
         .column-right {
             width: 80%;
         }
-
+        
         .contenido {
             background-color: rgb(196, 80, 105);
             overflow: auto;
-            height: 37.5em;
+            height: 35.5em;
         }
-
+        
         .titulo {
             text-decoration: underline;
             margin-left: 5px;
         }
-
+        
         .texto {
             margin-left: 25px;
             margin-right: 25px;
         }
-
+        
         .codigo {
             font-size: 15px;
             border-radius: 2px;
@@ -96,13 +96,20 @@
             font-weight: bolder;
             width: 50%;
         }
-
+        
         .imagen {
             margin-left: 35px;
             margin-right: 5em;
         }
-
+        
+        .video {
+            margin-top: 0.5em;
+            margin-left: 10em;
+            margin-right: 5em;
+        }
+        
         footer {
+            padding: 5px;
             font-size: 13.5px;
             color: #8c8c8c;
             text-align: center;
@@ -125,14 +132,20 @@
     <div class="row indice">
         <div class="column-left">
             <ul>
-                <li><a href="index.html"><img src="iconos/casa_NARANJA.png" width="30"> </a></li>
+                <li>
+                    <a href="index.html"><img src="iconos/casa_NARANJA.png" width="30"> </a>
+                </li>
             </ul>
         </div>
 
         <div class="column-right menu">
             <ul>
-                <li><a href="nginx.html"><img src="imagenes/nginx.png" width="70" height="40" /></a></li>
-                <li><a href="cherokee.html"><img src="imagenes/cherokee.png" width="90" /></a></li>
+                <li>
+                    <a href="nginx.html"><img src="imagenes/nginx.png" width="70" height="40" /></a>
+                </li>
+                <li>
+                    <a href="cherokee.html"><img src="imagenes/cherokee.png" width="90" /></a>
+                </li>
             </ul>
         </div>
     </div>
@@ -149,6 +162,7 @@
                 <li><a href="#comprobar">Comprobar su servidor web</a></li>
                 <li><a href="#administracion">Administrar el proceso de Apache</a></li>
                 <li><a href="#configurarHosts">Configurar hosts virtuales</a></li>
+                <li><a href="#video">Video de instalación</a></li>
             </ul>
             <img src="imagenes/apache_pluma.png" width="100" />
         </div>
@@ -158,19 +172,10 @@
                 <h2 id="introducion">Introducción</h2>
             </div>
             <div class="texto">
-                <p> Apache HTTP Server es un software de servidor web gratuito y de código abierto para plataformas Unix
-                    con el cual se ejecutan el 46% de los sitios web de todo el mundo. Es mantenido y desarrollado por
-                    la Apache Software Foundation.
-
-                    Le permite a los propietarios de sitios web servir contenido en la web, de ahí el nombre de
-                    <strong>web</strong>. Es uno de los servidores web más antiguos y confiables, con la primera versión
-                    lanzada hace más de 20 años, en 1995.
-
-                    Provee muchas características poderosas, incluyendo
-                    módulos de carga dinámica, soporte robusto a medios, así como amplia integración a otros programas
-                    comúnmente
-                    utilizados. En esta guía, explicaremoscómo instalar un servidor web Apache en tu servidor Ubuntu
-                    18.04.
+                <p> Apache HTTP Server es un software de servidor web gratuito y de código abierto para plataformas Unix con el cual se ejecutan el 46% de los sitios web de todo el mundo. Es mantenido y desarrollado por la Apache Software Foundation. Le permite
+                    a los propietarios de sitios web servir contenido en la web, de ahí el nombre de
+                    <strong>web</strong>. Es uno de los servidores web más antiguos y confiables, con la primera versión lanzada hace más de 20 años, en 1995. Provee muchas características poderosas, incluyendo módulos de carga dinámica, soporte robusto
+                    a medios, así como amplia integración a otros programas comúnmente utilizados. En esta guía, explicaremoscómo instalar un servidor web Apache en tu servidor Ubuntu 18.04.
                 </p>
             </div>
 
@@ -179,21 +184,16 @@
             </div>
 
             <div class="texto">
-                <p>Debe tener un usuario con root con privilegios sudo configurado en su servidor. Además, deberá
-                    habilitar un firewall básico para que bloquee los puertos que no sean esenciales. Para aprender a
-                    configurar una cuenta normal de usuario e instalar un firewall para su servidor,
-
-                    Cuando disponga de una cuenta, inicie sesión como user root para comenzar.</p>
+                <p>Debe tener un usuario con root con privilegios sudo configurado en su servidor. Además, deberá habilitar un firewall básico para que bloquee los puertos que no sean esenciales. Para aprender a configurar una cuenta normal de usuario e
+                    instalar un firewall para su servidor, Cuando disponga de una cuenta, inicie sesión como user root para comenzar.</p>
             </div>
             <div class="titulo">
                 <h2 id="caracteristicas">Características</h2>
             </div>
             <div class="texto">
-                <p>Es un servidor web con soporte para HTTP 1.1 y posteriormente añadir soporte para HTTP2 según la
-                    norma RFC 7540 y fue uno de los primeros servidores en soportar VirtualHost tanto para dominios como
-                    para IP respetando la normal norma RFC 2616, lo que permite alojar varios dominios en un mismo
-                    servidor con una misma IP, algo que hoy nos parece básico pero que en los noventas supuso una
-                    revolución.</p>
+                <p>Es un servidor web con soporte para HTTP 1.1 y posteriormente añadir soporte para HTTP2 según la norma RFC 7540 y fue uno de los primeros servidores en soportar VirtualHost tanto para dominios como para IP respetando la normal norma RFC
+                    2616, lo que permite alojar varios dominios en un mismo servidor con una misma IP, algo que hoy nos parece básico pero que en los noventas supuso una revolución.
+                </p>
                 <ol>
                     <li>Servidor web HTTP de código abierto</li>
                     <li>Plataformas Linux, Windows, Mac y otras</li>
@@ -208,9 +208,8 @@
                 <h2 id="instalacion">Instalar Apache</h2>
             </div>
             <div class="texto">
-                <p>Apache está disponible en los repositorios de software predeterminados de Ubuntu, lo que permite
-                    instalarlo con las herramientas convencionales de administración de paquetes. Comencemos
-                    actualizando el índice de paquetes locales para que reflejen los últimos cambios anteriores:</p>
+                <p>Apache está disponible en los repositorios de software predeterminados de Ubuntu, lo que permite instalarlo con las herramientas convencionales de administración de paquetes. Comencemos actualizando el índice de paquetes locales para que
+                    reflejen los últimos cambios anteriores:</p>
 
                 <div class="codigo">
                     <code>sudo apt update</code>
@@ -228,12 +227,10 @@
             </div>
 
             <div class="texto">
-                <p>Antes de probar Apache, es necesario modificar los ajustes de firewall para permitir el acceso
-                    externo a los puertos web predeterminados. Suponiendo que siguió las instrucciones de los requisitos
-                    previos, debería tener un firewall UFW configurado para que restrinja el acceso a su servidor.</p>
+                <p>Antes de probar Apache, es necesario modificar los ajustes de firewall para permitir el acceso externo a los puertos web predeterminados. Suponiendo que siguió las instrucciones de los requisitos previos, debería tener un firewall UFW
+                    configurado para que restrinja el acceso a su servidor.</p>
 
-                <p>Durante la instalación, Apache se registra con UFW para proporcionar algunos perfiles de aplicación
-                    que pueden utilizarse para habilitar o deshabilitar el acceso a Apache a través del firewall.</p>
+                <p>Durante la instalación, Apache se registra con UFW para proporcionar algunos perfiles de aplicación que pueden utilizarse para habilitar o deshabilitar el acceso a Apache a través del firewall.</p>
                 <p>Enumere los perfiles de aplicación <strong>ufw</strong> escribiendo lo siguiente:</p>
                 <div class="codigo">
                     <code>sudo ufw app list</code>
@@ -254,13 +251,10 @@
                 <p>Como lo indica el resultado, hay tres perfiles disponibles para Apache:</p>
                 <ul>
                     <li>Apache: este perfil abre solo el puerto 80 (tráfico web normal no cifrado)</li>
-                    <li>Apache Full: este perfil abre el puerto 80 (tráfico web normal no cifrado) y el puerto 443
-                        (tráfico TLS/SSL cifrado)</li>
+                    <li>Apache Full: este perfil abre el puerto 80 (tráfico web normal no cifrado) y el puerto 443 (tráfico TLS/SSL cifrado)</li>
                     <li>Apache Secure: este perfil abre solo el puerto 443 (tráfico TLS/SSL cifrado)</li>
                 </ul>
-                <p>Se recomienda habilitar el perfil más restrictivo, que de todos modos permitirá el tráfico que
-                    configuró. Debido a que en esta guía aún no configuramos SSL para nuestro servidor, solo deberemos
-                    permitir el tráfico en el puerto 80:</p>
+                <p>Se recomienda habilitar el perfil más restrictivo, que de todos modos permitirá el tráfico que configuró. Debido a que en esta guía aún no configuramos SSL para nuestro servidor, solo deberemos permitir el tráfico en el puerto 80:</p>
                 <div class="codigo">
                     <code>sudo ufw allow 'Apache'</code>
                 </div>
@@ -289,27 +283,22 @@
                 <h2 id="comprobar">Comprobar su servidor web</h2>
             </div>
             <div class="texto">
-                <p>Al final del proceso de instalación, Ubuntu 20.04 inicia Apache. El servidor web ya debería estar
-                    activo.</p>
-                <p>Realice una verificación con el sistema init systemd para saber si se encuentra en ejecución el
-                    servicio escribiendo lo siguiente:</p>
+                <p>Al final del proceso de instalación, Ubuntu 20.04 inicia Apache. El servidor web ya debería estar activo.
+                </p>
+                <p>Realice una verificación con el sistema init systemd para saber si se encuentra en ejecución el servicio escribiendo lo siguiente:</p>
 
                 <div class="codigo">
                     <code>sudo systemctl status apache2</code>
                 </div>
                 <p>Aunque la mejor forma de comprobarlo es solicitar una página de Apache. </p>
-                <p>Puede acceder a la página de destino predeterminada de Apache para confirmar que el software funcione
-                    correctamente mediante su dirección IP: Si no conoce la dirección IP de su servidor, puede obtenerla
-                    de varias formas desde la línea de comandos.</p>
+                <p>Puede acceder a la página de destino predeterminada de Apache para confirmar que el software funcione correctamente mediante su dirección IP: Si no conoce la dirección IP de su servidor, puede obtenerla de varias formas desde la línea
+                    de comandos.</p>
                 <p>Intente escribir esto en la línea de comandos de su servidor:</p>
                 <div class="codigo">
                     <code>hostname -I</code>
                 </div>
-                <p>Obtendrá algunas direcciones separadas por espacios. Puede probar cada uno en el navegador web para
-                    determinar si funcionan.
-
-                    Otra opción es utilizar la herramienta Icanhazip, que debería proporcionarle su dirección IP pública
-                    como aparece en otra ubicación en Internet:</p>
+                <p>Obtendrá algunas direcciones separadas por espacios. Puede probar cada uno en el navegador web para determinar si funcionan. Otra opción es utilizar la herramienta Icanhazip, que debería proporcionarle su dirección IP pública como aparece
+                    en otra ubicación en Internet:</p>
                 <div class="codigo">
                     <code>curl -4 icanhazip.com</code>
                 </div>
@@ -326,8 +315,7 @@
                 <h2 id="administracion">Administrar el proceso</h2>
             </div>
             <div class="texto">
-                <p>Ahora que el servidor web está listo y en funcionamiento, repasemos algunos comandos de
-                    administración básicos con <strong>systemctl</strong></p>
+                <p>Ahora que el servidor web está listo y en funcionamiento, repasemos algunos comandos de administración básicos con <strong>systemctl</strong></p>
 
                 <p>Para detener su servidor web, escriba lo siguiente:</p>
 
@@ -344,14 +332,12 @@
                     <code>sudo systemctl restart apache2</code>
                 </div>
 
-                <p>Si solo realiza cambios de configuración, Apache a menudo puede recargarse sin cerrar conexiones.
-                    Para hacerlo, utilice este comando:</p>
+                <p>Si solo realiza cambios de configuración, Apache a menudo puede recargarse sin cerrar conexiones. Para hacerlo, utilice este comando:</p>
                 <div class="codigo">
                     <code>sudo systemctl reload apache2</code>
                 </div>
 
-                <p>Por defecto, Apache está configurado para iniciarse automáticamente cuando el servidor lo hace. Si no
-                    es lo que quiere, deshabilite este comportamiento escribiendo lo siguiente:</p>
+                <p>Por defecto, Apache está configurado para iniciarse automáticamente cuando el servidor lo hace. Si no es lo que quiere, deshabilite este comportamiento escribiendo lo siguiente:</p>
                 <div class="codigo">
                     <code>sudo systemctl disable apache2</code>
                 </div>
@@ -368,19 +354,12 @@
                 <h2 id="configurarHosts">Configurar hosts virtuales</h2>
             </div>
             <div class="texto">
-                <p>Al emplear el servidor web Apache, puede utilizar hosts virtuales (similares a bloques de servidor de
-                    Nginx) para encapsular detalles de configuración y alojar más de un dominio desde un único servidor.
-                    Configuraremos un dominio llamado <stron>your_domain</stron>, pero debería cambiarlo por su propio
-                    nombre de dominio.</p>
-                <p>Ubuntu 20.04 tiene habilitado un bloque de servidor por defecto, que está configurado para
-                    proporcionar documentos del directorio <strong>/var/www/html</strong>. Si bien esto funciona bien
-                    para un solo sitio,
-                    puede ser difícil de manejar si aloja varios. En vez de modificar <strong>/var/www/html</strong>,
-                    vamos a crear una
-                    estructura de directorios dentro de /var/www para un sitio <strong> your_domain </strong>y dejaremos
-                    <strong>/var/www/html</strong>
-                    como directorio predeterminado que se suministrará si una solicitud de cliente no coincide con otros
-                    sitios.</p>
+                <p>Al emplear el servidor web Apache, puede utilizar hosts virtuales (similares a bloques de servidor de Nginx) para encapsular detalles de configuración y alojar más de un dominio desde un único servidor. Configuraremos un dominio llamado
+                    <stron>your_domain</stron>, pero debería cambiarlo por su propio nombre de dominio.</p>
+                <p>Ubuntu 20.04 tiene habilitado un bloque de servidor por defecto, que está configurado para proporcionar documentos del directorio <strong>/var/www/html</strong>. Si bien esto funciona bien para un solo sitio, puede ser difícil de manejar
+                    si aloja varios. En vez de modificar <strong>/var/www/html</strong>, vamos a crear una estructura de directorios dentro de /var/www para un sitio <strong> your_domain </strong>y dejaremos
+                    <strong>/var/www/html</strong> como directorio predeterminado que se suministrará si una solicitud de cliente no coincide con otros sitios.
+                </p>
                 <p>Cree el directorio para your_domain de la siguiente manera:</p>
                 <div class="codigo">
                     <code>sudo mkdir /var/www/your_domain</code>
@@ -391,10 +370,8 @@
                 <div class="codigo">
                     <code>sudo chown -R $USER:$USER /var/www/your_domain</code>
                 </div>
-                <p>Los permisos de los roots web deberían ser correctos si no modificó el valor umask, que establece
-                    permisos de archivos predeterminados. Para asegurarse de que sus permisos sean correctos y permitir
-                    al propietario leer, escribir y ejecutar los archivos, y a la vez conceder solo permisos de lectura
-                    y ejecución a los grupos y terceros, puede ingresar el siguiente comando:</p>
+                <p>Los permisos de los roots web deberían ser correctos si no modificó el valor umask, que establece permisos de archivos predeterminados. Para asegurarse de que sus permisos sean correctos y permitir al propietario leer, escribir y ejecutar
+                    los archivos, y a la vez conceder solo permisos de lectura y ejecución a los grupos y terceros, puede ingresar el siguiente comando:</p>
                 <div class="codigo">
                     <code>sudo chmod -R 755 /var/www/your_domain</code>
                 </div>
@@ -404,19 +381,14 @@
                     <code>sudo nano /var/www/your_domain/index.html</code>
                 </div>
 
-                <p>Para que Apache proporcione este contenido, es necesario crear un archivo de host virtual con las
-                    directivas correctas. En lugar de modificar el archivo de configuración predeterminado situado en
-                    <strong>/etc/apache2/sites-available/000-default.conf</strong> directamente, vamos a crear uno nuevo
-                    en <strong>/etc/apache2/sites-available/your_domain.conf</strong>:</p>
+                <p>Para que Apache proporcione este contenido, es necesario crear un archivo de host virtual con las directivas correctas. En lugar de modificar el archivo de configuración predeterminado situado en
+                    <strong>/etc/apache2/sites-available/000-default.conf</strong> directamente, vamos a crear uno nuevo en <strong>/etc/apache2/sites-available/your_domain.conf</strong>:</p>
                 <div class="codigo">
                     <code>sudo nano /etc/apache2/sites-available/your_domain.conf</code>
                 </div>
 
-                <p>Tenga en cuenta que cambiamos DocumentRoot por nuestro nuevo directorio y ServerAdmin por un correo
-                    electrónico al que pueda acceder el administrador del sitio your_domain. También agregamos dos
-                    directivas: ServerName, que establece el dominio de base que debería coincidir para esta definición
-                    de host virtual, y ServerAlias, que define más nombres que deberían coincidir como si fuesen el
-                    nombre de base.</p>
+                <p>Tenga en cuenta que cambiamos DocumentRoot por nuestro nuevo directorio y ServerAdmin por un correo electrónico al que pueda acceder el administrador del sitio your_domain. También agregamos dos directivas: ServerName, que establece el
+                    dominio de base que debería coincidir para esta definición de host virtual, y ServerAlias, que define más nombres que deberían coincidir como si fuesen el nombre de base.</p>
 
                 <p>Guarde y cierre el archivo cuando termine.</p>
 
@@ -438,6 +410,15 @@
                 <p>Reinicie Apache para implementar sus cambios:</p>
                 <div class="codigo">
                     <code>sudo systemctl restart apache2</code>
+                </div>
+            </div>
+            <div class="titulo">
+                <h2 id="video">Video de instalación</h2>
+            </div>
+            <div class="texto">
+                <p>Se muestra otro proceso de instalación mediante un video</p>
+                <div>
+                    <iframe class="video" width="560" height="315" src="https://www.youtube.com/embed/J7Dl4qV3ecw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
             </div>
         </div>

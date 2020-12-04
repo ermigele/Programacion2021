@@ -7,7 +7,7 @@
         html {
             height: 100%;
         }
-
+        
         body {
             font-family: 'Roboto', sans-serif;
             margin: 0px;
@@ -15,7 +15,7 @@
             flex-direction: column;
             height: 100%;
         }
-
+        
         header {
             color: #8c8c8c;
             text-align: justify;
@@ -25,68 +25,68 @@
             background-color: darkslategrey;
             flex: 0 0 auto;
         }
-
+        
         .menu {
             background-color: rgb(196, 80, 105);
             overflow: hidden;
             width: 100%;
         }
-
+        
         .menu ul li {
             margin-left: 35%;
             display: inline;
         }
-
+        
         .indice {
             border-bottom: 5em;
             background-color: rgb(196, 80, 105);
         }
-
+        
         .indice ul {
             font-size: 16px;
             border-radius: 2px;
         }
-
+        
         .column-left ul li {
             text-decoration: none;
             margin-bottom: 20px;
         }
-
+        
         ul li {
             list-style: none;
         }
-
+        
         .row {
             display: flex;
             flex-direction: row;
             height: 4em;
         }
-
+        
         .column-left {
             width: 20%;
             height: 5vh;
         }
-
+        
         .column-right {
             width: 80%;
         }
-
+        
         .contenido {
             background-color: rgb(111, 136, 245);
             overflow: auto;
-            height: 37.5em;
+            height: 35.5em;
         }
-
+        
         .titulo {
             text-decoration: underline;
             margin-left: 5px;
         }
-
+        
         .texto {
             margin-left: 25px;
             margin-right: 25px;
         }
-
+        
         .codigo {
             font-size: 15px;
             border-radius: 2px;
@@ -96,13 +96,20 @@
             font-weight: bolder;
             width: 50%;
         }
-
+        
         .imagen {
             margin-left: 35px;
             margin-right: 5em;
         }
-
+        
+        .video {
+            margin-top: 0.5em;
+            margin-left: 10em;
+            margin-right: 5em;
+        }
+        
         footer {
+            padding: 5px;
             font-size: 13.5px;
             color: #8c8c8c;
             text-align: center;
@@ -125,14 +132,20 @@
     <div class="row indice">
         <div class="column-left">
             <ul>
-                <li><a href="index.html"><img src="iconos/casa_AZUL.png" width="30"> </a></li>
+                <li>
+                    <a href="index.html"><img src="iconos/casa_AZUL.png" width="30"> </a>
+                </li>
             </ul>
         </div>
 
         <div class="column-right menu">
             <ul>
-                <li><a href="apache.html"><img src="iconos/apache.ico" width="90" height="40" /></a></li>
-                <li><a href="nginx.html"><img src="imagenes/nginx.png" width="70" height="40" /></a></li>
+                <li>
+                    <a href="apache.html"><img src="iconos/apache.ico" width="90" height="40" /></a>
+                </li>
+                <li>
+                    <a href="nginx.html"><img src="imagenes/nginx.png" width="70" height="40" /></a>
+                </li>
             </ul>
         </div>
     </div>
@@ -149,6 +162,7 @@
                 <li><a href="#configuracionPHP5">Configuración de PHP5 con soporte FastCGI para Cherokee</a></li>
                 <li><a href="#comprobar">Comprobar PHP5 con soporte FastCGI</a></li>
                 <li><a href="#habilitar">Habilitar el soporte de MySQL para PHP5</a></li>
+                <li><a href="#video">Video de instalación</a></li>
             </ul>
             <img src="iconos/cherokee-logo.png" width="100" />
         </div>
@@ -158,16 +172,12 @@
                 <h2 id="introducion">Introducción</h2>
             </div>
             <div class="texto">
-                <p> n servidor web multiplataforma que compite directamente con Nginx en lo que a ligereza se refiere y
-                    además puede ser ampliable mediante módulos sin dejar de ser un servidor web muy rápido.
+                <p> n servidor web multiplataforma que compite directamente con Nginx en lo que a ligereza se refiere y además puede ser ampliable mediante módulos sin dejar de ser un servidor web muy rápido.
                 </p>
 
-                <p>Se trata de un proyecto bastante maduro, ya que Cherokee empezó a desarrollarse en 2001 y desde
-                    entonces se han liberado varias versiones estables, aunque últimamente no se han liberado demasiadas
-                    versiones estables ya que su creador está trabajando actualmente para Canonical, pero aun así el
-                    software es perfectamente utilizable en sitios web actuales.</p>
-                <p>Cherokee no es demasiado utilizado, ya que normalmente la gente se decanta por otros servidores web
-                    alternativos como Nginx o Lighttpd.</p>
+                <p>Se trata de un proyecto bastante maduro, ya que Cherokee empezó a desarrollarse en 2001 y desde entonces se han liberado varias versiones estables, aunque últimamente no se han liberado demasiadas versiones estables ya que su creador está
+                    trabajando actualmente para Canonical, pero aun así el software es perfectamente utilizable en sitios web actuales.</p>
+                <p>Cherokee no es demasiado utilizado, ya que normalmente la gente se decanta por otros servidores web alternativos como Nginx o Lighttpd.</p>
             </div>
 
             <div class="titulo">
@@ -175,72 +185,44 @@
             </div>
 
             <div class="texto">
-                <p>La librería de cherokee, libcherokee, implementa las características básicas de un servidor web,
-                    permitiendo
-                    cargar desde módulos muchas otras. Esta arquitectura modular ha sido elegida para permitir cargar y
-                    ejecutar
-                    únicamente las partes y funcionalidades que sean necesarias en cada caso concreto. De esta forma, se
-                    ahorran
-                    recursos, se aumenta la seguridad (menos código en ejecución implica menos posibilidad de existir un
-                    bug en él)
-                    y se disminuye ligeramente la carga del servidor web</p>
+                <p>La librería de cherokee, libcherokee, implementa las características básicas de un servidor web, permitiendo cargar desde módulos muchas otras. Esta arquitectura modular ha sido elegida para permitir cargar y ejecutar únicamente las partes
+                    y funcionalidades que sean necesarias en cada caso concreto. De esta forma, se ahorran recursos, se aumenta la seguridad (menos código en ejecución implica menos posibilidad de existir un bug en él) y se disminuye ligeramente la carga
+                    del servidor web</p>
 
-                <p>Hay tres grandes grupos de módulos cargables: handlers, encoders, validators. Los handlers son
-                    manejadores de
-                    peticiones. Cuando el servidor procesa una petición, decide que clase de manajedor debe de utilizar
-                    para responder
-                    a dicha petición. Dependiendo de el módulo, la respuesta será una u otra. Cherokee incorpora el
-                    concepto de
-                    asociación de manejadores a directorios, de forma que el usuario puede definir que manejador desea
-                    utilizar en
-                    cada uno de los directorios servidos por web. Actualmente, se distribuyen los siguientes manejadores
-                    dentro del
-                    paquete principal de Cherokee</p>
+                <p>Hay tres grandes grupos de módulos cargables: handlers, encoders, validators. Los handlers son manejadores de peticiones. Cuando el servidor procesa una petición, decide que clase de manajedor debe de utilizar para responder a dicha petición.
+                    Dependiendo de el módulo, la respuesta será una u otra. Cherokee incorpora el concepto de asociación de manejadores a directorios, de forma que el usuario puede definir que manejador desea utilizar en cada uno de los directorios servidos
+                    por web. Actualmente, se distribuyen los siguientes manejadores dentro del paquete principal de Cherokee</p>
                 <ol>
                     <li>file: Sirve ficheros al cliente</li>
                     <li>irlist: Construye una página con lista de los ficheros contenidos en un directorio</li>
                     <li>redir: Redirecciona peticiones</li>
-                    <li>nn: Basado en el algoritmo de "Near Neighbors" atiende las peticiones recibidas con una
-                        respuesta simple
-                        positiv</li>
-                    <li>gnomevfs: Utiliza las librería de GNOME-VFS para atender las peticiones, de forma que es posible
-                        que sea
-                        el servidor web el que exporte ficheros localizados en ubicaciones accesibles bajo otros
-                        protocolos: NNTP,
-                        23
-                        Cherokee Web server
+                    <li>nn: Basado en el algoritmo de "Near Neighbors" atiende las peticiones recibidas con una respuesta simple positiv
+                    </li>
+                    <li>gnomevfs: Utiliza las librería de GNOME-VFS para atender las peticiones, de forma que es posible que sea el servidor web el que exporte ficheros localizados en ubicaciones accesibles bajo otros protocolos: NNTP, 23 Cherokee Web server
                         FTP, HTTP (en este caso trabajaría de proxy), etc</li>
                 </ol>
-                <p>Los encoders por su parte, son módulos que implementan una funcionalidad de conversión de la
-                    información que
-                    se va a enviar a los clientes. Actualmente, el encoder más útil es el de GZip. Este módulo comprime
-                    la información
-                    que se sirve antes de enviarla a los clientes, ahorrando ancho de banda y acelerando la transmisión
+                <p>Los encoders por su parte, son módulos que implementan una funcionalidad de conversión de la información que se va a enviar a los clientes. Actualmente, el encoder más útil es el de GZip. Este módulo comprime la información que se sirve
+                    antes de enviarla a los clientes, ahorrando ancho de banda y acelerando la transmisión
                 </p>
-                <p>Los validadores son los módulos que implementan posibles formas de validar a los usuarios. En el
-                    momento de
-                    escribir este artículo (Septiembre 2003) se encuentran en desarrollo. Cherokee implementa módulos
-                    para validar
-                    con LDAP, PAM y htpasswd</p>
-                <p>Todoslos módulosson configurables en tiempo de ejecución, normalmente mediante cadenas de texto que
-                    procesa
-                    libcheroke</p>
+                <p>Los validadores son los módulos que implementan posibles formas de validar a los usuarios. En el momento de escribir este artículo (Septiembre 2003) se encuentran en desarrollo. Cherokee implementa módulos para validar con LDAP, PAM y
+                    htpasswd
+                </p>
+                <p>Todoslos módulosson configurables en tiempo de ejecución, normalmente mediante cadenas de texto que procesa libcheroke
+                </p>
             </div>
             <div class="titulo">
                 <h2 id="requisitos"></h2>
             </div>
             <div class="texto">
-                <p>Tenemos que instaladar un servidor web con soporte para el lenguaje php y el gestor de base de datos
-                    mysql además es muy común que donde se encuentren esto paquetes también este la herramienta para
-                    administrar bases de datos phpmyadmin </p>
-                <p>La solución mas común es la implementación de LAMP en kernel Linux y WAMP en sistemas guindos. Vamos
-                    a mirar porque:</p>
+                <p>Tenemos que instaladar un servidor web con soporte para el lenguaje php y el gestor de base de datos mysql además es muy común que donde se encuentren esto paquetes también este la herramienta para administrar bases de datos phpmyadmin
+                </p>
+                <p>La solución mas común es la implementación de LAMP en kernel Linux y WAMP en sistemas guindos. Vamos a mirar porque:</p>
 
                 <ul>
-                    <li><strong>L</strong>    Linux : Linux es el sistema operativo</li>
-                    <li><strong>A</strong>    Apache: Apache es el software de servidor web</li>
-                    <li><strong>M</strong>    Mysql mysql el gestor de bases de datos</li>
-                    <li><strong>P</strong>    Php/Perl/Python estos son los lenguajes de programación, que instala según el que necesitemos
+                    <li><strong>L</strong> Linux : Linux es el sistema operativo</li>
+                    <li><strong>A</strong> Apache: Apache es el software de servidor web</li>
+                    <li><strong>M</strong> Mysql mysql el gestor de bases de datos</li>
+                    <li><strong>P</strong> Php/Perl/Python estos son los lenguajes de programación, que instala según el que necesitemos
                     </li>
                 </ul>
             </div>
@@ -249,11 +231,9 @@
                 <h2 id="instalacionMySQL">Instalación de MySQL</h2>
             </div>
             <div class="texto">
-                <p>Cherokee puede ser instalado sobre distintos sistemas operativos, pero en este caso en este artículo
-                    vamos a explicar cómo instalar Cherokee sobre un terminal debian en ubuntu.
+                <p>Cherokee puede ser instalado sobre distintos sistemas operativos, pero en este caso en este artículo vamos a explicar cómo instalar Cherokee sobre un terminal debian en ubuntu.
                 </p>
-                <p>Primero, instale el soporte de MySQL para el servidor web Cherokee. En medio de la instalación, se le
-                    pedirá que proporcione una nueva contraseña de usuario root de MySQL</p>
+                <p>Primero, instale el soporte de MySQL para el servidor web Cherokee. En medio de la instalación, se le pedirá que proporcione una nueva contraseña de usuario root de MySQL</p>
 
                 <p>Empezamos por abrir el terminal e introducir el siguiente comando</p>
                 <div class="codigo">
@@ -279,8 +259,7 @@
                 <div class="codigo">
                     <code>sudo nano /etc/php5/cgi/php.ini</code>
                 </div>
-                <p>Y descomente la línea <strong>cgi.fix_pathinfo u003d 1</strong>: y guarde el archivo. Vea la captura
-                    de pantalla acontinuación.</p>
+                <p>Y descomente la línea <strong>cgi.fix_pathinfo u003d 1</strong>: y guarde el archivo. Vea la captura de pantalla acontinuación.</p>
                 <img class="imagen" src="imagenes/cherokeeiphp5.png" />
             </div>
 
@@ -289,40 +268,31 @@
             </div>
 
             <div class="texto">
-                <p>Usamos el repositorio PPA (Archivo de paquetes personales) propio de Cherokee, así que agreguemos el
-                    ppa a su sistema y hagamos la actualización del sistema.</p>
+                <p>Usamos el repositorio PPA (Archivo de paquetes personales) propio de Cherokee, así que agreguemos el ppa a su sistema y hagamos la actualización del sistema.</p>
                 <div class="codigo">
                     <code> sudo add-apt-repository ppa:cherokee-webserver/ppa</code>
                 </div>
                 <div class="codigo">
                     <code> sudo apt-get update</code>
                 </div>
-                <p>Una vez, PPA agregado, abra el terminal con <strong>Ctrl + Alt + T</strong> y escriba el comando
-                    desde el terminal. Le pedirá confirmación si desea instalar Cherokee Web Server. Escriba "Sí" para
-                    continuar.</p>
+                <p>Una vez, PPA agregado, abra el terminal con <strong>Ctrl + Alt + T</strong> y escriba el comando desde el terminal. Le pedirá confirmación si desea instalar Cherokee Web Server. Escriba "Sí" para continuar.
+                </p>
 
                 <div class="codigo">
                     <code> sudo apt-get install cherokee</code>
                 </div>
 
-                <p>Una de las características agradables de Cherokee Web Server es su panel de control de administración
-                    basado en la Web desde donde puede administrar su servidor Web. Comando de fuego ‘cherokee-admin’ se
-                    iniciará un nombre de usuario y contraseña que se utilizarán más adelante (copie la contraseña en el
-                    portapapeles). Por defecto, el servidor web Cherokee está vinculado al host local (127.0.0.1) o la
-                    dirección IP del sistema (xx.xx.xx.xx) en el puerto no 9090. En mi caso sería algo así como
-                    http://10.0.2.15:9090 /.</p>
+                <p>Una de las características agradables de Cherokee Web Server es su panel de control de administración basado en la Web desde donde puede administrar su servidor Web. Comando de fuego ‘cherokee-admin’ se iniciará un nombre de usuario y
+                    contraseña que se utilizarán más adelante (copie la contraseña en el portapapeles). Por defecto, el servidor web Cherokee está vinculado al host local (127.0.0.1) o la dirección IP del sistema (xx.xx.xx.xx) en el puerto no 9090. En
+                    mi caso sería algo así como http://10.0.2.15:9090 /.</p>
 
                 <img class="imagen" src="imagenes/cherokeeinstall.png" />
 
-                <p>Ahora, abra el navegador y escriba http://127.0.0.1:9090/ o http://10.0.2.15:9090/ en la barra de
-                    direcciones. Cuando se le solicite, proporcione el nombre de usuario "admin", pegue la contraseña
-                    que se copió anteriormente durante el comando <strong>cherokee-admin</strong> . Así es como se ve la
-                    interfaz web y
-                    el funcionamiento de Cherokee Web Server.</p>
+                <p>Ahora, abra el navegador y escriba http://127.0.0.1:9090/ o http://10.0.2.15:9090/ en la barra de direcciones. Cuando se le solicite, proporcione el nombre de usuario "admin", pegue la contraseña que se copió anteriormente durante el comando
+                    <strong>cherokee-admin</strong> . Así es como se ve la interfaz web y el funcionamiento de Cherokee Web Server.</p>
 
                 <img class="imagen" src="imagenes/cherokeeinstall2.png" />
-                <p>Cómo iniciar, detener y verificar el estado de Cherokee Web Server. También para verificar que
-                    cherokee-admin y Web Server se estén ejecutando.</p>
+                <p>Cómo iniciar, detener y verificar el estado de Cherokee Web Server. También para verificar que cherokee-admin y Web Server se estén ejecutando.</p>
                 <div class="codigo">
                     <code> /etc/init.d/cherokee status</code>
                 </div>
@@ -339,8 +309,7 @@
                     <code>sudo netstat -antp | grep cherokee</code>
                 </div>
 
-                <p>Para dejar de ejecutar cherokee-admin, presione <strong>CTRL + C</strong> en la terminal o use el
-                    siguiente comando.</p>
+                <p>Para dejar de ejecutar cherokee-admin, presione <strong>CTRL + C</strong> en la terminal o use el siguiente comando.</p>
                 <div class="codigo">
                     <code> sudo killall -TERM cherokee-admin</code>
                 </div>
@@ -352,22 +321,19 @@
             </div>
 
             <div class="texto">
-                <p>Por defecto, el soporte PHP5 no está habilitado en Cherokee. Necesitamos habilitarlo manualmente
-                    yendo al panel de control de administración de Cherokee en <strong>//10.0.2.15:9090/</strong></p>
+                <p>Por defecto, el soporte PHP5 no está habilitado en Cherokee. Necesitamos habilitarlo manualmente yendo al panel de control de administración de Cherokee en <strong>//10.0.2.15:9090/</strong></p>
 
                 <img class="imagen" src="imagenes/configuracionPHP5cherokee.png" />
 
-                <p>Vaya a vServers, seleccione el vhost predeterminado y luego vaya a la pestaña Behavior y ejecute
-                    Rule Management.</p>
+                <p>Vaya a vServers, seleccione el vhost predeterminado y luego vaya a la pestaña Behavior y ejecute Rule Management.</p>
 
                 <img class="imagen" src="imagenes/configuracionPHP5cherokee2.png" />
 
-                <p>En la columna de la izquierda, verá una lista de reglas disponibles. Vea la imagen a continuación
-                    para su referencia.</p>
+                <p>En la columna de la izquierda, verá una lista de reglas disponibles. Vea la imagen a continuación para su referencia.</p>
 
                 <img class="imagen" src="imagenes/configuracionPHP5cherokee3.png" />
-                <p>Haga clic en el icono "+" junto a la pestaña Comportamiento que dice "Agregar regla de
-                    comportamiento".</p>
+                <p>Haga clic en el icono "+" junto a la pestaña Comportamiento que dice "Agregar regla de comportamiento".
+                </p>
 
                 <img class="imagen" src="imagenes/configuracionPHP5cherokee4.png" />
                 <p>Seleccione "Idiomas" en la columna de la izquierda, luego elija PHP y presione el botón "Agregar".
@@ -377,11 +343,9 @@
                 <p> continuación, haga clic en el botón Crear en la ventana Asistente de configuración.</p>
                 <img class="imagen" src="imagenes/configuracionPHP5cherokee6.png" />
 
-                <p>Se agregó una nueva regla a la columna de la izquierda que dice "Extensiones php" con estado "NO
-                    FINAL". Haga clic en "NO FINAL" y conviértalo en "FINAL".</p>
+                <p>Se agregó una nueva regla a la columna de la izquierda que dice "Extensiones php" con estado "NO FINAL". Haga clic en "NO FINAL" y conviértalo en "FINAL".</p>
                 <img class="imagen" src="imagenes/configuracionPHP5cherokee7.png" />
-                <p>A continuación, en la esquina superior derecha, verá el botón "GUARDAR", haga clic en él para guardar
-                    la configuración. </p>
+                <p>A continuación, en la esquina superior derecha, verá el botón "GUARDAR", haga clic en él para guardar la configuración. </p>
                 <img class="imagen" src="imagenes/configuracionPHP5cherokee8.png" />
                 <p>Ahora reinicie el servidor web Cherokee para realizar nuevos cambios.</p>
 
@@ -398,8 +362,7 @@
                 <h2 id="comprobar">Comprobar PHP5 con soporte FastCGI</h2>
             </div>
             <div class="texto">
-                <p>El directorio raíz web predeterminado para el sitio web es <strong>/var/www</strong>. Debajo de este
-                    directorio, cree un archivo llamado <strong>phpinfo.php</strong></p>
+                <p>El directorio raíz web predeterminado para el sitio web es <strong>/var/www</strong>. Debajo de este directorio, cree un archivo llamado <strong>phpinfo.php</strong></p>
 
                 <div class="codigo">
                     <code> nano /var/www/phpinfo.php</code>
@@ -420,17 +383,15 @@
                 <img class="imagen" src="imagenes/php-support.png" />
 
 
-                <p>Vea la figura anterior, verá que PHP5 está habilitado con soporte FastCGI con otros módulos por
-                    carga, pero falta una cosa en la lista (es decir, MySQL). Todavía no hemos agregado la
-                    compatibilidad con MySQL para PHP5. Vamos a hacerlo. </p>
+                <p>Vea la figura anterior, verá que PHP5 está habilitado con soporte FastCGI con otros módulos por carga, pero falta una cosa en la lista (es decir, MySQL). Todavía no hemos agregado la compatibilidad con MySQL para PHP5. Vamos a hacerlo.
+                </p>
             </div>
 
             <div class="titulo">
                 <h2 id="habilitar">Habilitar el soporte de MySQL para PHP5</h2>
             </div>
             <div class="texto">
-                <p>ara habilitar el soporte de MySQL para PHP, instale el paquete php5-mysql con otros módulos php
-                    importantes que puedan ser necesarios para sus aplicaciones.</p>
+                <p>ara habilitar el soporte de MySQL para PHP, instale el paquete php5-mysql con otros módulos php importantes que puedan ser necesarios para sus aplicaciones.</p>
 
                 <div class="codigo">
                     <code>sudo apt-get install php5-mysql php5-gd php5-curl php-pear php5-imagick php5-memcache php5-xmlrpc php5-xsl</code>
@@ -440,13 +401,19 @@
                     <code>/etc/init.d/cherokee restart</code>
                 </div>
 
-                <p>Actualice el navegador <strong>http://10.0.2.15/phpinfo.php</strong> y busque <strong>mysql</strong>,
-                    obtendrá una sección MySQL
-                    con una lista de otros módulos.</p>
+                <p>Actualice el navegador <strong>http://10.0.2.15/phpinfo.php</strong> y busque <strong>mysql</strong>, obtendrá una sección MySQL con una lista de otros módulos.</p>
                 <img class="imagen" src="imagenes/mysql-support.png" />
             </div>
-
+            <div class="titulo">
+                <h2 id="video">Video de instalación</h2>
+            </div>
+            <div class="texto">
+                <p>Se muestra otro proceso de instalación mediante un video</p>
+            </div>
+            <div>
+                <iframe class=video " width="560 " height="315 " src="https://www.youtube.com/embed/pKtEcgtwf_o " frameborder="0 " allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture " allowfullscreen></iframe></div>
         </div>
+    </div>
     </div>
 
     <footer>
