@@ -7,7 +7,7 @@
         h3 {
             color: red;
         }
-        
+
         #formUsuario {
             visibility: hidden;
             position: absolute;
@@ -20,11 +20,11 @@
             padding: 1em;
             color: red;
         }
-        
+
         fieldset {
             width: 93%;
         }
-        
+
         #eliminar {
             background-color: pink;
             font-weight: bold;
@@ -61,25 +61,30 @@
             var selectEstadoCivil = document.getElementById("estadoCivil");
             var op;
 
+            for (a in selectSex)
+                selectSex.remove(a);
+
+            for (a in selectEstadoCivil)
+                selectEstadoCivil.remove(a);
+
             for (a in listaSexo) {
                 op = new Option(listaSexo[a], a);
                 selectSex.appendChild(op);
             }
 
-            listaEstadoCivil.forEach(function(a) {
-                op = new Option(a, a);
+            for (a in listaEstadoCivil) {
+                op = new Option(listaEstadoCivil[a], a);
                 selectEstadoCivil.appendChild(op);
-            });
+            }
         }
 
         function borrarPersona() {
-            debugger;
             this.parentNode.parentNode.className = "eliminar";
             setTimeout(() => {
                 if (confirm("¿Estas seguro que lo deseas eliminar?")) {
                     let a = {
                         accion: 2,
-                        id: this.dataset.idPersona
+                        ID: this.dataset.idPersona
                     }
                     let parametros = {
                         method: 'POST',
@@ -95,13 +100,13 @@
         function editarPersona() {
             let buscarP = {
                 accion: 4,
-                id: this.dataset.idPersona
+                ID: this.dataset.idPersona
             }
             let parametros = {
                 method: 'POST',
                 body: JSON.stringify(buscarP)
             }
-            fetch(URL, parametros).then(peti => peti.json()).then(datos => mostrarTabla(datos))
+            fetch(URL, parametros).then(peti => peti.json()).then(datos => llenarForm(datos))
                 .catch(e => console.error('error al pedir los datos. ', e));
             document.getElementById("formUsuario").setAttribute("style", "visibility:visible");
         }
@@ -111,15 +116,14 @@
         }
 
         function confirmarPersona() {
-            debugger;
-            if (this.dataset.id = "-1") {
+            if (this.dataset.idPersona == "-1") {
                 var a = {
                     accion: 0,
-                    nombre: document.getElementById("nombre").value,
-                    apellidos: document.getElementById("apellidos").value,
-                    sexo: document.getElementById("sexo").value,
-                    fecha_nacimiento: document.getElementById("fecNac").value,
-                    estado_civil: document.getElementById("estadoCivil").value
+                    NOMBRE: document.getElementById("nombre").value,
+                    APELLIDOS: document.getElementById("apellidos").value,
+                    SEXO: document.getElementById("sexo").value,
+                    FECHA_NACIMIENTO: document.getElementById("fecNac").value,
+                    ESTADO_CIVIL: document.getElementById("estadoCivil").value
                 }
                 var parametros = {
                     method: 'POST',
@@ -128,9 +132,12 @@
             } else {
                 var a = {
                     accion: 1,
-                    id: document.getElementById("idMod").value,
-                    nombre: document.getElementById("nombreMod").value,
-                    apellidos: document.getElementById("apellidosMod").value
+                    ID: document.getElementById("idPersona").value,
+                    NOMBRE: document.getElementById("nombre").value,
+                    APELLIDOS: document.getElementById("apellidos").value,
+                    SEXO: document.getElementById("sexo").value,
+                    FECHA_NACIMIENTO: document.getElementById("fecNac").value,
+                    ESTADO_CIVIL: document.getElementById("estadoCivil").value
                 }
                 var parametros = {
                     method: 'POST',
@@ -143,21 +150,41 @@
         }
 
         function llenarForm(datos) {
-            document.getElementById("id").value = datos.ID;
-            document.getElementById("dni").value = datos.DNI;
-            document.getElementById("nombre").value = datos.NOMBRE
+            var selectSex = document.getElementById("sexo");
+            var selectEstadoCivil = document.getElementById("estadoCivil");
+
+            for (a in selectSex)
+                selectSex.remove(a);
+            for (a in selectEstadoCivil)
+                selectEstadoCivil.remove(a);
+
+            for (a in listaSexo) {
+                op = new Option(listaSexo[a], a);
+                selectSex.appendChild(op);
+            }
+
+            for (a in listaEstadoCivil) {
+                op = new Option(listaEstadoCivil[a], a);
+                selectEstadoCivil.appendChild(op);
+            }
+
+            document.getElementById("idPersona").value = datos.ID;
+            document.getElementById("nombre").value = datos.NOMBRE;
             document.getElementById("apellidos").value = datos.APELLIDOS;
+            selectSex.value = datos.SEXO;
+            document.getElementById("fecNac").value = datos.FECHA_NACIMIENTO;
+            selectEstadoCivil.value = datos.ESTADO_CIVIL;
         }
 
         function mostrarTabla(datos) {
             listaAlumnos = datos;
             document.getElementById("filasAlumnos").innerHTML = " ";
-            listaAlumnos.forEach(function(a) {
+            listaAlumnos.forEach(function (a) {
                 let fecha = new Date(a.FECHA_NACIMIENTO);
-                fecha = fecha.getDate() + " / " + (fecha.getMonth() + 1) + " / " + fecha.getFullYear();
+                fecha = fecha.getDate() + "/" + (fecha.getMonth() + 1) + "/" + fecha.getFullYear();
 
                 var tr = document.createElement("tr");
-                tr.appendChild(llenarFila(a.ID));
+                //  tr.appendChild(llenarFila(a.ID));
                 tr.appendChild(llenarFila(a.NOMBRE));
                 tr.appendChild(llenarFila(a.APELLIDOS));
                 tr.appendChild(llenarFila(listaSexo[a.SEXO]));
@@ -242,7 +269,7 @@
 
     <form id="formUsuario">
         <fieldset>
-            <input type="hidden" dataset-idPersonas="-1" id="id">
+            <input type="hidden" id="idPersona">
             <label for="nombre">Nombre:</label>
             <input type="text" id="nombre" name="nombre" />
             <br /> <br />
@@ -267,7 +294,7 @@
 
     <table id="tablaAlumnos" border="1.5">
         <tr>
-            <th>ID</th>
+            <!-- <th>ID</th>-->
             <th>NOMBRE</th>
             <th>APELLIDOS</th>
             <th>SEXO</th>
