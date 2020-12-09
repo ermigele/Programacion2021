@@ -112,10 +112,17 @@
         }
 
         function cancelarForm() {
+            debugger;
             document.getElementById("formUsuario").setAttribute("style", "visibility:hidden");
+            document.getElementById("nombre").value = "";
+            document.getElementById("apellidos").value = "";
+            document.getElementById("sexo").value = "";
+            document.getElementById("fecNac").value = "";
+            document.getElementById("estadoCivil").value = "";
         }
 
         function confirmarPersona() {
+            debugger;
             if (this.dataset.idPersona == "-1") {
                 var a = {
                     accion: 0,
@@ -147,6 +154,12 @@
             fetch(URL, parametros).then(peti => peti.json()).then(datos => mostrarTabla(datos))
                 .catch(e => console.error('error al pedir los datos. ', e));
             document.getElementById("formUsuario").setAttribute("style", "visibility:hidden");
+
+            document.getElementById("nombre").value = "";
+            document.getElementById("apellidos").value = "";
+            document.getElementById("sexo").value = "";
+            document.getElementById("fecNac").value = "";
+            document.getElementById("estadoCivil").value = "";
         }
 
         function llenarForm(datos) {
