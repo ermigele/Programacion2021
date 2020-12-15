@@ -11,22 +11,21 @@ $conexion = new PDO($mysql, $usuario, $contrasena);
 
 <head>
     <meta charset="utf-8">
-    <title>Nuevo usuario</title>
+    <title>Alta usuarios</title>
 </head>
 
 <body>
-    <h1> Nuevo usuario </h1>
+    <h1> Alta usuarios </h1>
 
-    <form action="anyade.php">
+    <form action="altaUsuarios-03.php" method="POST">
 
         <label>Nombre: </label><input type="text" name="usuario" /> <br /> <br />
         <label>Contraseña: </label><input type="password" name="password" /> <br /> <br />
         <label>Rol: </label><select name="rol">
             <?php
-            print_r("holas");
             $consulta = $conexion->query("SELECT * FROM roles");
             while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
-                print("<option name=\"rol\" value=\"$fila[nombre]\" >" . $fila['nombre'] . "</option>");
+                print("<option name=\"rol\" value=\"$fila[id]\" >" . $fila['nombre'] . "</option>");
             }
             ?>
         </select>
