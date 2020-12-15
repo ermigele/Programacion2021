@@ -30,7 +30,7 @@ $conexion = new PDO($mysql, $usuario, $contrasena);
             ?>
         </select>
         <br /> <br />
-        <input type="submit" value="Añadir alumno" />
+        <input type="submit" value="Añadir usuario" />
     </form>
 </body>
 

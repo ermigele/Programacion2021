@@ -28,7 +28,6 @@ $conexion = new PDO($mysql, $usuario, $contrasena);
             <?php
             $consulta = $conexion->query("SELECT login, nombre, password, fecha FROM usuarios u INNER JOIN roles r ON u.rol=r.id ORDER BY u.fecha asc");
             while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
-               md5($fila['password']);
                 print("<tr><td>" . $fila['login'] . "</td><td>" . $fila['nombre'] . "</td><td>" . $fila['fecha'] . "</td></tr>");
             }
             ?>

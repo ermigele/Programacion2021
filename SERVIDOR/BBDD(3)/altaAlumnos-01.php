@@ -17,26 +17,24 @@ $conexion = new PDO($mysql, $usuario, $contrasena);
 <body>
     <h1> Listado alumnos </h1>
 
-
     <table border=1.5>
         <thead>
             <th>Nombre</th>
             <th>Apellidos</th>
             <th>Email</th>
-            <th>Curso)</th>
+            <th>Curso</th>
         </thead>
         <tbody>
             <?php
-            $consulta = $conexion->query("SELECT login, nombre, password, fecha FROM usuarios u INNER JOIN roles r ON u.rol=r.id ORDER BY u.fecha asc");
+            $consulta = $conexion->query("SELECT a.nombre as nombre, apellidos, email, c.nombre as curso FROM alumnos a INNER JOIN cursos c ON a.codigo_curso=c.codigo ORDER BY apellidos asc");
             while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
-               md5($fila['password']);
-                print("<tr><td>" . $fila['login'] . "</td><td>" . $fila['nombre'] . "</td><td>" . $fila['fecha'] . "</td></tr>");
+                print("<tr><td>" . $fila['nombre'] . "</td><td>" . $fila['apellidos'] . "</td><td>" . $fila['email'] . "</td><td>" . $fila['curso'] . "</td></tr>");
             }
             ?>
         </tbody>
     </table>
     <br />
-    <form action="altaUsuarios-02.php">
+    <form action="altaAlumnos-02.php">
         <input type="submit" value="Añadir alumno" />
     </form>
 </body>
