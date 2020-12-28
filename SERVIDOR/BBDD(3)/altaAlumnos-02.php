@@ -20,7 +20,8 @@ $conexion = new PDO($mysql, $usuario, $contrasena);
     <form action="altaAlumnos-03.php" method="POST">
 
         <label>Nombre: </label><input type="text" name="nombre" /> <br /> <br />
-        <label>Email: </label><input type="text" name="apellidos" /> <br /> <br />
+        <label>Apellidos: </label><input type="text" name="apellidos" /> <br /> <br />
+        <label>Email: </label><input type="text" name="email" /> <br /> <br />
         <label>Curso: </label><select name="curso">
             <?php
             $consulta = $conexion->query("SELECT * FROM cursos");
