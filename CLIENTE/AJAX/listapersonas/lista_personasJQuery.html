@@ -5,11 +5,9 @@
 <head>
     <meta charset="UTF-8" />
     <title>Ejercicio Listado Personas. AJAX</title>
-    <link href="UI/jquery-ui.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="UI/jquery-ui.min.css">
     <script src="UI/external/jquery/jquery.js"></script>
     <script src="UI/jquery-ui.min.js"></script>
-    <script>
-    </script>
     <style type="text/css">
         h3 {
             color: red;
@@ -46,7 +44,37 @@
             opacity: 1;
         }
     </style>
+    <script>
+        let dialog, form;
+        $(function() {
+            dialog = $("#dialog-form").dialog({
+                autoOpen: false,
+                height: 400,
+                width: 350,
+                modal: true,
+                buttons: {
+                    "Create an account": addUser,
+                    Cancel: function() {
+                        dialog.dialog("close");
+                    }
+                },
+                close: function() {
+                    form[0].reset();
+                    allFields.removeClass("ui-state-error");
+                }
+            });
+        });
+    </script>
     <script type="text/javascript">
+        window.onload = function() {
+                cargarTabla();
+                document.getElementById("btAnade").onclick = anadePersona;
+                document.getElementById("btNuevaPersona").onclick = mostrarForm;
+                document.getElementById("btCancelar").onclick = cancelarForm;
+            }
+            //  Variables globales:
+        const URL = "servidor.php";
+
         function Crea_Fila(aCol) {
             var fila = document.createElement("tr");
             var col;
@@ -87,10 +115,6 @@
             }
         }
 
-
-        //  Variables globales:
-        var url = "servidor.php";
-
         function MuestraPersonas(datos) {
             console.log(datos);
             document.getElementById("filas_tabla").innerHTML = "";
@@ -118,25 +142,19 @@
                 };
             console.log(p);
 
-            var parametros = {
-                method: 'POST',
-                body: JSON.stringify(p)
-            };
-            fetch(url, parametros)
-                .then(r => r.json())
-                .then(datos => MuestraPersonas(datos))
-                .catch(e => console.error('error al pedir los datos. ', e));
-
+            $.ajax({
+                url: URL,
+                type: "post",
+                data: JSON.stringify(p),
+                dataType: "json",
+                success: MuestraPersonas,
+                error: function(res) {
+                    alert("Ha habido un error: " + JSON.stringify(res))
+                }
+            });
 
             this.dataset.idpersona = -1;
             cancelarForm();
-        }
-
-        window.onload = function() {
-            cargarTabla();
-            document.getElementById("btAnade").onclick = anadePersona;
-            document.getElementById("btNuevaPersona").onclick = mostrarForm;
-            document.getElementById("btCancelar").onclick = cancelarForm;
         }
 
         function cargarTabla() {
@@ -144,14 +162,16 @@
                 servicio: "listar"
             }
 
-            var parametros = {
-                method: 'POST',
-                body: JSON.stringify(p)
-            };
-            fetch(url, parametros)
-                .then(r => r.json())
-                .then(datos => MuestraPersonas(datos))
-                .catch(e => console.error('error al pedir los datos. ', e));
+            $.ajax({
+                url: URL,
+                type: "post",
+                data: JSON.stringify(p),
+                dataType: "json",
+                success: MuestraPersonas,
+                error: function(res) {
+                    alert("Ha habido un error: " + JSON.stringify(res))
+                }
+            })
         }
 
 
@@ -164,15 +184,18 @@
                     id: this.dataset.idpersona
                 }
 
-                var parametros = {
-                    method: 'POST',
-                    body: JSON.stringify(p)
-                };
-                fetch(url, parametros)
-                    .then(r => r.json())
-                    .then(datos => MuestraPersonas(datos))
-                    .catch(e => console.error('error al pedir los datos. ', e));
+                $.ajax({
+                    url: URL,
+                    type: "post",
+                    data: JSON.stringify(p),
+                    dataType: "json",
+                    success: MuestraPersonas,
+                    error: function(res) {
+                        alert("Ha habido un error: " + JSON.stringify(res))
+                    }
+                });
             }
+
         }
 
         function mostrarForm() {
@@ -194,7 +217,6 @@
             limpiaForm();
         }
 
-
         function editarPersona(e) {
             e.preventDefault();
             var p = {
@@ -202,14 +224,16 @@
                 id: this.dataset.idpersona
             }
 
-            var parametros = {
-                method: 'POST',
-                body: JSON.stringify(p)
-            };
-            fetch(url, parametros)
-                .then(r => r.json())
-                .then(datos => llenaForm(datos))
-                .catch(e => console.error('error al pedir los datos. ', e));
+            $.ajax({
+                url: URL,
+                type: "post",
+                data: JSON.stringify(p),
+                dataType: "json",
+                success: llenaForm,
+                error: function(res) {
+                    alert("Ha habido un error: " + JSON.stringify(res))
+                }
+            });
         }
 
         function llenaForm(datos) {
@@ -257,11 +281,10 @@
         </fieldset>
     </div>
 
-
     <br/>
     <button class="btn" id="btNuevaPersona">Nueva persona</button>
     <br><br>
-    <table id="tabla_personas" border="1" class="ui-widget ui-widget-content">
+    <table id="tabla_personas" class="ui-widget ui-widget-content">
         <tr class="ui-widget-header">
             <th>ID</th>
             <th>DNI</th>
@@ -270,12 +293,12 @@
             <th>Borrar</th>
             <th>Editar</th>
         </tr>
-
         <tbody id="filas_tabla" class="ui-widget-header">
 
         </tbody>
     </table>
     <br><br>
+
 </body>
 
 </html>
