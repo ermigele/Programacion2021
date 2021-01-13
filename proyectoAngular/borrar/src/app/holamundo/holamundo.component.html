@@ -1,0 +1,21 @@
+<div class="merienda">
+    <p>El titulo es: {{titulo}}</p>
+    <p>Los ingredientes son: {{lista}}</p>
+</div>
+<ul>
+    <app-cosas *ngFor="let esencia of lista" [nombreCosa]="esencia">
+    </app-cosas>
+    <div>
+        <label>Primer Input</label>
+        <input type="text" [(ngModel)]="titulo" />
+    </div>
+    <br />
+    <div>
+        <button (click)="cambiar()">Cambiar</button>
+    </div>
+
+    <div>
+        <p>El titulo es: {{titulo}}</p>
+    </div>
+
+</ul>
