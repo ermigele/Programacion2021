@@ -30,3 +30,9 @@ Route::get('/pruebasP/{id}/{nombre}', function ($id, $nombre) {
 
     return 'El parametro es: ' . $id . " y el nombre es: " . $nombre;
 });
+
+Route::get('/quienessomos', 'MiPrimerController@inicio');
+
+Route::get('/dondeestamos/{nombre}', 'MiPrimerController@final');
+
+Route::get('/contenido', 'MiPrimerController@contenido');

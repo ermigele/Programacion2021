@@ -17,63 +17,63 @@ $conexion->connect('localhost', 'root', '', 'ejemplo');
 <body>
     <?php
 
-    if (isset($_GET['editar'])) {
-        $id = $_GET['editar'];
-        $resultado = $conexion->query("SELECT * FROM alumnos WHERE codigo=" . $id);
-        $row = $resultado->fetch_array(MYSQLI_ASSOC);
-        $nombre = $row['nombre'];
-        $apellidos = $row['apellidos'];
-        $email = $row['email'];
-        $codigocurso = $row['codigo_curso'];
-        print_r($row);
-    } else if (isset($_GET['nombre']) || isset($_GET['apellidos']) || isset($_GET['email']) || isset($_GET['codigo_curso'])) {
-        $validado = true;
-        if ($_GET['nombre'] == "") {
-            print("Error el nombre del alumno no puede estar vacio <br />");
-            $validado = false;
-        }
-        if ($_GET['apellidos'] == "") {
-            print("Error los apellidos del alumno no puede estar vacio <br />");
-            $validado = false;
-        }
-        if ($_GET['codigo_curso'] == "") {
-            print("Error el curso no puede estar vacio <br />");
-            $validado = false;
-        }
-
-        if ($validado) {
-            $id = $_GET['id'];
-            $nombre = $_GET['nombre'];
-            $apellidos = $_GET['apellidos'];
-            $email = $_GET['email'];
-            $codigocurso = $_GET['codigo_curso'];
-
-            $consulta = $conexion->stmt_init();
-            if ($id < 0) {
-                $consulta->prepare("insert into alumnos (nombre, apellidos, email, codigo_curso) values (?,?,?,?)");
-                $consulta->bind_param('sssi', $nombre, $apellidos, $email, $codigocurso);
-            } else {
-                $consulta->prepare("UPDATE alumnos SET nombre = ?, apellidos = ?, email = ?, codigo_curso = ? WHERE codigo = ?");
-                $consulta->bind_param('sssii', $nombre, $apellidos, $email, $codigocurso, $id);
-            }
-            $consulta->execute();
-            $consulta->close();
-
-            header("Location: listado.php");
-        } else {
-            $id = $_GET['nombre'];
-            $nombre = $_GET['nombre'];
-            $apellidos = $_GET['apellidos'];
-            $email = $_GET['email'];
-            $codigocurso = $_GET['codigo_curso'];
-        }
-    } else {
-        $id = -1;
-        $nombre = "";
-        $apellidos = "";
-        $email = "";
-        $codigocurso = "";
+if (isset($_GET['editar'])) {
+    $id = $_GET['editar'];
+    $resultado = $conexion->query("SELECT * FROM alumnos WHERE codigo=" . $id);
+    $row = $resultado->fetch_array(MYSQLI_ASSOC);
+    $nombre = $row['nombre'];
+    $apellidos = $row['apellidos'];
+    $email = $row['email'];
+    $codigocurso = $row['codigo_curso'];
+    print_r($row);
+} elseif (isset($_GET['nombre']) || isset($_GET['apellidos']) || isset($_GET['email']) || isset($_GET['codigo_curso'])) {
+    $validado = true;
+    if ($_GET['nombre'] == "") {
+        print("Error el nombre del alumno no puede estar vacio <br />");
+        $validado = false;
     }
+    if ($_GET['apellidos'] == "") {
+        print("Error los apellidos del alumno no puede estar vacio <br />");
+        $validado = false;
+    }
+    if ($_GET['codigo_curso'] == "") {
+        print("Error el curso no puede estar vacio <br />");
+        $validado = false;
+    }
+
+    if ($validado) {
+        $id = $_GET['id'];
+        $nombre = $_GET['nombre'];
+        $apellidos = $_GET['apellidos'];
+        $email = $_GET['email'];
+        $codigocurso = $_GET['codigo_curso'];
+
+        $consulta = $conexion->stmt_init();
+        if ($id < 0) {
+            $consulta->prepare("insert into alumnos (nombre, apellidos, email, codigo_curso) values (?,?,?,?)");
+            $consulta->bind_param('sssi', $nombre, $apellidos, $email, $codigocurso);
+        } else {
+            $consulta->prepare("UPDATE alumnos SET nombre = ?, apellidos = ?, email = ?, codigo_curso = ? WHERE codigo = ?");
+            $consulta->bind_param('sssii', $nombre, $apellidos, $email, $codigocurso, $id);
+        }
+        $consulta->execute();
+        $consulta->close();
+
+        header("Location: listado.php");
+    } else {
+        $id = $_GET['nombre'];
+        $nombre = $_GET['nombre'];
+        $apellidos = $_GET['apellidos'];
+        $email = $_GET['email'];
+        $codigocurso = $_GET['codigo_curso'];
+    }
+} else {
+    $id = -1;
+    $nombre = "";
+    $apellidos = "";
+    $email = "";
+    $codigocurso = "";
+}
     ?>
     <h1>Añadir alumno </h1>
 
