@@ -36,3 +36,8 @@ Route::get('/quienessomos', 'MiPrimerController@inicio');
 Route::get('/dondeestamos/{nombre}', 'MiPrimerController@final');
 
 Route::get('/contenido', 'MiPrimerController@contenido');
+
+///AQUI
+
+Route::get('/empleados', 'MiPrimerController@mostrarEmpleados');
+Route::get('/centros', 'MiPrimerController@mostrarCentros');
