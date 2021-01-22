@@ -14,7 +14,8 @@ class CentrosController extends Controller
      */
     public function index()
     {
-        return "<h1>Hola Miguel</h1>";
+        $centros = Centro::all();
+        return view("centros.lista", compact("centros"));
     }
 
     /**
@@ -24,7 +25,7 @@ class CentrosController extends Controller
      */
     public function create()
     {
-        //
+        return view('centros.create');
     }
 
     /**
@@ -38,7 +39,9 @@ class CentrosController extends Controller
         $centro = new Centro;
         $centro->nombre = $request->nombre;
         $centro->direccion = $request->direccion;
-        $centro->saved();
+        $centro->save();
+
+        return redirect('/centros');
     }
 
     /**

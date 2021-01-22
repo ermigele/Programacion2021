@@ -16,4 +16,9 @@ export class PAjaxService {
     let dir = this.url + "?servicio=provincias";
     return this.http.get<any>(dir);
   }
+
+  pedirLocalidades(idProvincia) {
+    let dir = this.url + "?servicio=localidades&codigop="+ idProvincia;
+    return this.http.get<any>(dir);
+  }
 }
