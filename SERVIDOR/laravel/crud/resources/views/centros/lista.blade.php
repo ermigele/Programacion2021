@@ -12,7 +12,7 @@
     </thead>
     @foreach($centros as $centro)
     <tr>
-        <td><a href="{{ROUTE('centro.edit', $centro->id}}">{{$centro->nombre}}</a></td>
+        <td><a href="{{ROUTE('centro.edit', $centro->id}}">{{$centro->nombre}}</td>
         <td>{{$centro->direccion}}</td>
     </tr>
     @endforeach
