@@ -22,6 +22,10 @@ export class PAjaxService {
     return this.http.get<any>(dir);
   }
 
+  petiADir(url1:string){
+    return this.http.get<any>(url1);
+  }
+
   pedirPersonaje(idPersonaje: number) {
     let dir = this.url + "/people/" + idPersonaje + "?format=json";
     return this.http.get<any>(dir);

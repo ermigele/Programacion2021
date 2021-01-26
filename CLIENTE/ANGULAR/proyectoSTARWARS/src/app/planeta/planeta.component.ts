@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { PAjaxService } from '../p-ajax.service';
+  
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-planeta',
@@ -8,17 +8,11 @@ import { PAjaxService } from '../p-ajax.service';
 })
 export class PlanetaComponent implements OnInit {
 
-  private planeta: Array<any>;
+  @Input() planeta: Object;
 
-  constructor(private peti: PAjaxService) {
-    this.planeta = [];
-  }
+  constructor() { }
 
   ngOnInit(): void {
-    this.peti.pedirTodosPlanetas().subscribe(datos => {
-      this.planeta = datos;
-      console.log("datos: ", datos);
-    }, error => console.log("Error: ", error));
   }
 
 }
