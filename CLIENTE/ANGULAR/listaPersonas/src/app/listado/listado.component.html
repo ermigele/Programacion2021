@@ -1,0 +1,18 @@
+<button routerLink="persona-addMod/-1">Añadir persona</button>
+
+<table border="1.5">
+    <thead>
+        <th>ID</th>
+        <th>DNI</th>
+        <th>NOMBRE</th>
+        <th>APELLIDOS</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let p of lista">
+            <td>{{p.ID}}</td>
+            <td>{{p.DNI}}</td>
+            <td>{{p.NOMBRE}}</td>
+            <td>{{p.APELLIDOS}}</td>
+        </tr>
+    </tbody>
+</table>

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PAjaxService } from '../p-ajax.service';
+import {Provincia} from '../provincia';
+import {Localidad} from '../localidad';
+
 @Component({
   selector: 'app-prov-loc',
   templateUrl: './prov-loc.component.html',
@@ -7,9 +10,10 @@ import { PAjaxService } from '../p-ajax.service';
 })
 export class ProvLocComponent implements OnInit {
 
-  public opcionesProv: Array<any>;
+  //public opcionesProv: Provincia[]
+  public opcionesProv: Array<Provincia>;
   public opSelProv: any;
-  public opcionesLoc: Array<any>;
+  public opcionesLoc: Array<Localidad>;
   public opSelLoc: any;
 
   constructor(private peti: PAjaxService) {
