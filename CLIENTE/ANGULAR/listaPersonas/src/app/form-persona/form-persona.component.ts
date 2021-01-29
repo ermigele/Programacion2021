@@ -24,26 +24,25 @@ export class FormPersonaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    const personaId = this.route.snapshot.params["id"];
+    console.log("personaId = ", personaId);
+    this.persona.id = personaId;
   }
 
   addMod() {
-    /*
-       let nuevo = JSON.parse(JSON.stringify(this.persona));
-
-       let p = {
-         servicio: "insertar",
-         dni: this.persona.DNI,
-         nombre: this.persona.NOMBRE,
-         apellidos: this.persona.APELLIDOS
-       }; */
-
-    this.peti.anade(this.persona).subscribe(datos => {
+    if (this.persona.id == -1) {
+      /*
+         let nuevo = JSON.parse(JSON.stringify(this.persona));
+         let p = {
+           servicio: "insertar",
+           dni: this.persona.DNI,
+           nombre: this.persona.NOMBRE,
+           apellidos: this.persona.APELLIDOS
+         }; */
+      this.peti.anade(this.persona).subscribe(datos => {
         console.log("Datos: ", datos);
       }, error => console.log("Error: ", error));
-
-
-
+    }
   }
 
 }
