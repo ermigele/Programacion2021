@@ -1,3 +1,4 @@
+<h1>Lista Personas</h1>
 <button routerLink="persona-addMod/-1">Añadir persona</button>
 
 <table border="1.5">
@@ -6,6 +7,7 @@
         <th>DNI</th>
         <th>NOMBRE</th>
         <th>APELLIDOS</th>
+        <th>MODIFICAR</th>
     </thead>
     <tbody>
         <tr *ngFor="let p of lista">
@@ -13,6 +15,7 @@
             <td>{{p.DNI}}</td>
             <td>{{p.NOMBRE}}</td>
             <td>{{p.APELLIDOS}}</td>
+            <td><button routerLink="persona-addMod/{{p.ID}}">Editar</button></td>
         </tr>
     </tbody>
 </table>

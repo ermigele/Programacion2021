@@ -9,7 +9,7 @@ export class PersonajeComponent implements OnInit {
 
   public personajes: Array<any>;
   public datos: any;
-  public datosPlaneta: Object = null;
+  public datosPlaneta: Array<any>;
 
   constructor(private peti: PAjaxService) {
     this.personajes = [];
@@ -45,9 +45,11 @@ export class PersonajeComponent implements OnInit {
 
   mostrarDatosPlaneta(dirPlaneta: string, evento) {
     evento.preventDefault();
+    dirPlaneta  += "?format=json";
     this.peti.petiADir(dirPlaneta).subscribe(
       datos => {
-        this.asignarDatos(datos);
+        console.log("Planeta: ", datos);
+        this.datosPlaneta = datos;
       });
   }
 }

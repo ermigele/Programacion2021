@@ -23,7 +23,7 @@ export class PAjaxService {
   }
 
   petiADir(url1: string) {
-    return this.http.get<any>(url1 + "?format=json");
+    return this.http.get<any>(url1);
   }
 
 }

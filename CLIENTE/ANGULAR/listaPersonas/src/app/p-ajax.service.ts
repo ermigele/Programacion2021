@@ -1,6 +1,5 @@
 import { Persona } from './persona';
-
-import { Injectable, NgModule } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -16,5 +15,13 @@ export class PAjaxService {
 
   listar() {
     return this.http.post<Persona[]>(this.url, { servicio: "listar" });
+  }
+
+  anade(p: Persona) {
+    let nuevo = JSON.parse(JSON.stringify(p));
+    nuevo.servicio = "insertar";
+    console.log("Nuevo (en el servicio): ", nuevo);
+
+    return this.http.post<Array<Persona>>(this.url, nuevo);
   }
 }

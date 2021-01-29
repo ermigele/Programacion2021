@@ -21,4 +21,9 @@ export class ListadoComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+  editar(id:number){
+
+  }
+
 }
