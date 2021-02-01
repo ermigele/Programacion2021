@@ -21,9 +21,12 @@ export class ListadoComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
-  editar(id:number){
-
+  delete(id: number) {
+    if (confirm("¿Estas seguro que desea borrar a esa persona?")) {
+      this.peti.borrar(id).subscribe(datos => {
+        console.log("Borrar: ",datos);
+        this.lista = datos;
+      },error => console.log("Error: ", error));
+    }
   }
-
 }

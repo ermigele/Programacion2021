@@ -102,7 +102,7 @@ function modificarPersona($objeto) {
 function selPersonaID($id) {
 	global $conn;
 	try {
-		$sc = "Select * From personas Where ID = ?";
+		$sc = "Select id, dni, nombre, apellidos From personas Where ID = ?";
 		$stm = $conn->prepare($sc);
 		$stm->execute(array($id));
 		return ($stm->fetch(PDO::FETCH_ASSOC));

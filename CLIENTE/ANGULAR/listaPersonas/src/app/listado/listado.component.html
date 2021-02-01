@@ -8,6 +8,7 @@
         <th>NOMBRE</th>
         <th>APELLIDOS</th>
         <th>MODIFICAR</th>
+        <th>ELIMINAR</th>
     </thead>
     <tbody>
         <tr *ngFor="let p of lista">
@@ -16,6 +17,7 @@
             <td>{{p.NOMBRE}}</td>
             <td>{{p.APELLIDOS}}</td>
             <td><button routerLink="persona-addMod/{{p.ID}}">Editar</button></td>
+            <td><button (click)="delete(p.ID)">Borrar</button></td>
         </tr>
     </tbody>
 </table>

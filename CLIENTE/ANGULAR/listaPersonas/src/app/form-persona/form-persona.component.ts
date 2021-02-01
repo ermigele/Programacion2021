@@ -2,6 +2,7 @@ import { PAjaxService } from './../p-ajax.service';
 import { Persona } from './../persona';
 import { Component, OnInit, NgModule } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { IfStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-form-persona',
@@ -13,35 +14,37 @@ export class FormPersonaComponent implements OnInit {
   public persona: Persona;
   constructor(private peti: PAjaxService, private ruta: Router, private route: ActivatedRoute) {
     this.persona = <Persona>{};
-    /*  this.persona = <Persona>{
-       this.persona = {
-         ID: -1,
-         DNI: '25474932G',
-         NOMBRE: "Miguel Ángel",
-         APELLIDOS: "Martin Martin"
-       }; */
-
   }
 
   ngOnInit(): void {
-    const personaId = this.route.snapshot.params["id"];
-    console.log("personaId = ", personaId);
-    this.persona.id = personaId;
+    this.persona.id = this.route.snapshot.params["id"];
+
+    if(this.persona.id != -1)
+    this.peti.selPersonaId(this.persona.id).subscribe(datos =>{
+      console.log("Datos: ", datos);
+      this.persona = datos;
+    },
+    error => console.log("Error: ", error));
   }
 
   addMod() {
-    if (this.persona.id == -1) {
-      /*
+    if (this.persona.id == -1) { //AÑADIMOS NUEVA PERSONA
+         /* OTRA FORMA DE HACERLO
          let nuevo = JSON.parse(JSON.stringify(this.persona));
          let p = {
            servicio: "insertar",
            dni: this.persona.DNI,
            nombre: this.persona.NOMBRE,
-           apellidos: this.persona.APELLIDOS
-         }; */
+           apellidos: this.persona.APELLIDOS  }*/
       this.peti.anade(this.persona).subscribe(datos => {
         console.log("Datos: ", datos);
+        // Navegamos de vuelta al listado de personas
+        this.ruta.navigate(['/']);
       }, error => console.log("Error: ", error));
+
+    }else{ // MODIFICAMOS PERSONA
+      this.peti.modificar(this.persona).subscribe(datos => {
+      }, error => console.log("Error al modificar", error));
     }
   }
 
