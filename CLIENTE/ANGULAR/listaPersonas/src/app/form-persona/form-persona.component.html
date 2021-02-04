@@ -2,7 +2,7 @@
 
 <div id="formPersonas" class="formPersonas">
     <fieldset>
-        <legend>Nueva persona</legend>
+        <legend>{{accion}} usuario</legend>
         <div>
             <label>DNI: </label>
             <input type="text" size="10" maxlength="9" [(ngModel)]="persona.dni" />
@@ -16,7 +16,7 @@
             <input type="text" size="40" [(ngModel)]="persona.apellidos" />
         </div>
         <div class="btn">
-            <button (click)="addMod()" routerLink="/">Añadir</button>
+            <button (click)="addMod()">{{accion}}</button>
             <button routerLink="/">Cancelar </button>
         </div>
     </fieldset>
