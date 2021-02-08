@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Persona } from './../persona';
 import { PAjaxService } from '../p-ajax.service';
 import { Component, OnInit } from '@angular/core';
@@ -12,13 +13,13 @@ export class ListadoComponent implements OnInit {
   public lista: Array<Persona>;
 
   constructor(private peti: PAjaxService) {
+  }
+
+  ngOnInit(): void {
     this.peti.listar().subscribe(datos => {
       console.log("datos: ", datos);
       this.lista = datos;
     }, error => console.log("errores:", error));
-  }
-
-  ngOnInit(): void {
   }
 
   delete(id: number) {

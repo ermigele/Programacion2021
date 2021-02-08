@@ -47,6 +47,8 @@ class CategoriasController extends Controller
 
         $categoria = new Categoria;
         $categoria->nombre = $request->nombre;
+        //if($request->descripcion == null)
+        //$request->descripcion = null;
         $categoria->descripcion = $request->descripcion;
         $categoria->save();
 

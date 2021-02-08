@@ -20,9 +20,7 @@ class CursosController extends Controller
     public function index()
     {
         $cursos = Curso::all();
-        //dd($cursos->first()->alumnos()->count());
-       // $cursos= DB::select('SELECT * from cursos');
-       // $alumnos =  DB::select('SELECT * FROM alumnos');
+    
         return view("cursos.lista", compact("cursos"));
     }
 

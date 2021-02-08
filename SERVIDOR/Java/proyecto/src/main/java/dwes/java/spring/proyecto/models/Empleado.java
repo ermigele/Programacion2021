@@ -8,6 +8,9 @@ public class Empleado {
 	private String telefono;
 	private String email;
 	
+	public Empleado() {
+	}
+	
 	public Empleado(long id, String nombre, String telefono, String email) {
 		this.id = id;
 		this.nombre = nombre;

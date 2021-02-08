@@ -17,7 +17,7 @@
 	<tr>
 		<td>{{ $c->nombre }}</td>
 			<td align="center">{{ $c->alumnos()->count() }}</td>
-		@if (!empty($c->plazas))
+		@if (($c->plazas - $c->alumnos()->count()) > 0)
 			<td align="center">SI</td>
 		@else
 			<td align="center">NO</td>
