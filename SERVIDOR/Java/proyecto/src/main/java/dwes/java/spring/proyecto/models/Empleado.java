@@ -1,11 +1,18 @@
 package dwes.java.spring.proyecto.models;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 public class Empleado {
 
 	private long id;
+	@NotEmpty
+	@Size(min=3, max=100, message = "El nombre '${validateValue}' debe estar entre {min} y {max} caracteres")
 	private String nombre;
+	@NotEmpty
 	private String telefono;
+	@Email
 	private String email;
 	
 	public Empleado() {

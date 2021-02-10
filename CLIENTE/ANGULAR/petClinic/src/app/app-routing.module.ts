@@ -1,4 +1,5 @@
-import { DetailOwnerComponent } from './detail-owner/detail-owner.component';
+import { FormOwnerComponent } from './components/form-owner/form-owner.component';
+import { DetailOwnerComponent } from './components/detail-owner/detail-owner.component';
 import { OwnersComponent } from './components/owners/owners.component';
 import { HomeComponent } from './components/home/home.component';
 import { NgModule } from '@angular/core';
@@ -12,6 +13,10 @@ const routes: Routes = [
   {
     path: "owners",
     component: OwnersComponent
+  },
+  {
+    path: "owners-add/:id",
+    component: FormOwnerComponent
   },{
     path:"detail-owner/:id",
     component: DetailOwnerComponent

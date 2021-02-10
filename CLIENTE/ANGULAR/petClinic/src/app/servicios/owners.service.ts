@@ -22,11 +22,22 @@ export class OwnersService {
     return this.http.post<Owner[]>(this.url, pa);
   }
 
-  getOwnersID(){
+  getOwnerID(id: number) {
     let pa = JSON.stringify({
-      accion: "ObtenerOwnerId"
+      accion: "ObtenerOwnerId",
+      id: id
     });
-    
-    return this.http.post<Owner[]>(this.url, pa)
+
+    return this.http.post<Owner>(this.url, pa)
   }
+
+  setOwner(owner: Owner) {
+    let pa = JSON.stringify({
+      accion: "AnadeOwner",
+      owner: owner
+    });
+
+    return this.http.post<Owner>(this.url, pa)
+  }
+
 }

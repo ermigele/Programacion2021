@@ -14,7 +14,7 @@ import java.util.Optional;
 @Controller
 public class IndexController {
 
-	@GetMapping("/")
+	@GetMapping("/prueba")
 	public String holaMundo(Model model) {
 	model.addAttribute("nombre","migue");
 	return "index";

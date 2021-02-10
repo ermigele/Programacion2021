@@ -5,13 +5,21 @@
 <title>Listado Empleado</title>
 </head>
 <body>
- <h1>Empleados</h1>
+	<h1>Empleados</h1>
 	<table border="1.5">
 		<thead>
-		<th>ID</th><th>Nombre</th><th>Telefono</th><th>Email</th>
+			<th>ID</th>
+			<th>Nombre</th>
+			<th>Telefono</th>
+			<th>Email</th>
 		</thead>
 		<tbody>
-		<td></td>
+			<tr th:each="empleado : ${listaEmpleado}">
+				<td th:text="${empleado.id}" />
+				<td th:text="${empleado.nombre}" />
+				<td th:text="${empleado.telefono}" />
+				<td th:text="${empleado.email}" />
+			</tr>
 		</tbody>
 	</table>
 </body>
