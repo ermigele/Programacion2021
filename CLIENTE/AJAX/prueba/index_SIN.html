@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Provincias Localidades</title>
+
+    <!-- <script type="text/javascript" src="utilAyax.js"></script> -->
+    <script type="text/javascript">
+        //  Recibe un string JSON con que representa un resultset de CODIGO y NOMBRE.
+        const peticion = new XMLHttpRequest();
+
+        //     const llenaSelect = (select, arrObj) => {
+
+        function cargarProvincias() {
+            debugger;
+
+            peticion.onreadystatechange = () => {
+                if ((peticion.readyState == 4) && (peticion.status == 200)) {
+                    //peti.open("GET", "servidor.php?servicio=provincias"); 
+                    console.log("Respuesta: " + peticion.responseText);
+                    var oRes = JSON.stringify(peticion.responseText);
+
+                }
+            }
+            peticion.open('GET', 'http://localhost/CLIENTE/AJAX/provinciaslocalidades/servidor.php?servicio=provincias');
+            peticion.send();
+        }
+
+        function cargarLocalidades() {}
+
+        window.onload = cargarProvincias();
+    </script>
+
+</head>
+
+<body>
+    <h2>Ejemplo proyecto web con JAVA y AJAX</h2>
+
+    <label for="provincia">Provincia:</label>
+    <select id="provincia">
+
+  </select>
+    <br><br>
+
+    <label for="localidad">Localidad</label>
+    <select id="localidad">
+    <option value="-1">Seleccione Provincia</option>
+  </select>
+    <br><br>
+
+</body>
+
+</html>

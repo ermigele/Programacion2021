@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Ejercicio Listado Personas. AJAX</title>
+    <link rel="stylesheet" href="UI/jquery-ui.min.css">
+    <script src="UI/external/jquery/jquery.js"></script>
+    <script src="UI/jquery-ui.min.js"></script>
+    <script>
+        $(function() {
+            $("#accordion").accordion();
+        });
+    </script>
+
+    <style type="text/css">
+        h3 {
+            color: red;
+        }
+        
+        body {
+            background-color: rgb(138, 223, 226);
+        }
+        /*
+        #tabla_personas {
+            background-color: rgb(236, 77, 77);
+        }
+        */
+        
+        #nuevoUsuario {
+            background-color: rgb(199, 238, 107);
+            border: 2px solid rgb(100, 139, 224);
+            border-radius: 15px;
+            padding: 1em;
+            color: rgb(139, 74, 199);
+        }
+        
+        #editarUsuario {
+            visibility: hidden;
+            position: absolute;
+            top: 20%;
+            left: 20%;
+            z-index: 11;
+            background-color: rgb(223, 135, 84);
+            border: 2px solid rgb(8, 107, 146);
+            border-radius: 15px;
+            padding: 1em;
+            color: rgb(126, 39, 207);
+        }
+        
+        fieldset {
+            width: 20%;
+        }
+        
+        #eliminar {
+            background-color: pink;
+            font-weight: bold;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = () => {
+            $.ajax({
+                url: URL,
+                type: "post",
+                data: JSON.stringify(LISTAR),
+                dataType: "json",
+                success: mostrarTabla,
+                error: function(res) {
+                    alert("ha habido un error: " + JSON.stringify(res))
+                }
+            })
+            document.getElementById("btAnade").onclick = nuevaPersona;
+            document.getElementById("btCancelar").onclick = cancelarForm;
+            document.getElementById("btConfirmar").onclick = mofidicarPersona;
+        }
+        const LISTAR = {
+            servicio: "listar"
+        }
+        const URL = "servidor.php";
+        var oRes = null;
+
+        function nuevaPersona(e) {
+            debugger;
+            var p = {
+                servicio: "insertar",
+                dni: document.getElementById("dni").value,
+                nombre: document.getElementById("nombre").value,
+                apellidos: document.getElementById("apellidos").value
+            }
+            $.ajax({
+                url: URL,
+                type: "post",
+                data: JSON.stringify(p),
+                dataType: "json",
+                success: mostrarTabla,
+                error: function(res) {
+                    alert("ha habido un error: " + JSON.stringify(res))
+                }
+            })
+        }
+
+        function borrarPersona() {
+            this.parentNode.parentNode.className = "eliminar";
+            setTimeout(() => {
+                if (confirm("¿Estas seguro que lo deseas eliminar?")) {
+                    var p = {
+                        servicio: "borrar",
+                        id: this.dataset.idPersona
+                    }
+                    $.ajax({
+                        url: URL,
+                        type: "post",
+                        data: JSON.stringify(p),
+                        dataType: "json",
+                        success: mostrarTabla,
+                        error: function(res) {
+                            alert("ha habido un error: " + JSON.stringify(res))
+                        }
+                    })
+                }
+                this.parentNode.parentNode.className = "";
+            }, 100);
+        }
+
+
+        function editarPersona() {
+            var buscarP = {
+                servicio: "selPersonaID",
+                id: this.dataset.idPersona
+            };
+            document.getElementById("editarUsuario").setAttribute("style", "visibility:visible");
+            $.ajax({
+                url: URL,
+                type: "post",
+                data: JSON.stringify(buscarP),
+                dataType: "json",
+                success: llenarForm,
+                error: function(res) {
+                    alert("ha habido un error: " + JSON.stringify(res))
+                }
+            })
+        }
+
+        function cancelarForm() {
+            document.getElementById("editarUsuario").setAttribute("style", "visibilty:visible");
+        }
+
+        function mofidicarPersona() {
+            var p = {
+                servicio: "modificar",
+                id: document.getElementById("idMod").value,
+                dni: document.getElementById("dniMod").value,
+                nombre: document.getElementById("nombreMod").value,
+                apellidos: document.getElementById("apellidosMod").value
+            };
+            $.ajax({
+                url: URL,
+                type: "post",
+                data: JSON.stringify(p),
+                dataType: "json",
+                success: mostrarTabla,
+                error: function(res) {
+                    alert("ha habido un error: " + JSON.stringify(res))
+                }
+            })
+            document.getElementById("editarUsuario").setAttribute("style", "visibility:hidden");
+
+
+        }
+
+        function llenarForm(datos) {
+            document.getElementById("idMod").value = datos.ID;
+            document.getElementById("dniMod").value = datos.DNI;
+            document.getElementById("nombreMod").value = datos.NOMBRE;
+            document.getElementById("apellidosMod").value = datos.APELLIDOS;
+        }
+
+        function mostrarTabla(datos) {
+            oRes = datos;
+            document.getElementById("filas_tabla").innerHTML = " ";
+
+            oRes.forEach(function(o) {
+                var tr = document.createElement("tr");
+                tr.appendChild(llenarFila(o.ID));
+                tr.appendChild(llenarFila(o.DNI));
+                tr.appendChild(llenarFila(o.NOMBRE));
+                tr.appendChild(llenarFila(o.APELLIDOS));
+                tr.appendChild(llenarFila(o.ID, "BORRAR"));
+                tr.appendChild(llenarFila(o.ID, "EDITAR"));
+                document.getElementById("filas_tabla").appendChild(tr);
+            });
+        }
+
+        function llenarFila(datos, tipo = "") {
+            var td = document.createElement("td");
+            var boton = document.createElement("button");
+            switch (tipo) {
+                case "BORRAR":
+                    boton.innerHTML = "Borrar"
+                    boton.dataset.idPersona = datos;
+                    boton.onclick = borrarPersona;
+                    td.appendChild(boton);
+                    break;
+                case "EDITAR":
+                    boton.innerHTML = "Editar"
+                    boton.dataset.idPersona = datos;
+                    boton.onclick = editarPersona;
+                    td.appendChild(boton);
+                    break;
+                default:
+                    datos = document.createTextNode(datos);
+                    td.appendChild(datos);
+            }
+            return td;
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Registro de Usuarios</h1>
+
+    <form id="nuevoUsuario">
+        <fieldset>
+            <legend>Nuevo usuario </legend>
+            <label for="dni">DNI:</label>
+            <input type="text" id="dni" name="dni" value="20538956W" />
+            <span id="infoDNI"> </span>
+            <br />
+            <label for="nombre">NOMBRE:</label>
+            <input type="text" id="nombre" name="nombre" value="Manuel" />
+            <br />
+            <label for="apellidos">APELLIDOS:</label>
+            <input type="text" id="apellidos" name="apellidos" value="Martin" />
+            <br />
+            <input type="button" value="Añadir" id="btAnade" />
+        </fieldset>
+    </form>
+
+    <br />
+
+    <table id="tabla_personas" class="ui-widget ui-widget-content">
+        <tr class="ui-widget-header">
+            <th>ID</th>
+            <th>DNI</th>
+            <th>NOMBRE</th>
+            <th>APELLIDOS</th>
+            <th>Eliminar</th>
+            <th>Modificar</th>
+        </tr>
+        <tbody id="filas_tabla" class="ui-widget-header">
+
+        </tbody>
+    </table>
+
+
+    <form id="editarUsuario">
+        <fieldset>
+            <legend>Editar usuario </legend>
+            <input type="hidden" id="idMod">
+            <label for="dni">DNI:</label>
+            <input type="text" id="dniMod" name="dniMod" />
+            <span id="infoDNI"> </span>
+            <br />
+            <label for="nombre">NOMBRE:</label>
+            <input type="text" id="nombreMod" name="nombreMod" />
+            <br />
+            <label for="apellidos">APELLIDOS:</label>
+            <input type="text" id="apellidosMod" name="apellidosMod" />
+            <br />
+            <input type="button" value="Confirmar" id="btConfirmar" />
+            <input type="button" value="Cancelar" id="btCancelar" />
+        </fieldset>
+    </form>
+
+    <div id="accordion">
+        <h3>Section 1</h3>
+        <div>
+            <p>
+                Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut odio. Curabitur malesuada. Vestibulum
+                a velit eu ante scelerisque vulputate.
+            </p>
+        </div>
+        <h3>Section 2</h3>
+        <div>
+            <p>
+                Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In suscipit faucibus urna.
+            </p>
+        </div>
+        <h3>Section 3</h3>
+        <div>
+            <p>
+                Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis. Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis lacinia ornare, quam ante aliquam
+                nisi, eu iaculis leo purus venenatis dui.
+            </p>
+            <ul>
+                <li>List item one</li>
+                <li>List item two</li>
+                <li>List item three</li>
+            </ul>
+        </div>
+        <h3>Section 4</h3>
+        <div>
+            <p>
+                Cras dictum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia mauris vel est.
+            </p>
+            <p>
+                Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+            </p>
+        </div>
+    </div>
+
+</body>
+
+</html>

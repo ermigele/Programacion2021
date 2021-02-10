@@ -1,0 +1,19 @@
+<table border="1.5">
+    <thead>
+        <th>NOMBRE</th>
+        <th>APELLIDOS</th>
+        <th>DIRECCION</th>
+        <th>CIUDAD</th>
+        <th>TELEFONO</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let o of owners">
+            <td><a routerLink="/detail-owner/{{o.id}}">{{o.firstName}} </a></td>
+            <td>{{o.lastName}}</td>
+            <td>{{o.address}}</td>
+            <td>{{o.city}}</td>
+            <td>{{o.telephone}}</td>
+        </tr>
+    </tbody>
+
+</table>

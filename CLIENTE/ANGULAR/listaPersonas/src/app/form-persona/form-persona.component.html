@@ -1,0 +1,23 @@
+<h2>Registro</h2>
+
+<div id="formPersonas" class="formPersonas">
+    <fieldset>
+        <legend>{{accion}} usuario</legend>
+        <div>
+            <label>DNI: </label>
+            <input type="text" size="10" maxlength="9" [(ngModel)]="persona.dni" />
+        </div>
+        <div>
+            <label>Nombre: </label>
+            <input type="text" [(ngModel)]="persona.nombre" />
+        </div>
+        <div>
+            <label>Apellidos: </label>
+            <input type="text" size="40" [(ngModel)]="persona.apellidos" />
+        </div>
+        <div class="btn">
+            <button (click)="addMod()">{{accion}}</button>
+            <button routerLink="/">Cancelar </button>
+        </div>
+    </fieldset>
+</div>

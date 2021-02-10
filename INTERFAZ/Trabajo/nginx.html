@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Servidor Nginx</title>
+    <style type="text/css">
+        html {
+            height: 100%;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0px;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        header {
+            color: #8c8c8c;
+            text-align: justify;
+            font-size: 2em;
+            height: 1.5em;
+            text-align: center;
+            background-color: darkslategrey;
+            flex: 0 0 auto;
+        }
+        
+        .menu {
+            background-color: rgb(66, 148, 110);
+            overflow: hidden;
+            width: 100%;
+        }
+        
+        .menu ul li {
+            margin-left: 35%;
+            display: inline;
+        }
+        
+        .indice {
+            border-bottom: 5em;
+            background-color: rgb(66, 148, 110);
+        }
+        
+        .indice ul {
+            font-size: 16px;
+            border-radius: 2px;
+        }
+        
+        .column-left ul li {
+            text-decoration: none;
+            margin-bottom: 20px;
+        }
+        
+        ul li {
+            list-style: none;
+        }
+        
+        .row {
+            display: flex;
+            flex-direction: row;
+            height: 4em;
+        }
+        
+        .column-left {
+            width: 20%;
+            height: 5vh;
+        }
+        
+        .column-right {
+            width: 80%;
+        }
+        
+        .contenido {
+            background-color: rgb(158, 238, 178);
+            overflow: auto;
+            height: 35.5em;
+        }
+        
+        .titulo {
+            text-decoration: underline;
+            margin-left: 5px;
+        }
+        
+        .texto {
+            margin-left: 25px;
+            margin-right: 25px;
+        }
+        
+        .codigo {
+            font-size: 15px;
+            border-radius: 2px;
+            margin-left: 35px;
+            background-color: beige;
+            text-align: justify;
+            font-weight: bolder;
+            width: 50%;
+        }
+        
+        .imagen {
+            margin-left: 35px;
+            margin-right: 5em;
+        }
+        
+        .video {
+            margin-top: 0.5em;
+            margin-left: 10em;
+            margin-right: 5em;
+        }
+        
+        footer {
+            padding: 5px;
+            font-size: 13.5px;
+            color: #8c8c8c;
+            text-align: center;
+            background-color: darkslategrey;
+            bottom: 0;
+            width: 100%;
+            clear: both;
+            position: fixed;
+            height: 40px;
+        }
+    </style>
+</head>
+
+
+<body>
+    <header>
+        <label>Servidor Nginx</label>
+    </header>
+
+    <div class="row indice">
+        <div class="column-left">
+            <ul>
+                <li>
+                    <a href="index.html"><img src="iconos/casa_VERDE.png" width="30"> </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="column-right menu">
+            <ul>
+                <li>
+                    <a href="cherokee.html"><img src="imagenes/cherokee.png" width="90" height="40" /></a>
+                </li>
+                <li>
+                    <a href="apache.html"><img src="iconos/apache.ico" width="90" height="40" /></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="column-left">
+            <img src="imagenes/nginx.png" width="100" />
+            <ul>
+                <li><a href="#introducion">Introducción</a></li>
+                <li><a href="#requisitos">Requisitos</a></li>
+                <li><a href="#caracteristicas">Caracteristicas</a></li>
+                <li><a href="#descargar">Descargar el servidor Nginx</a></li>
+                <li><a href="#instalacion">Instalación</a></li>
+                <li><a href="#ejecutar">Ejecutar Nginx en su PC con Windows</a></li>
+                <li><a href="#video">Video de instalación</a></li>
+            </ul>
+            <img src="imagenes/nginx.jpeg" width="170" />
+        </div>
+
+        <div class="column-right contenido">
+            <div class="titulo">
+                <h2 id="introducion">Introducción a Nginx </h2>
+            </div>
+            <div class="texto">
+                <p> Según la propia información dispuesta en su sitio web, Nginx es un servidor HTTP, un servidor proxy inverso, un servidor proxy de correo y un servidor proxy genérico para TCP/UDP. En esencia Nginx es un servidor web de alto desempeño que
+                    puede manejar una carga alta, es decir, puede funcionar si su sitio web recibe muchos visitantes y peticiones debido a la facilidad de administrar sesiones concurrentes y contenido estático. Una de las ventajas que posee Nginx es que
+                    es una implementación asíncrona, diseñada para permitir que más solicitudes sean servidas simultáneamente pasando parte del trabajo de procesamiento a los hilos de escucha. </p>
+            </div>
+
+            <div class="titulo">
+                <h2 id="caracteristicas">Caracteristicas</h2>
+            </div>
+
+            <div class="texto">
+                <ol>
+                    <li>sirve archivos estáticos, índices y autoindexado</li>
+                    <li>admite el proxy inverso acelerado con uso de cache</li>
+                    <li>ofrece balanceo de carga y tolerancia a fallos</li>
+                    <li>provee soporte acelerado con interfaces como FastCGI, uwsgi y SCGI</li>
+                    <li>soporta SSL y TLS SNI</li>
+                    <li>es compatible con IPv6</li>
+                    <li>su arquitectura modular permite el uso de filtros para compresión gzip, rangos de bytes, respuestas recortadas, XSLT, SSI y filtro de transformación de imágenes</li>
+                    <li>soporte para autenticación</li>
+                    <li>se pueden añadir servidores virtuales basados en nombre y en IP</li>
+                    <li>geolocalización vía IP</li>
+                    <li>contiene un módulo perl embebido.</li>
+                </ol>
+                <p>Características de Nginx como servidor proxy de correo electrónico:</p>
+                <ol>
+                    <li>redirección de usuarios a servidores IMAP o POP3 usando un servidor de autenticación HTTP externo
+                    </li>
+                    <li>autenticación de usuarios utilizando un servidor de autenticación HTTP externo y redirección de conexión a un servidor SMTP interno</li>
+                    <li>redir: Redirecciona peticiones</li>
+                    <li>soporte de autenticación POP3, IMAP y SMTP</li>
+                    <li>soporte SSL</li>
+                    <li>soporte para STARTTLS y STLS</li>
+                </ol>
+                <p>Características de Nginx como servidor proxy TCP/UDP</p>
+                <ol>
+                    <li>proxy genérico de TCP y UDP</li>
+                    <li>soporte SSL y TLS SNI para TCP</li>
+                    <li>balanceo de carga y tolerancia a fallos</li>
+                    <li>control de acceso basado en dirección de clientes</li>
+                    <li>ejecución de funciones diferentes dependiente de la dirección del client</li>
+                    <li>limitación del número de conexiones simultáneas provenientes de una sola dirección</li>
+                    <li>registros de acceso de búfer, "fast log" y registro de errores de sistema</li>
+                    <li>geolocalización basada en IP</li>
+                    <li>pruebas A/B</li>
+                </ol>
+                <p>Además, Nginx es compatible con un número muy variado de sistemas operativos:</p>
+                <ol>
+                    <li>FreeBSD 3 — 10 / i386; FreeBSD 5 — 10 / amd64</li>
+                    <li>Linux 2.2 — 4 / i386; Linux 2.6 — 4 / amd64; Linux 3 — 4 / armv6l, armv7l, aarch64, ppc64le</li>
+                    <li>Solaris 9 / i386, sun4u; Solaris 10 / i386, amd64, sun4v</li>
+                    <li>AIX 7.1 / powerpc</li>
+                    <li>HP-UX 11.31 / ia64</li>
+                    <li>Mac OS X / ppc, i386</li>
+                    <li>Windows XP, Windows Server 2003</li>
+                </ol>
+            </div>
+
+
+            <div class="titulo">
+                <h2 id="descargar">Descargar el servidor Nginx</h2>
+            </div>
+
+            <div class="texto">
+                <p>Hay muchas versiones de Windows descargar versiones de Nginx , y Nginx recomienda usar la «versión mainline». Sin embargo, no encontrará ningún problema si descarga su versión estable más reciente para Windows.</p>
+
+                <a href="http://nginx.org/en/download.html">clic para dirigirte a la página de la descarga</a>
+
+                <br /> <br />
+                <img class="imagen" src="imagenes/descargar_nginx.jpg" />
+
+                <p>Como primer paso, debe extraer la nueva carpeta. Puede utilizar 7-zip, WinRAR o cualquier otro software de compresión popular</p>
+
+                <img class="imagen" src="imagenes/descomprimir.jpg" />
+                <p>Después de extraer el contenido del archivo en la carpeta original, tiene que mover la carpeta completa que vino con la copia de descarga incorporada. Tendremos que mover esto a <strong>Archivos
+                        de programa</strong>.</p>
+
+                <img class="imagen" src="imagenes/descomprimir2.jpg" />
+
+                <p>Pegue la carpeta en los archivos de programa. Vamos a ejecutar Nginx desde esta ubicación como un programa de servicio web por defecto.</p>
+                <img class="imagen" src="imagenes/descomprimir3.jpg" />
+
+            </div>
+
+            <div class="titulo">
+                <h2 id="instalacion">Instalar Nginx</h2>
+            </div>
+            <div class="texto">
+                <p>Para instalar y ejecutar Nginx, seleccione y haga doble clic en el archivo Nginx.exe. Ahora ha sido activado para su uso posterior.
+                    <img class="imagen" src="imagenes/instalacion_nginx.jpg" />
+
+                    <p> n el siguiente paso debe verificar si la instalación se ha realizado correctamente. Para ello, puede ir a su navegador predeterminado y escribir «localhost». Si ve la siguiente pantalla que dice que el servidor web de Nginx está instalado
+                        y funcionando correctamente, no hay problemas en su instalación de Windows 10.</p>
+                    <img class="imagen" src="imagenes/instalacion_nginx2.jpg" />
+                    <p>Para detener Nginx, puede terminarlo desde la ventana Administrador de tareas.</p>
+                    <img class="imagen" src="imagenes/instalacion_nginx3.jpg" />
+            </div>
+
+            <div class="titulo">
+                <h2 id="ejecutar">Ejecutar Nginx en su PC con Windows</h2>
+            </div>
+            <div class="texto">
+                <p>Para ejecutar Nginx, debe utilizar Internet Information Services (IIS), que es un servidor web de Microsoft que sirve páginas o archivos HTML solicitados. Puede activarlo desde <strong>Activar o
+                        desactivar
+                        características de Windows</strong> en el Panel de control. Compruebe los campos obligatorios para
+                    <strong>Herramientas de gestión web</strong> y <strong>Consola de gestión IIS</strong>.</p>
+                <img class="imagen" src="imagenes/ejecutar_nginx.jpg" />
+
+                <p>Tomará un tiempo para que IIS esté habilitado en su computadora a medida que se apliquen los cambios.
+                </p>
+                <img class="imagen" src="imagenes/ejecutar_nginx2.jpg" />
+
+                <p>Puede abrir el Administrador de IIS directamente desde el menú Inicio. Aquí podrá acceder a la página web por defecto, que normalmente se encuentra en <strong>inetpub wwwwroot</strong>. Esto también se conoce como la raíz de la aplicación
+                    web .</p>
+
+                <p>Es útil cambiar la ruta física de esta raíz a una carpeta más deseable. Creé una nueva carpeta
+                    <strong>Work</strong> en C: y cambié la ruta física a <strong>C:Work</strong> </p>
+                <img class="imagen" src="imagenes/ejecutar_nginx3.jpg" />
+                <p>Después de esto, vaya a la carpeta Nginx que renombró en los archivos de Programa. Haga clic en
+                    <strong>Conf</strong> y seleccione <strong>nginx.conf</strong>. Este archivo se puede editar utilizando el editor de texto Bloc de notas++.</p>
+                <img class="imagen" src="imagenes/ejecutar_nginx4.jpg">
+                <p>En Bloc de notas++, cambie la raíz a la ruta física editada que discutimos anteriormente.</p>
+                <img class="imagen" src="imagenes/ejecutar_nginx5.jpg">
+                <p>Puede editar el archivo <strong>index.html</strong> en la carpeta raíz en una pestaña separada. Cambie el texto a lo que desea que el servidor web muestre en la pantalla.</p>
+                <img class="imagen" src="imagenes/ejecutar_nginx6.jpg">
+                <p>Ahora, ejecute el programa Nginx.exe una vez más y escriba <strong>localhost</strong> en una ventana del navegador. El servidor web de Nginx resaltará las ediciones realizadas.</p>
+                <img class="imagen" src="imagenes/ejecutar_nginx7.jpg">
+                <p>tiene una lista completa de aplicaciones de servidor web que puede utilizar para ejecutar varias aplicaciones en un PC con Windows.</p>
+            </div>
+            <div class="titulo">
+                <h2 id="video">Video de instalación</h2>
+            </div>
+            <div class="texto">
+                <p>Se muestra otro proceso de instalación mediante un video</p>
+                <div>
+                    <iframe class="video" width="560" height="315" src="https://www.youtube.com/embed/OctuQwlPo8w" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <footer>
+        <strong>Miguel Ángel Martín Martín</strong>
+    </footer>
+</body>
+
+</html>

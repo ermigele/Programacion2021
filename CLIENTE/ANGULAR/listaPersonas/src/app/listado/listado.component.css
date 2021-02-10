@@ -1,0 +1,36 @@
+h1 {
+    color: cadetblue;
+}
+
+table {
+    border-collapse: collapse;
+    width: 95%;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+th {
+    color: white;
+    border: 1px solid black;
+    background-color: green;
+}
+
+td {
+    border: 1px solid black;
+}
+
+table tbody tr:nth-child(2n) {
+    background-color: greenyellow;
+}
+
+#previus {
+    display: none;
+}
+
+input {
+    background-color: #4CAF50;
+}
+
+button {
+    margin-bottom: 15px;
+    margin-right: 15px;
+}

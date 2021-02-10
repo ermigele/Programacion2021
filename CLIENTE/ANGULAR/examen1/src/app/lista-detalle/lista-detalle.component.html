@@ -1,0 +1,50 @@
+<h1>
+    Gestión de Facturas
+</h1>
+
+<h2>
+    Detalle de la factura: {{num}}
+</h2>
+<table id="detalle" border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>CANTIDAD</th>
+            <th>CONCEPTO</th>
+            <th>PRECIO</th>
+            <th>Tipo IVA</th>
+            <th>IVA</th>
+            <th>TOTAL</th>
+            <th>Modificar</th>
+            <th>Borrar</th>
+        </tr>
+    </thead>
+    <tr *ngFor="let d of listaDetalle">
+        <td>{{d.id}}</td>
+        <td>{{d.cantidad}}</td>
+        <td>{{d.concepto}}</td>
+        <td>{{d.precio}}</td>
+        <td>{{d.tipo_iva}}</td>
+        <td>{{d.iva}}</td>
+        <td>{{d.total}}</td>
+        <td><button (click)="editar(d.id)">Editar</button></td>
+        <td><button (click)="borrar(d.id)">Borrar</button></td>
+    </tr>
+    <tbody>
+    </tbody>
+</table>
+
+<button routerLink="/">Volver</button> <button (click)="mostrarDetalle()">Nuevo detalle</button>
+
+<div *ngIf="mostrar">
+    <fieldset>
+        <legend> Añadir detalle</legend>
+        <div>
+            <label>Cantidad: </label><input type="text" [(ngModel)]="detalle.cantidad"> <br /> <br />
+            <label>Concepto: </label><input type="text" [(ngModel)]="detalle.concepto"> <br /> <br />
+            <label>Precio: </label><input type="text" [(ngModel)]="detalle.precio"> <br /> <br />
+            <label>Tipo IVA: </label><input type="text" [(ngModel)]="detalle.tipo_iva">
+        </div>
+    </fieldset>
+    <button (click)="nuevoDetalle()">Añadir linea detalle</button>
+</div>
