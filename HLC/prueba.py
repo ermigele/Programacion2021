@@ -1,45 +1,68 @@
-class Persona:
-    def __init__():
-        self.nombre = ""
-        self.edad = ""
-        self.dni = ""
+<!-- Sidebar Widgets Column - ->
+<div class = "col-md-4" >
 
-    def __init__(self, nombre, edad, dni):
-        self.nombre = nombre
-        self.edad = edad
-        self.dni = dni
+<!-- Search Widget - ->
+<div class = "card my-4" >
+<h5 class = "card-header" > Búsqueda < /h5 >
+<form class = "card-body" action = "" method = "GET"
 
-    def getNombre(self):
-        return self.nombre
+role = "search" >
 
-    def getEdad(self):
-        return self.edad
+<div class = "input-group" >
+<label >
+<input type = "text" class = "form-control"
 
-    def getDni(self):
-        return self.dni
+placeholder = "Búsqueda por..." name = "q" >
 
-    def setNombre(self, nombre):
-        self.nombre = nombre
+</label >
+<span class = "input-group-btn" >
+<button class = "btn btn-secondary"
 
-    def setEdad(self, edad):
-        if edad >= 0:
-            self.edad = edad
+type = "submit" > Ir < /button >
+</span >
+</div >
+</form >
+</div >
 
-    def setDni(self, dni):
-        self.dni = dni
+<!-- Categories Widget - ->
+<div class = "card my-4" >
+<h5 class = "card-header" > Categorías < /h5 >
+<div class = "card-body" >
+<div class = "row" >
+<div class = "col-lg-6" >
+<ul class = "list-unstyled mb-0" >
+{% for category in categories % }
+<li >
+<a href ="{% url 'category'
 
-    def mostrar():
-        print(self.nombre)
-        print(self.edad)
-        print(self.dni)
+            category.slug % }"> {{category.name }} < /a >
 
-    def esMayorDeEdad():
-        if(self.edad > 18):
-            return True
-        else:
-            return False
+</li >
+{% endfor % }
+</ul >
+</div > </div >
+</div >
+</div >
 
+<!-- Tags Widget - ->
+<div class = "card my-4" >
+<h5 class = "card-header" > Etiquetas < /h5 >
+<div class = "card-body" >
+<div class = "row" >
+<div class = "col-lg-6" >
+<ul class = "list-unstyled mb-0" >
+{% for tag in tags % }
+<li >
+<a href ="{% url 'tag' tag.slug
 
-p = Persona("juan", 20, "20494268G")
+            % }"> {{tag.name }} < /a >
 
-print(p.mostrar())
+</li >
+{% endfor % }
+</ul >
+</div >
+</div >
+</div >
+</div >
+
+</div >

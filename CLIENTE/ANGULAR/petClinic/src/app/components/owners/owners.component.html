@@ -5,6 +5,8 @@
         <th>DIRECCION</th>
         <th>CIUDAD</th>
         <th>TELEFONO</th>
+        <th>ELIMINAR</th>
+        <th>MODIFICAR</th>
     </thead>
     <tbody>
         <tr *ngFor="let o of owners">
@@ -13,6 +15,8 @@
             <td>{{o.address}}</td>
             <td>{{o.city}}</td>
             <td>{{o.telephone}}</td>
+            <td><button class="btn btn-danger" (click)="borrarList(o.id)">DEL</button></td>
+            <td><button class="btn btn-primary" routerLink="/detail-owner/{{o.id}}">MOD</button></td>
         </tr>
     </tbody>
 

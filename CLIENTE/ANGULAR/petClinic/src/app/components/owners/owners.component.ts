@@ -9,15 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OwnersComponent implements OnInit {
 
-  public owners:Array<Owner>
+  public owners: Array<Owner>
 
-  constructor(private servicioOwner: OwnersService) { 
+  constructor(private servicioOwner: OwnersService) {
 
   }
 
   ngOnInit(): void {
-    this.servicioOwner.getOwners().subscribe( datos =>{
+    this.servicioOwner.getOwners().subscribe(datos => {
       console.log("Owners: ", datos);
+      this.owners = datos;
+    })
+  }
+
+
+  borrarList(id: number) {
+    this.servicioOwner.delOwnerList(id).subscribe(datos => {
       this.owners = datos;
     })
   }

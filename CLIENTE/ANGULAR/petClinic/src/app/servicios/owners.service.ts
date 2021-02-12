@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import { Owner } from './../models/owner';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -8,7 +9,7 @@ import { Injectable } from '@angular/core';
 })
 export class OwnersService {
 
-  private url: string = "http://localhost/CLIENTE/AJAX/serviciosWeb/petclinic/servicios.php";
+  private url = environment.API_URL;
 
   constructor(private http: HttpClient) {
 
@@ -39,5 +40,26 @@ export class OwnersService {
 
     return this.http.post<Owner>(this.url, pa)
   }
+
+  delOwner(id: number) {
+    let pa = JSON.stringify({
+      accion: "BorraOwner",
+      id: id,
+      listado: "NO"
+    });
+
+    return this.http.post<Owner>(this.url, pa)
+  }
+
+  delOwnerList(id: number) {
+    let pa = JSON.stringify({
+      accion: "BorraOwner",
+      id: id,
+      listado: "OK"
+    });
+
+    return this.http.post<Owner[]>(this.url, pa)
+  }
+
 
 }

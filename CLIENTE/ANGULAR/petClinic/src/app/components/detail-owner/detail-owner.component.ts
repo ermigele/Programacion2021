@@ -24,4 +24,10 @@ export class DetailOwnerComponent implements OnInit {
     });
   }
 
+  borrarOwner(id: number) {
+    this.servicioOwner.delOwner(id).subscribe(datos => {
+      console.log("Borrar: ", datos);
+    })
+  }
+
 }
