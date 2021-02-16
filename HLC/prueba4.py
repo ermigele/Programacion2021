@@ -1,61 +1,51 @@
-class Electrodomestisco():
-    def __init__(self, nombre, anioFabricacion, estado=False):
-        self.nombre = nombre
-        self.anioFabricacion = anioFabricacion
-        self.estado = estado
+class Vehiculo():
+    def __init__(self, color, ruedas):
+        self.color = color
+        self.ruedas = ruedas
+    
+    def __str__(self):
+            return "Color: "+self.color+" Ruedas: "+str(self.ruedas)
+
+class Coche(Vehiculo):
+    def __init__(self, color, ruedas, velocidad, cilindrada):
+        super().__init__(color, ruedas)
+        self.velocidad = velocidad
+        self.cilindrada = cilindrada
+    
+    def __str__(self):
+            return super().__str__()+" Velocidad: "+str(self.velocidad)+" Cilindrada: "+str(self.cilindrada)
+    
+    
+c = Coche("azul", 4, 140, 1200)
+print(c)
+
+class Bicicleta(Vehiculo):
+    def __init__(self, color, ruedas, tipo):
+        super().__init__(color, ruedas)
+        self.tipo = tipo
+    
+    def __str__(self):
+        return super().__str__() + " Tipo: "+self.tipo
+
+class Motocicleta(Bicicleta):
+    def __init__(self, color, ruedas, tipo, velocidad, cilindrada):
+        super().__init__(color, ruedas, tipo)
+        self.velocidad = velocidad
+        self.cilindrada = cilindrada
+    
+    def __str__(self):
+        return super().__str__()+" Velocidad: "+str(self.velocidad)+" Cilindrada: "+str(self.cilindrada)
+
+class Camioneta(Coche):
+    def __init__(self, color, ruedas, velocidad, cilindrada, carga):
+        super().__init__(color, ruedas, velocidad, cilindrada)
+        self.carga = carga
+    
+    def __str__(self):
+            return super().__str__()+" Carga: "+str(self.carga)
+
+def catalogar():
+    for v in Vehiculos:
+        print(v)
         
-    def encender(self):
-        if self.estado:
-            return "Ya estaba encendido"
-        else:
-            self.estado=True
-            return "El electrodomestico con nombre: "+self.nombre+" se ha encendido"
-    
-    def apagar(self):
-        if self.estado:
-            return "Ya está apagado"
-        else:
-            self.estado=False
-            return "El electrodomestico con nombre: "+self.nombre+" se ha apagado"   
-        
-    def __str__(self):
-        return "Nombre: "+self.nombre+" Año de fabricacion: "+str(self.anioFabricacion)
-    
-class Telefono():
-    def llamar(self):
-        return "Llamando...."
-    
-    def colgar(self):
-        return "Colgando...."
-    
-class Television(Electrodomestisco):
-    def __init__(self, numPulgadas):
-        super().__init__(nombre, anioFabricacion, estado=False)
-        self.__numPulgadas = numPulgadas
-    
-    def cambiarCanal(self):
-        if self.estado:
-            return "Cambiado de canal..."
-    
-    def __str__(self):
-        return "Nombre: "+self.nombre+" Pulgadas: "+str(self.__numPulgadas)+" Año de fabricacion: "+str(self.anioFabricacion)
-
-class Movil(Electrodomestisco, Telefono):
-    def __init__(self, sistemaOp):
-        super().__init__(nombre, anioFabricacion, estado=False)
-        self.__sistemaOp = sistemaOp
-    
-    def mandarMensaje(self):
-        if self.estado:
-            return "Mensaje Enviado..."
-    
-    def mostrarSistemaOperativo(self):
-        return self.__sistemaOp
-    
-    def __str__(self):
-        return "Nombre: "+self.nombre+" Pulgadas: "+str(self.__numPulgadas)+" Año de fabricacion: "+str(self.anioFabricacion)
-
-print("hola")
-e1 = Electrodomestisco("lavadora", 2010)
-
-print(e1)
+print(catalogar())
