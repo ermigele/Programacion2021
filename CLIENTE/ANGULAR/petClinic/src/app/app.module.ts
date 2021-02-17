@@ -9,6 +9,10 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { OwnersComponent } from './components/owners/owners.component';
 import { DetailOwnerComponent } from './components/detail-owner/detail-owner.component';
+import { PettypeListComponent } from './pettype-list/pettype-list.component';
+import { PettypeAddComponent } from './pettype-add/pettype-add.component';
+import { PetTypeListComponent } from './components/pet-type-list/pet-type-list.component';
+import { PetTypeAddComponent } from './components/pet-type-add/pet-type-add.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +20,11 @@ import { DetailOwnerComponent } from './components/detail-owner/detail-owner.com
     HomeComponent,
     FormOwnerComponent,
     OwnersComponent,
-    DetailOwnerComponent
+    DetailOwnerComponent,
+    PettypeListComponent,
+    PettypeAddComponent,
+    PetTypeListComponent,
+    PetTypeAddComponent
   ],
   imports: [
     BrowserModule,

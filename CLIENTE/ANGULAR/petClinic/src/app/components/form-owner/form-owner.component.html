@@ -4,31 +4,33 @@
     <form class="form-horizontal" #ownerForm="ngForm" (ngSubmit)="enviar(ownerForm.value)">
         <div class="form-group">
             <div class="form-group">
-                <label>Nombre: </label> <input type="text" name="firstName" [(ngModel)]="owner.firstName" #firstName="ngModel" class="form-control" />
+                <input type="hidden" name="id" [(ngModel)]="owner.id" #id="ngModel" />
+                <!--Campo oculto id-->
+                <label>Nombre: </label> <input type="text" name="firstName" [(ngModel)]="owner.firstName" #firstName="ngModel" class="form-control" required/>
                 <div [hidden]="firstName.valid || firstName.pristine" class="alert alert-danger">
                     El nombre es obligatorio
                 </div>
             </div>
             <div class="form-group">
-                <label>Apellidos: </label> <input type="text " name="lastName" [(ngModel)]="owner.lastName" #lastName="ngModel" class="form-control" />
+                <label>Apellidos: </label> <input type="text " name="lastName" [(ngModel)]="owner.lastName" #lastName="ngModel" class="form-control" required/>
                 <div [hidden]="lastName.valid || lastName.pristine" class="alert alert-danger">
                     El apellidos es obligatorio
                 </div>
             </div>
             <div class="form-group">
-                <label>Direccion: </label> <input type="text " name="address" [(ngModel)]="owner.address" #address="ngModel" class="form-control" />
+                <label>Direccion: </label> <input type="text " name="address" [(ngModel)]="owner.address" #address="ngModel" class="form-control" required />
                 <div [hidden]="address.valid || address.pristine" class="alert alert-danger">
                     El direccion es obligatorio
                 </div>
             </div>
             <div class="form-group">
-                <label>Ciudad: </label> <input type="text " name="city" [(ngModel)]="owner.city" #city="ngModel" class="form-control" />
+                <label>Ciudad: </label> <input type="text " name="city" [(ngModel)]="owner.city" #city="ngModel" class="form-control" required/>
                 <div [hidden]="city.valid || city.pristine" class="alert alert-danger">
                     El ciudad es obligatorio
                 </div>
             </div>
             <div class="form-group">
-                <label>Telefono: </label> <input type="number " name="telephone" [(ngModel)]="owner.telephone" #telephone="ngModel" class=" form-control" />
+                <label>Telefono: </label> <input type="number " name="telephone" [(ngModel)]="owner.telephone" #telephone="ngModel" class=" form-control" required/>
                 <div [hidden]="telephone.valid || telephone.pristine" class="alert alert-danger">
                     El nombre es telefono
                 </div>

@@ -41,6 +41,15 @@ export class OwnersService {
     return this.http.post<Owner>(this.url, pa)
   }
 
+  updateOwner(owner: Owner) {
+    let pa = JSON.stringify({
+      accion: "ModificaOwner",
+      owner: owner
+    });
+
+    return this.http.post<Owner>(this.url, pa)
+  }
+  
   delOwner(id: number) {
     let pa = JSON.stringify({
       accion: "BorraOwner",

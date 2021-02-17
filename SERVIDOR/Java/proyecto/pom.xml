@@ -51,6 +51,11 @@
     		<version>2.4.2</version><!--$NO-MVN-MAN-VER$-->
 		</dependency>
 		
+		<dependency>
+		    <groupId>org.thymeleaf.extras</groupId>
+		    <artifactId>thymeleaf-extras-springsecurity5</artifactId>
+		</dependency>
+		
 	</dependencies>
 
 	<build>

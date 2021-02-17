@@ -1,23 +1,26 @@
-<table border="1.5">
-    <thead>
-        <th>NOMBRE</th>
-        <th>APELLIDOS</th>
-        <th>DIRECCION</th>
-        <th>CIUDAD</th>
-        <th>TELEFONO</th>
-        <th>ELIMINAR</th>
-        <th>MODIFICAR</th>
-    </thead>
-    <tbody>
-        <tr *ngFor="let o of owners">
-            <td><a routerLink="/detail-owner/{{o.id}}">{{o.firstName}} </a></td>
-            <td>{{o.lastName}}</td>
-            <td>{{o.address}}</td>
-            <td>{{o.city}}</td>
-            <td>{{o.telephone}}</td>
-            <td><button class="btn btn-danger" (click)="borrarList(o.id)">DEL</button></td>
-            <td><button class="btn btn-primary" routerLink="/detail-owner/{{o.id}}">MOD</button></td>
-        </tr>
-    </tbody>
+<div class="container">
+    <table border="1.5" class="table">
+        <thead>
+            <th>NOMBRE</th>
+            <th>APELLIDOS</th>
+            <th>DIRECCION</th>
+            <th>CIUDAD</th>
+            <th>TELEFONO</th>
+            <th>ELIMINAR</th>
+            <th>MODIFICAR</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let o of owners">
+                <td><a routerLink="/detail-owner/{{o.id}}">{{o.firstName}} </a></td>
+                <td>{{o.lastName}}</td>
+                <td>{{o.address}}</td>
+                <td>{{o.city}}</td>
+                <td>{{o.telephone}}</td>
+                <td><button class="btn btn-danger" (click)="borrarList(o.id)">DEL</button></td>
+                <td><button routerLink="/owners-add/{{o.id}}" routerLinkActive="active" class="btn btn-primary">MOD</button></td>
+            </tr>
+        </tbody>
 
-</table>
+    </table>
+
+</div>
