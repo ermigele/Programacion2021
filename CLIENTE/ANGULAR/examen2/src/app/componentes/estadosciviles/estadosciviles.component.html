@@ -1,0 +1,18 @@
+<app-inicio></app-inicio>
+<h1>Listado de estado civiles</h1>
+
+<table border="1.5">
+    <thead>
+        <th>ID</th>
+        <th>NOMBRE</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let e of estados">
+            <td>{{e.ID}}</td>
+            <td>{{e.NOMBRE}}</td>
+        </tr>
+    </tbody>
+    <tfoot>
+        Total {{estados.length}} de estados civiles
+    </tfoot>
+</table>

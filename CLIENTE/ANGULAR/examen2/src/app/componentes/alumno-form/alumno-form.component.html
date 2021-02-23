@@ -1,0 +1,38 @@
+<app-inicio></app-inicio>
+<h2>Formulario</h2>
+
+
+<form class="form-horizontal" #alumnoForm="ngForm" (ngSubmit)="enviar(alumnoForm.value)">
+    <div class="form-group">
+        <div class="form-group">
+            <input type="hidden" name="ID" [(ngModel)]="alumno.ID" #ID="ngModel" />
+            <label>Nombre: </label> <input type="text" name="NOMBRE" [(ngModel)]="alumno.NOMBRE" #NOMBRE="ngModel" required/>
+        </div>
+
+        <div class="form-group">
+            <label>Apellidos: </label> <input type="text " name="APELLIDOS" [(ngModel)]="alumno.APELLIDOS" #APELLIDOS="ngModel" required/>
+        </div>
+
+        <div class="form-group">
+            <label>Sexo: </label>
+            <select name="SEXO" [(ngModel)]="alumno.SEXO" #SEXO="ngModel" required>
+             <option *ngFor="let s of sexos" value="{{s.CODIGO}}">{{s.NOMBRE}}</option>
+            </select>
+            <!-- <input type="text " name="address" [(ngModel)]="alumno.sexo" #sexo="ngModel" class="form-control" /> -->
+        </div>
+
+        <div class="form-group">
+            <label>Fecha nacimiento: </label> <input type="date" name="FECHA_NACIMIENTO" [(ngModel)]="alumno.FECHA_NACIMIENTO" #FECHA_NACIMIENTO="ngModel" required/>
+        </div>
+
+        <div class="form-group">
+            <label>Estado civil: </label>
+            <select [(ngModel)]="alumno.ESTADO_CIVIL" name="ESTADO_CIVIL" #ESTADO_CIVIL="ngModel" required>
+                <option *ngFor="let e of estadosCiviles" value={{e.ID}}>{{e.NOMBRE}}</option>
+               </select>
+            <!-- <input type="number " name="telephone" [(ngModel)]="alumno.ESTADO_CIVIL" #estadocivil="ngModel" class=" form-control" required/> -->
+        </div>
+    </div>
+
+    <button class="btn btn-primary" [disabled]=!alumnoForm.valid type="submit">Enviar</button>
+</form>

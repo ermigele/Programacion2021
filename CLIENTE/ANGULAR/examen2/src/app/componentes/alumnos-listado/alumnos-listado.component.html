@@ -1,0 +1,29 @@
+<app-inicio></app-inicio>
+
+<button routerLink="/alumno-add" routerLinkActive="active">Añadir un alumno</button>
+
+<table border=1.5>
+    <thead>
+        <th>ID</th>
+        <th>NOMBRE</th>
+        <th>APELLIDOS</th>
+        <th>SEXO</th>
+        <th>FECHA_NACIMIENTO</th>
+        <th>ESTADO_CIVIL</th>
+        <th>MODIFICAR</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let a of alumnos">
+            <td>{{a.ID}}</td>
+            <td>{{a.NOMBRE}}</td>
+            <td>{{a.APELLIDOS}}</td>
+            <td>{{a.SEXO_NOMBRE}}</td>
+            <td>{{a.FECHA_NACIMIENTO | date:'dd-MM-yyyy'}}</td>
+            <td>{{a.NOMBRE_EC}}</td>
+            <td><button routerLink="/alumno-add/{{a.ID}}" routerLinkActive="active">MOD</button></td>
+        </tr>
+    </tbody>
+    <tfoot>
+        Total {{alumnos.length}} de alumnos
+    </tfoot>
+</table>
