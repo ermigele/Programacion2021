@@ -1,0 +1,7 @@
+<p>
+  <select multiple name="listaNombres" [(ngModel)]="nombre">
+		<option *ngFor="let nombre of listaNombres" [ngValue]="nombre">
+			{{ nombre }}
+		</option>
+	</select>
+</p>

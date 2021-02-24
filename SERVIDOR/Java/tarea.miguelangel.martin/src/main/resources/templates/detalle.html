@@ -35,36 +35,36 @@
 
 
 	<div class="container">
-		<h1>Listado de productos</h1>
+		<h1>Detalle producto</h1>
 		<div class="starter-template">
-			<h1>Listado de empleados</h1>
-			<table class="table">
-				<thead>
-					<tr>
-						<th>ID</th>
-						<th>Nombre</th>
-						<th>Descripción</th>
-						<th>Precio</th>
-						<th>Unidades</th>
-						<th>Acciones</th>
-				</thead>
-				<tbody>
-					<tr th:each="p : ${productos}">
-						<td th:text="${p.id}"></td>
-						<!-- 	<td><img src=""
-							th:src="@{${empleado.imagen} ?: '/images/icon_placeholder.png'}"
-							width="64px" /></td>  -->
-						<td th:text="${p.nombre}"></td>
-						<td th:text="${p.descripcion}"></td>
-						<td th:text="${p.unidades}"></td>
-						<td th:text="${p.precio}"></td>
-						<td><a th:href="@{/producto/edit/{id}(id=${p.id})}">Editar</a>
-						<a th:href="@{/producto/detalle/{id}(id=${p.id})}">Detalle</a></td>
-						<!--<td><a th:href="@{/empleado/edit/{id}(id=${empleado.id})}">Editar</a></td>  -->
-					</tr>
-				</tbody>
-			</table>
+
+			<h1>Detalle del producto</h1>
+
+
+			<div class="card" style="width: 18rem;">
+				<img class="card-img-top" src="" alt="imagen prueba" />
+				<!-- 	<img src=""
+							th:src="@{${producto.imagen} ?: '/images/icon_placeholder.png'}"
+							width="64px" />  -->
+				<div class="card-body>">
+					<h5 class="card-title">
+						Nombre: <span th:text="${producto.nombre}"></span>
+					</h5>
+					<h6 class="card-subtitle mb-2 text-muted">
+						Descripción: <span th:text="${producto.descripcion}"></span>
+					</h6>
+					<p class="card-text">
+						Unidades: <span th:text="${producto.unidades}"></span>
+					</p>
+					<p class="card-text">
+						Precio: <span th:text="${producto.precio}"></span>
+					</p>
+					<a th:href="@{/producto/comprar/{id}(id=${producto.id})}" class="btn btn-primary">Comprar</a>
+					<a th:href="@{/producto/borrar/{id}(id=${producto.id})}" class="btn btn-warning">Borrar</a>
+				</div>
+			</div>
 		</div>
+
 	</div>
 </body>
 </html>

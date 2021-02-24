@@ -8,7 +8,7 @@
 
 <head>
 <meta charset="ISO-8859-1">
-<title>Listado productos</title>
+<title>Finalizar compra</title>
 
 <!-- Bootstrap core CSS -->
 <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -28,6 +28,16 @@
 					<li class="nav-item"><a class="nav-link" href="/producto/new">Nuevo
 							producto</a></li>
 				</ul>
+				<form class="navbar-form navbar-right">
+					<input type="text" class="form-control" placeholder="Buscar..."
+						name="q" value="">
+				</form>
+				<ul class="nav navbar-nav navbar-right"
+					sec:authorize="isAuthenticated()">
+					<li class="nav-item"><a class="nav-link"
+						href="javascript:document.getElementById('logoutForm').submit()">Salir</a>
+					</li>
+				</ul>
 			</div>
 		</div>
 	</nav>
@@ -35,35 +45,29 @@
 
 
 	<div class="container">
-		<h1>Listado de productos</h1>
+		<h1>Gracias por realizar esta compra</h1>
 		<div class="starter-template">
-			<h1>Listado de empleados</h1>
-			<table class="table">
-				<thead>
-					<tr>
-						<th>ID</th>
-						<th>Nombre</th>
-						<th>Descripción</th>
-						<th>Precio</th>
-						<th>Unidades</th>
-						<th>Acciones</th>
-				</thead>
-				<tbody>
-					<tr th:each="p : ${productos}">
-						<td th:text="${p.id}"></td>
-						<!-- 	<td><img src=""
+			<div class="card" style="width: 18rem;">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Nombre</th>
+							<th>Precio</th>
+					</thead>
+					<tbody>
+						<tr>
+							<!-- 	<td><img src=""
 							th:src="@{${empleado.imagen} ?: '/images/icon_placeholder.png'}"
 							width="64px" /></td>  -->
-						<td th:text="${p.nombre}"></td>
-						<td th:text="${p.descripcion}"></td>
-						<td th:text="${p.unidades}"></td>
-						<td th:text="${p.precio}"></td>
-						<td><a th:href="@{/producto/edit/{id}(id=${p.id})}">Editar</a>
-						<a th:href="@{/producto/detalle/{id}(id=${p.id})}">Detalle</a></td>
-						<!--<td><a th:href="@{/empleado/edit/{id}(id=${empleado.id})}">Editar</a></td>  -->
-					</tr>
-				</tbody>
-			</table>
+							<td th:text="${producto.nombre}"></td>
+							<td th:text="${producto.precio}"></td>
+							<td><a
+								th:href="@{/producto/detalle/{id}(id=${producto.id})}">Volver
+									a comprar</a>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
 </body>

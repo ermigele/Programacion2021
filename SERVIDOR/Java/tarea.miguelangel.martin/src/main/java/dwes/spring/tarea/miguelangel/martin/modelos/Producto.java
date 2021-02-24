@@ -17,15 +17,14 @@ public class Producto {
 	@Size(min = 3)
 	private String nombre;
 
+	@NotEmpty(message = "El campo no puede estar vacio")
 	@Column(nullable = false, columnDefinition = "Text")
 	private String descripcion;
 
-	@Column(nullable = false)
-	@NotEmpty
+	//@Column(nullable = false)
 	private double precio;
 
-	@Column(nullable = false)
-	@NotEmpty
+	//@Column(nullable = false)
 	private int unidades;
 
 	private String imagen;
