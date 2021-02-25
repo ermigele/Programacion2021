@@ -53,8 +53,8 @@
 
 						<div class="form-group"
 							th:classappend="${#fields.hasErrors('descripcion')} ? 'has-error'">
-							<label for="descripcion">Descripción</label> <input type="text"
-								class="form-control" id="descripcion" placeholder="Descripción" th:field="*{descripcion}" /> 
+							<label for="descripcion">Descripción</label> <textarea
+								class="form-control" id="descripcion" placeholder="Descripción" th:field="*{descripcion}"></textarea>
 								<span th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}">Errores</span>
 						</div>
 

@@ -39,7 +39,7 @@ public class ProductoController {
 		if (buscar == null) {
 			model.addAttribute("productos", servicio.findAll());
 		} else {
-			model.addAttribute("productos", servicio.BuscarProductoPorNombre(buscar));
+			model.addAttribute("productos", servicio.BuscarProductoPorNombreoDescripcion(buscar));
 		}
 		return "listado";
 	}
@@ -51,7 +51,7 @@ public class ProductoController {
 		return "detalle";
 	}
 
-	@GetMapping("producto/comprar/{id}")
+	@GetMapping("producto/{id}/comprar")
 	public String comprar(@PathVariable long id, Model model) {
 		Producto p = servicio.findById(id);
 		int unidades = p.getUnidades() - 1;
@@ -128,12 +128,5 @@ public class ProductoController {
 			servicio.edit(producto);
 			return "redirect:/productos";
 		}
-	}
-
-	@GetMapping({ "/buscarProducto" })
-	public String buscarProducto(@Param("buscar") String producto, Model model) {
-
-		model.addAttribute("productos", servicio.BuscarProductoPorNombre(producto));
-		return "listado";
 	}
 }

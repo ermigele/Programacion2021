@@ -7,6 +7,6 @@ import dwes.spring.tarea.miguelangel.martin.modelos.Producto;
 
 public interface ProductoRepositorio extends JpaRepository<Producto, Long> {
 
-	@Query("SELECT p FROM productos p WHERE Upper(p.nombre) LIKE %?1% ")
-	public Iterable<Producto> BuscarProductoPorNombre(String nombre);
+	@Query("SELECT p FROM productos p WHERE Upper(p.nombre) LIKE %?1% or Upper(p.descripcion) LIKE %?1% ")
+	public Iterable<Producto> BuscarProductoPorNombreoDescripcion(String nombre);
 }

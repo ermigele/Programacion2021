@@ -33,14 +33,15 @@
 	</nav>
 
 
-
 	<div class="container">
 		<div class="starter-template">
 
 			<h1>Detalle del producto</h1>
 
 			<div class="card" style="width: 18rem;">
-				<img class="card-img-top" src="" th:src="@{${producto.imagen} ?: '/images/icon_placeholder.png'}" width="200px" alt="imagen prueba" /> 
+				<img class="card-img-top" src=""
+					th:src="@{${producto.imagen} ?: '/images/icon_placeholder.png'}"
+					width="200px" alt="imagen prueba" />
 				<div class="card-body>">
 					<h5 class="card-title">
 						Nombre: <span th:text="${producto.nombre}"></span>
@@ -54,12 +55,13 @@
 					<h6 class="card-subtitle mb-2 text-muted">
 						Descripción: <span th:text="${producto.descripcion}"></span>
 					</h6>
-					<a th:href="@{/producto/comprar/{id}(id=${producto.id})}" class="btn btn-success">Comprar</a>
+					
+					<a th:if="${producto.unidades > 0}" th:href="@{/producto/{id}/comprar(id=${producto.id})}" class="btn btn-success">Comprar</a> 
+					<a th:if="${producto.unidades < 1}" class="btn btn-warning">Sin stock</a>
 					<a th:href="@{/producto/borrar/{id}(id=${producto.id})}" class="btn btn-danger">Borrar</a>
 				</div>
 			</div>
 		</div>
-
 	</div>
 </body>
 </html>

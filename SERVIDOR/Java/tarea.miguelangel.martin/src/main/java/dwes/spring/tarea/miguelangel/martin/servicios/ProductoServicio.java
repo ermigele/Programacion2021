@@ -25,8 +25,8 @@ public class ProductoServicio {
 	}
 
 	
-	public Iterable<Producto> BuscarProductoPorNombre(String nombre) {
-		return repositorio.BuscarProductoPorNombre(nombre.toUpperCase());
+	public Iterable<Producto> BuscarProductoPorNombreoDescripcion(String nombre) {
+		return repositorio.BuscarProductoPorNombreoDescripcion(nombre.toUpperCase());
 	} 
 	
 	public Producto delete(Producto p) {
