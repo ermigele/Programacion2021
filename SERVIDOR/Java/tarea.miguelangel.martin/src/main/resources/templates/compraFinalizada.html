@@ -28,10 +28,7 @@
 					<li class="nav-item"><a class="nav-link" href="/producto/new">Nuevo
 							producto</a></li>
 				</ul>
-				<form class="navbar-form navbar-right">
-					<input type="text" class="form-control" placeholder="Buscar..."
-						name="q" value="">
-				</form>
+	
 				<ul class="nav navbar-nav navbar-right"
 					sec:authorize="isAuthenticated()">
 					<li class="nav-item"><a class="nav-link"
@@ -45,29 +42,26 @@
 
 
 	<div class="container">
-		<h1>Gracias por realizar esta compra</h1>
 		<div class="starter-template">
-			<div class="card" style="width: 18rem;">
-				<table class="table">
-					<thead>
-						<tr>
-							<th>Nombre</th>
-							<th>Precio</th>
-					</thead>
-					<tbody>
-						<tr>
-							<!-- 	<td><img src=""
-							th:src="@{${empleado.imagen} ?: '/images/icon_placeholder.png'}"
-							width="64px" /></td>  -->
-							<td th:text="${producto.nombre}"></td>
-							<td th:text="${producto.precio}"></td>
-							<td><a
-								th:href="@{/producto/detalle/{id}(id=${producto.id})}">Volver
-									a comprar</a>
-						</tr>
-					</tbody>
-				</table>
-			</div>
+			<h1>Gracias por realizar esta compra</h1>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Imagen</th>
+						<th>Nombre</th>
+						<th>Precio</th>
+				</thead>
+				<tbody>
+					<tr>
+						<td><img src=""
+							th:src="@{${producto.imagen} ?: '/images/icon_placeholder.png'}"
+							width="64px" alt="imagen prueba" /></td>
+						<td th:text="${producto.nombre}"></td>
+						<td th:text="${producto.precio}"></td>
+					</tr>
+				</tbody>
+			</table>
+			<a th:href="@{/producto/detalle/{id}(id=${producto.id})}" class="btn btn-info" >Volver a comprar</a>
 		</div>
 	</div>
 </body>

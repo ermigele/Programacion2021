@@ -6,64 +6,88 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<head>
-<meta charset="ISO-8859-1">
-<title>Listado productos</title>
+<title>Formulario</title>
 
 <!-- Bootstrap core CSS -->
 <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
 <link href="/css/starter-template.css" rel="stylesheet">
+
 </head>
 <body>
-
 	<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-		<div class="container-fluid">
+		<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+			<div class="container-fluid">
 
-			<div class="collapse navbar-collapse" id="navbarsExampleDefault">
-				<ul class="navbar-nav me-auto mb-2 mb-md-0">
-					<li class="nav-item active"><a class="nav-link"
-						aria-current="page" th:href="@{/productos}">Inicio</a></li>
-					<li class="nav-item"><a class="nav-link" href="/producto/new">Nuevo
-							producto</a></li>
-				</ul>
+				<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+					<ul class="navbar-nav me-auto mb-2 mb-md-0">
+						<li class="nav-item active"><a class="nav-link"
+							aria-current="page" th:href="@{/productos}">Inicio</a></li>
+						<li class="nav-item"><a class="nav-link" href="/producto/new">Nuevo
+								producto</a></li>
+					</ul>
+				</div>
 			</div>
-		</div>
+		</nav>
 	</nav>
 
-
-
 	<div class="container">
-		<h1>Detalle producto</h1>
 		<div class="starter-template">
+			<div class="row">
+				<div class="col-md-offset-2 col-md-8">
+					<form method="post" enctype="multipart/form-data" action="#"
+						th:action="${productoForm.id != 0} ? @{/producto/edit/submit} : @{/producto/new/submit}"
+						th:object="${productoForm}">
+						<h1
+							th:text="${productoForm.id != 0} ? 'Editar producto' : 'Nuevo producto'">Nuevo</h1>
 
-			<h1>Detalle del producto</h1>
+						<input type="hidden" id="id" name="id" th:field="*{id}" /> <!-- campo oculto -->
+						
+						<div class="form-group">
+							<label for="nombre">Nombre</label> <input type="text"
+								class="form-control" id="nombre" placeholder="Nombre" th:field="*{nombre}"
+								th:classappend="${#fields.hasErrors('nombre')} ? 'is-invalid'" />
+							<span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" id="name-error">Errores</span>
+						</div>
 
+						<div class="form-group"
+							th:classappend="${#fields.hasErrors('descripcion')} ? 'has-error'">
+							<label for="descripcion">Descripción</label> <input type="text"
+								class="form-control" id="descripcion" placeholder="Descripción" th:field="*{descripcion}" /> 
+								<span th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}">Errores</span>
+						</div>
 
-			<div class="card" style="width: 18rem;">
-				<img class="card-img-top" src="" alt="imagen prueba" />
-				<!-- 	<img src=""
-							th:src="@{${producto.imagen} ?: '/images/icon_placeholder.png'}"
-							width="64px" />  -->
-				<div class="card-body>">
-					<h5 class="card-title">
-						Nombre: <span th:text="${producto.nombre}"></span>
-					</h5>
-					<h6 class="card-subtitle mb-2 text-muted">
-						Descripción: <span th:text="${producto.descripcion}"></span>
-					</h6>
-					<p class="card-text">
-						Unidades: <span th:text="${producto.unidades}"></span>
-					</p>
-					<p class="card-text">
-						Precio: <span th:text="${producto.precio}"></span>
-					</p>
+						<div class="form-group">
+							<label for="telefono">Precio</label> <input class="form-control"
+								id="precio" placeholder="0,00" th:field="*{precio}"
+								th:classappend="${#fields.hasErrors('precio')} ? 'is-invalid'" />
+							<span th:if="${#fields.hasErrors('precio')}"
+								th:errors="*{precio}" id="name-error">Errores</span>
+						</div>
 
+						<div class="form-group">
+							<label for="telefono">Unidades</label> <input type="number" min=1
+								class="form-control" id="unidades" placeholder="0"
+								th:field="*{unidades}"
+								th:classappend="${#fields.hasErrors('unidades')} ? 'is-invalid'" />
+							<span th:if="${#fields.hasErrors('unidades')}"
+								th:errors="*{unidades}" id="name-error">Errores</span>
+						</div>
+
+						<div class="form-group">
+							<label for="file">Imagen</label> <input type="file"
+								id="filebutton" name="file" class="form-control input-file" />
+						</div>
+
+						<button type="submit" class="btn btn-primary">Enviar</button>
+
+					</form>
 				</div>
 			</div>
 		</div>
-
 	</div>
+	<script src="/webjars/jquery/jquery.min.js"></script>
+	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

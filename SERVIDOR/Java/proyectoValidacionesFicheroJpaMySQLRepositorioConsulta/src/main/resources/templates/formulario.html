@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>Starter Template for Bootstrap</title>
+
+	<!-- Bootstrap core CSS -->
+	<link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="/css/starter-template.css" rel="stylesheet">
+
+	</head>
+	<body>
+		<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+		  <div class="container-fluid">
+		
+		    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+		      <ul class="navbar-nav me-auto mb-2 mb-md-0">
+		        <li class="nav-item">
+		          <a class="nav-link" href="/">Inicio</a>
+		        </li>
+		        <li class="nav-item active">
+		          <a class="nav-link" aria-current="page" href="#">Nuevo empleado</a>
+		        </li>
+		      </ul>
+		      
+		    </div>
+		  </div>
+		</nav>
+		
+		<div class="container">
+			<div class="starter-template">
+				<div class="row">
+					<div class="col-md-offset-2 col-md-8">
+						<form method="post" enctype="multipart/form-data" action="#" th:action="${empleadoForm.id != 0} ? @{/empleado/edit/submit} : @{/empleado/new/submit}" th:object="${empleadoForm}">
+							<h1 th:text="${empleadoForm.id != 0} ? 'Editar empleado' : 'Nuevo empleado'">Nuevo</h1>
+							<!-- <div class="form-group"
+							th:classappend="${#fields.hasErrors('id')} ? 'has-error'">
+								<label for="id">ID</label> <input type="text"
+									class="form-control" id="id" placeholder="1" th:field="*{id}"
+									th:attrappend="readonly = ${empleadoForm.id != 0} ? 'readonly' : null">
+									<span th:if="${#fields.hasErrors('id')}" th:errors="*{id}" 
+								class="help-block" id="id-error">Errores</span>
+							</div> -->
+							<input type="hidden" id="id" name="id" th:field="*{id}" />
+							<div class="form-group">
+								<label for="nombre">Nombre</label> <input type="text"
+									class="form-control" id="nombre" placeholder="Nombre"
+									th:field="*{nombre}" th:classappend="${#fields.hasErrors('nombre')} ? 'is-invalid'"/>
+								<span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" 
+								 id="name-error">Errores</span>
+							</div>
+							
+							<div class="form-group"
+							th:classappend="${#fields.hasErrors('email')} ? 'has-error'">
+								<label for="email">Email</label> <input type="email"
+									class="form-control" id="email"
+									placeholder="emple@email.net" th:field="*{email}" />
+								<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" 
+								 id="email-error">Errores</span>
+								
+							</div>
+							
+							<div class="form-group">
+								<label for="telefono">Teléfono</label> <input type="tel"
+									class="form-control" id="telefono" placeholder="954000000"
+									th:field="*{telefono}" th:classappend="${#fields.hasErrors('telefono')} ? 'is-invalid'"/>
+								<span th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}" 
+								 id="name-error">Errores</span>
+							</div>
+							
+							<div class="form-group">
+								<label for="file">Avatar</label>
+								<input type="file" id="filebutton" name="file" class="form-control input-file" />
+							</div>
+							
+							<button type="submit" class="btn btn-primary">Enviar</button>
+	
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="/webjars/jquery/jquery.min.js"></script>
+		<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+	</body>
+</html>

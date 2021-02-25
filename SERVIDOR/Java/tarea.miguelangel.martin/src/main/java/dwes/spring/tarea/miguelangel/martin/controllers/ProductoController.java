@@ -1,9 +1,12 @@
 package dwes.spring.tarea.miguelangel.martin.controllers;
 
+import java.util.Date;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,13 +29,18 @@ public class ProductoController {
 
 	@Autowired
 	private ProductoServicio servicio;
-	
+
 	@Autowired
 	private StorageService storageService;
 
 	@GetMapping({ "/", "productos" })
-	public String listado(Model model) {
-		model.addAttribute("productos", servicio.findAll());
+	public String listado(Model model, @Param("buscar") String buscar) {
+		model.addAttribute("buscar", buscar);
+		if (buscar == null) {
+			model.addAttribute("productos", servicio.findAll());
+		} else {
+			model.addAttribute("productos", servicio.BuscarProductoPorNombre(buscar));
+		}
 		return "listado";
 	}
 
@@ -42,67 +50,90 @@ public class ProductoController {
 		model.addAttribute("producto", p);
 		return "detalle";
 	}
-	
+
 	@GetMapping("producto/comprar/{id}")
 	public String comprar(@PathVariable long id, Model model) {
 		Producto p = servicio.findById(id);
 		int unidades = p.getUnidades() - 1;
 		p.setUnidades(unidades);
 		servicio.save(p);
-		//te dirige a un página donde pone "Gracias por comprar el producto tal y precio tal
 		model.addAttribute("producto", p);
 		return "compraFinalizada";
 	}
-	
+
 	@GetMapping("/producto/borrar/{id}")
 	public String borrar(@PathVariable long id) {
 		Producto p = servicio.findById(id);
 		servicio.delete(p);
-		
 		return "redirect:/productos";
 	}
-	
-	
-	@GetMapping("/files/{filename:.+}")
+
+	@GetMapping("/upload-dir/{filename:.+}")
 	@ResponseBody
 	public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
 		Resource file = storageService.loadAsResource(filename);
 		return ResponseEntity.ok().body(file);
 	}
+
+	@GetMapping("/producto/new")
+	public String nuevoProducto(Model model) {
+		model.addAttribute("productoForm", new Producto());
+		return "formulario";
+	}
+
+	@PostMapping("/producto/new/submit")
+	public String enviarNuevoProducto(@Valid @ModelAttribute("productoForm") Producto nuevoProducto,
+			BindingResult bindingResult, @RequestParam("file") MultipartFile file) {
+
+		if (bindingResult.hasErrors()) {
+			return "formulario";
+		} else {
+			if (!file.isEmpty()) { // Lógica de almacenamiento del fichero
+				Date date = new Date();
+				long timeMilli = date.getTime();
+				String imagen = storageService.store(file, timeMilli);
+				nuevoProducto.setImagen(MvcUriComponentsBuilder
+						.fromMethodName(ProductoController.class, "serveFile", imagen).build().toUriString());
+			}
+			servicio.save(nuevoProducto);
+			return "redirect:/productos";
+		}
+	}
+
+	@GetMapping("/producto/edit/{id}")
+	public String editarProducto(@PathVariable long id, Model model) {
+		Producto p = servicio.findById(id);
+		if (p != null) {
+			model.addAttribute("productoForm", p);
+			return "formulario";
+		} else {
+			return "redirect:/producto/new";
+		}
+	}
+
+	@PostMapping("/producto/edit/submit")
+	public String enviarProductoEditar(@Valid @ModelAttribute("empleadoForm") Producto producto,
+			@RequestParam("file") MultipartFile file, BindingResult bindingResult) {
+
+		if (bindingResult.hasErrors()) {
+			return "formulario";
+		} else {
+			if (!file.isEmpty()) { // Lógica de almacenamiento del fichero
+				Date date = new Date();
+				long timeMilli = date.getTime();
+				String imagen = storageService.store(file, timeMilli);
+				producto.setImagen(MvcUriComponentsBuilder
+						.fromMethodName(ProductoController.class, "serveFile", imagen).build().toUriString());
+			}
+			servicio.edit(producto);
+			return "redirect:/productos";
+		}
+	}
+
+	@GetMapping({ "/buscarProducto" })
+	public String buscarProducto(@Param("buscar") String producto, Model model) {
+
+		model.addAttribute("productos", servicio.BuscarProductoPorNombre(producto));
+		return "listado";
+	}
 }
-
-/*
- * @GetMapping({"/", "productos"}) public String listado(Model model){
- * model.addAttribute("productos",servicio.findAll()); return "listado"; }
- * 
- * @GetMapping("/empleado/new") public String nuevoEmpleadoForm(Model model) {
- * model.addAttribute("empleadoForm", new Empleado()); return "formulario"; }
- * 
- * 
- * @PostMapping("/empleado/new/submit") public String
- * nuevoEmpleadoSubmit(@Valid @ModelAttribute("empleadoForm") Empleado
- * nuevoEmpleado, BindingResult bindingResult, @RequestParam("file")
- * MultipartFile file) {
- * 
- * if (bindingResult.hasErrors()) { return "formulario"; } else { if
- * (!file.isEmpty()) { // Lógica de almacenamiento del fichero String avatar =
- * storageService.store(file, nuevoEmpleado.getId());
- * nuevoEmpleado.setImagen(MvcUriComponentsBuilder.fromMethodName(
- * EmpleadoController.class, "serveFile", avatar).build().toUriString()); }
- * servicio.add(nuevoEmpleado); return "redirect:/empleado/listado"; } }
- * 
- * @GetMapping("/empleado/edit/{id}") public String
- * editarEmpleadoForm(@PathVariable long id, Model model) { Empleado empleado =
- * servicio.findById(id); if (empleado!=null) {
- * model.addAttribute("empleadoForm", empleado); return "formulario"; }else {
- * return "redirect:/empleado/new"; } }
- * 
- * @PostMapping("/empleado/edit/submit") public String
- * editarEmpleadoSubmit(@Valid @ModelAttribute("empleadoForm") Empleado
- * empleado, BindingResult bindingResult) { if (bindingResult.hasErrors()) {
- * return "formulario"; } else { servicio.edit(empleado); return
- * "redirect:/empleado/listado"; }
- * 
- * }
- */
-

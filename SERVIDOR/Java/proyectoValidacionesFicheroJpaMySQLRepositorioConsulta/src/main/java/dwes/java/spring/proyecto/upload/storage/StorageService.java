@@ -1,9 +1,10 @@
-package dwes.spring.tarea.miguelangel.martin.upload.storage;
+package dwes.java.spring.proyecto.upload.storage;
 
 import java.nio.file.Path;
 import java.util.stream.Stream;
 
 import org.springframework.core.io.Resource;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -19,7 +20,6 @@ import org.springframework.web.multipart.MultipartFile;
  * @author Equipo de desarrollo de Spring
  *
  */
-
 public interface StorageService {
 
     void init();

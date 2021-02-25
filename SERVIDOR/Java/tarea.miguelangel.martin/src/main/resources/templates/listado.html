@@ -6,15 +6,14 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<head>
-<meta charset="ISO-8859-1">
-<title>Listado productos</title>
+<title>Listado</title>
 
 <!-- Bootstrap core CSS -->
 <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
 <link href="/css/starter-template.css" rel="stylesheet">
+
 </head>
 <body>
 
@@ -28,20 +27,23 @@
 					<li class="nav-item"><a class="nav-link" href="/producto/new">Nuevo
 							producto</a></li>
 				</ul>
+				<!-- Formulario de búsqueda -->
+				<form class="navbar-form navbar-right" th:object="${buscar}">
+					<input type="text" class="form-control" placeholder="Buscar..." name="buscar" th:value="${buscar}" >
+				</form>
 			</div>
 		</div>
 	</nav>
 
-
-
 	<div class="container">
-		<h1>Listado de productos</h1>
+
 		<div class="starter-template">
-			<h1>Listado de empleados</h1>
+			<h1>Listado de productos</h1>
 			<table class="table">
 				<thead>
 					<tr>
 						<th>ID</th>
+						<th>Imagen</th>
 						<th>Nombre</th>
 						<th>Descripción</th>
 						<th>Precio</th>
@@ -51,15 +53,13 @@
 				<tbody>
 					<tr th:each="p : ${productos}">
 						<td th:text="${p.id}"></td>
-						<!-- 	<td><img src=""
-							th:src="@{${empleado.imagen} ?: '/images/icon_placeholder.png'}"
-							width="64px" /></td>  -->
+						<td><img src="" th:src="@{${p.imagen} ?: '/images/icon_placeholder.png'}" width="64px" /></td>
 						<td th:text="${p.nombre}"></td>
 						<td th:text="${p.descripcion}"></td>
 						<td th:text="${p.unidades}"></td>
 						<td th:text="${p.precio}"></td>
 						<td><a th:href="@{/producto/edit/{id}(id=${p.id})}">Editar</a>
-						<a th:href="@{/producto/detalle/{id}(id=${p.id})}">Detalle</a></td>
+							<a th:href="@{/producto/detalle/{id}(id=${p.id})}">Detalle</a></td>
 						<!--<td><a th:href="@{/empleado/edit/{id}(id=${empleado.id})}">Editar</a></td>  -->
 					</tr>
 				</tbody>

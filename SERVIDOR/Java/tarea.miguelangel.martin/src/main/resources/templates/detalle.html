@@ -35,32 +35,27 @@
 
 
 	<div class="container">
-		<h1>Detalle producto</h1>
 		<div class="starter-template">
 
 			<h1>Detalle del producto</h1>
 
-
 			<div class="card" style="width: 18rem;">
-				<img class="card-img-top" src="" alt="imagen prueba" />
-				<!-- 	<img src=""
-							th:src="@{${producto.imagen} ?: '/images/icon_placeholder.png'}"
-							width="64px" />  -->
+				<img class="card-img-top" src="" th:src="@{${producto.imagen} ?: '/images/icon_placeholder.png'}" width="200px" alt="imagen prueba" /> 
 				<div class="card-body>">
 					<h5 class="card-title">
 						Nombre: <span th:text="${producto.nombre}"></span>
 					</h5>
-					<h6 class="card-subtitle mb-2 text-muted">
-						Descripción: <span th:text="${producto.descripcion}"></span>
-					</h6>
-					<p class="card-text">
-						Unidades: <span th:text="${producto.unidades}"></span>
-					</p>
 					<p class="card-text">
 						Precio: <span th:text="${producto.precio}"></span>
 					</p>
-					<a th:href="@{/producto/comprar/{id}(id=${producto.id})}" class="btn btn-primary">Comprar</a>
-					<a th:href="@{/producto/borrar/{id}(id=${producto.id})}" class="btn btn-warning">Borrar</a>
+					<p class="card-text">
+						Unidades: <span th:text="${producto.unidades}"></span>
+					</p>
+					<h6 class="card-subtitle mb-2 text-muted">
+						Descripción: <span th:text="${producto.descripcion}"></span>
+					</h6>
+					<a th:href="@{/producto/comprar/{id}(id=${producto.id})}" class="btn btn-success">Comprar</a>
+					<a th:href="@{/producto/borrar/{id}(id=${producto.id})}" class="btn btn-danger">Borrar</a>
 				</div>
 			</div>
 		</div>
